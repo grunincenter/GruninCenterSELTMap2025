@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delaware - SELT Legislative History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00abce, #73a535);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #925333, #73a535);
+        }
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            color: #925333;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header-content p {
+            color: #555;
+            font-size: 1.2em;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .summary-card {
+            background: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 120px;
+        }
+
+        .summary-card h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #925333;
+        }
+
+        .summary-card p {
+            font-size: 0.85em;
+            color: #666;
+            margin: 0;
+        }
+
+        .forms-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .forms-section h2 {
+            color: #925333;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #00abce;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-item:nth-child(even) {
+            border-left-color: #73a535;
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-status {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .form-status.failed {
+            background: #dc3545;
+        }
+
+        .form-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #925333;
+        }
+
+        .form-details h4 {
+            color: #925333;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .form-details p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .citation {
+            background: rgba(0, 171, 206, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .timeline-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #00abce;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 70px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background: #00abce;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #00abce;
+        }
+
+        .timeline-year {
+            background: linear-gradient(135deg, #00abce, #73a535);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .timeline-content h4 {
+            color: #925333;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content p {
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .header-content h1 {
+                font-size: 2em;
+            }
+            
+            .header-stats {
+                justify-content: center;
+            }
+            
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                padding-left: 40px;
+            }
+            
+            .timeline-item::before {
+                left: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to SELT Map</a>
+        
+        <!-- ========== CHANGE THIS SECTION ========== -->
+        <div class="header">
+            <div class="header-content">
+                <h1>Delaware</h1><!-- CHANGE: State name -->
+                <p>Complete Social Enterprise Legislative History</p><!-- KEEP SAME -->
+            </div>
+            <div class="header-stats">
+                <div class="summary-card">
+                    <h3>3</h3><!-- CHANGE: Number of active forms -->
+                    <p>Active Forms</p><!-- KEEP SAME -->
+                </div>
+                <div class="summary-card">
+                    <h3>2013</h3><!-- CHANGE: Year of first legislation -->
+                    <p>First Legislation</p><!-- KEEP SAME -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== CHANGE THIS SECTION - ADD/REMOVE FORMS ========== -->
+        <div class="forms-section">
+            <h2>Available Social Enterprise Forms</h2><!-- KEEP SAME -->
+            
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">✅ Enacted</span><!-- KEEP SAME for enacted forms -->
+                    <span class="form-name">Benefit Corporation (BCORP)</span><!-- CHANGE: Form name -->
+                </div>
+                <div class="form-details">
+                    <h4>An Act to Amend Title 8 of the Delaware Code Relating to the General Corporation - Public Benefit Corporation</h4><!-- CHANGE: Bill title -->
+                    <p>Delaware's Public Benefit Corporation Act deviates from the Model Benefit Corporation legislation. On June 24, 2015, Gov. Jack Markell signed S.B. 75 into law, which amended 362 and 363 relating to the use of the "P.B.C." designation, voting thresholds, and appraisal rights. On July 16, 2020, the Governor signed H.B. 341 into law, which amended 363, 365 and 367 relating to the voting thresholds and appraisal rights, changing the voting threshold from a two thirds to a majority requirement. Effective date was August 1, 2013.</p><!-- CHANGE: Description -->
+                    <div class="citation">
+                        Del. Code Ann. tit. 8, §§ 361-368 (2013)<!-- CHANGE: Legal citation -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">✅ Enacted</span>
+                    <span class="form-name">Benefit Limited Liability Company (BLLC)</span>
+                </div>
+                <div class="form-details">
+                    <h4>Statutory Public Benefit Limited Liability Companies</h4>
+                    <p>Subchapter XII of the DLLCA. Effective on August 1, 2018. On June 30, 2021, the Governor signed S.B. 114 into law, which amended 1201 to provide for the manner in which a limited liability company may become a statutory public benefit limited liability company and 1202(a) to require that the BLLC company agreement must set forth the specific public benefit(s) to be promoted by the company.</p>
+                    <div class="citation">
+                        Del. Code Ann. tit. 6, § 18-1201 to § 18-1208 (2018)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">✅ Enacted</span>
+                    <span class="form-name">Statutory Public Benefit Limited Partnership (SPBLP)</span>
+                </div>
+                <div class="form-details">
+                    <h4>Delaware Revised Uniform Limited Partnership Act</h4>
+                    <p>Delaware enacted SPBLP legislation as part of its comprehensive social enterprise legal framework.</p>
+                    <div class="citation">
+                        Subchapter XII of Chapter 17, Title 6 Commerce and Trade of the Delaware Code, Section 17 1202
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Forms Not Available</h2><!-- KEEP SAME -->
+            
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status failed">❌ Not Available</span><!-- KEEP SAME -->
+                    <span class="form-name">Low-profit Limited Liability Company (L3C)</span><!-- CHANGE: Form name -->
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for L3C formation in Delaware.</p><!-- CHANGE: State-specific message -->
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status failed">❌ Not Available</span>
+                    <span class="form-name">Social Purpose Corporation (SPC)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for SPC formation in Delaware.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== CHANGE THIS SECTION - UPDATE TIMELINE ========== -->
+        <div class="timeline-section">
+            <h2>Legislative Timeline</h2><!-- KEEP SAME -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div><!-- CHANGE: Year -->
+                    <div class="timeline-content">
+                        <h4>Public Benefit Corporation Act Enacted</h4><!-- CHANGE: Event title -->
+                        <p>Delaware enacted its Public Benefit Corporation Act, effective August 1, 2013. The Delaware statute deviates from the Model Benefit Corporation legislation in several key respects.</p><!-- CHANGE: Description -->
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h4>PBC Act Amended</h4>
+                        <p>Gov. Jack Markell signed S.B. 75 into law, amending sections 362 and 363 relating to the use of the "P.B.C." designation, voting thresholds, and appraisal rights.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h4>BLLC Legislation Enacted</h4>
+                        <p>Delaware enacted Statutory Public Benefit Limited Liability Company legislation, effective August 1, 2018, as part of Subchapter XII of the DLLCA.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h4>Further PBC Amendments</h4>
+                        <p>The Governor signed H.B. 341 into law, amending sections 363, 365 and 367 relating to voting thresholds and appraisal rights, changing the voting threshold from two-thirds to a majority requirement.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-content">
+                        <h4>BLLC Act Amended</h4>
+                        <p>The Governor signed S.B. 114 into law, amending BLLC provisions to clarify conversion procedures and require that company agreements set forth specific public benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
