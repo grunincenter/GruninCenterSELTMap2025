@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawaii - SELT Legislative History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00abce, #73a535);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #925333, #73a535);
+        }
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            color: #925333;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header-content p {
+            color: #555;
+            font-size: 1.2em;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .summary-card {
+            background: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 120px;
+        }
+
+        .summary-card h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #925333;
+        }
+
+        .summary-card p {
+            font-size: 0.85em;
+            color: #666;
+            margin: 0;
+        }
+
+        .forms-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .forms-section h2 {
+            color: #925333;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .no-activity-message {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            border: 2px dashed #ccc;
+        }
+
+        .no-activity-message h3 {
+            color: #925333;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .no-activity-message p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .form-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-status {
+            background: #6c757d;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .form-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #925333;
+        }
+
+        .form-details p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .header-content h1 {
+                font-size: 2em;
+            }
+            
+            .header-stats {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to SELT Map</a>
+        
+        <div class="header">
+            <div class="header-content">
+                <h1>Hawaii</h1>
+                <p>Complete Social Enterprise Legislative History</p>
+            </div>
+            <div class="header-stats">
+                <div class="summary-card">
+                    <h3>0</h3>
+                    <p>Active Forms</p>
+                </div>
+                <div class="summary-card">
+                    <h3>—</h3>
+                    <p>First Legislation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Legislative Status</h2>
+            
+            <div class="no-activity-message">
+                <h3>No Social Enterprise Legislation</h3>
+                <p>Hawaii has not introduced or enacted any corporate forms for social enterprises (Benefit Corporations, L3Cs, Social Purpose Corporations, Benefit LLCs, or Social Purpose Benefit Limited Partnerships).</p>
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Forms Not Available</h2>
+            
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">⚪ Not Available</span>
+                    <span class="form-name">Benefit Corporation (BCORP)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for Benefit Corporation formation in Hawaii.</p>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">⚪ Not Available</span>
+                    <span class="form-name">Low-profit Limited Liability Company (L3C)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for L3C formation in Hawaii.</p>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">⚪ Not Available</span>
+                    <span class="form-name">Social Purpose Corporation (SPC)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for SPC formation in Hawaii.</p>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">⚪ Not Available</span>
+                    <span class="form-name">Benefit Limited Liability Company (BLLC)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for BLLC formation in Hawaii.</p>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">⚪ Not Available</span>
+                    <span class="form-name">Social Purpose Benefit Limited Partnership (SPBLP)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for SPBLP formation in Hawaii.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

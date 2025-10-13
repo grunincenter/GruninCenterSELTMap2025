@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas - SELT Legislative History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00abce, #73a535);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #925333, #73a535);
+        }
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            color: #925333;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header-content p {
+            color: #555;
+            font-size: 1.2em;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .summary-card {
+            background: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 120px;
+        }
+
+        .summary-card h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #925333;
+        }
+
+        .summary-card p {
+            font-size: 0.85em;
+            color: #666;
+            margin: 0;
+        }
+
+        .forms-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .forms-section h2 {
+            color: #925333;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #00abce;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-item:nth-child(even) {
+            border-left-color: #73a535;
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-status {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .form-status.failed {
+            background: #dc3545;
+        }
+
+        .form-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #925333;
+        }
+
+        .form-details h4 {
+            color: #925333;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .form-details p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .citation {
+            background: rgba(0, 171, 206, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .timeline-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #00abce;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 70px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background: #00abce;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #00abce;
+        }
+
+        .timeline-year {
+            background: linear-gradient(135deg, #00abce, #73a535);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .timeline-content h4 {
+            color: #925333;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content p {
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .header-content h1 {
+                font-size: 2em;
+            }
+            
+            .header-stats {
+                justify-content: center;
+            }
+            
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                padding-left: 40px;
+            }
+            
+            .timeline-item::before {
+                left: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to SELT Map</a>
+        
+        <div class="header">
+            <div class="header-content">
+                <h1>Texas</h1>
+                <p>Complete Social Enterprise Legislative History</p>
+            </div>
+            <div class="header-stats">
+                <div class="summary-card">
+                    <h3>2</h3>
+                    <p>Active Forms</p>
+                </div>
+                <div class="summary-card">
+                    <h3>2013</h3>
+                    <p>First Legislation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Available Social Enterprise Forms</h2>
+            
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">✅ Enacted</span>
+                    <span class="form-name">Social Purpose Corporation (SPC)</span>
+                </div>
+                <div class="form-details">
+                    <h4>An Act Relating to Social Purposes of a For-Profit Corporation</h4>
+                    <p>The Texas statute permits all Texas for-profit corporations to adopt a "social purpose," but unlike the other SPC statutes, it does not authorize the creation of a new corporate form. Instead, it allows existing corporations to designate social purposes within their charter.</p>
+                    <div class="citation">
+                        Tx. Bus. Org. Code §§ 23.001 to- .110 (2013)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status">✅ Enacted</span>
+                    <span class="form-name">Benefit Corporation (BCORP)</span>
+                </div>
+                <div class="form-details">
+                    <h4>An Act Relating to Authorizing the Formation of Public Benefit Corporations</h4>
+                    <p>In 2017, Texas was one of four states that passed a benefit corporation bill. Texas's statute took effect on September 1, 2017, establishing a comprehensive framework for public benefit corporations in the state.</p>
+                    <div class="citation">
+                        Tex. Bus. Org. Code § 21.951-21.959
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Failed Legislation</h2>
+            
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status failed">❌ Failed</span>
+                    <span class="form-name">Low-profit Limited Liability Company (L3C)</span>
+                </div>
+                <div class="form-details">
+                    <h4>An Act Relating to the Creation of a Low-Profit Limited Liability Company</h4>
+                    <p>HB 2622 was introduced in the 83rd Regular Session in 2013. It died in the House Business and Industry Committee without advancing to a floor vote.</p>
+                    <div class="citation">
+                        HB 2622 (2013)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Forms Not Available</h2>
+            
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status failed">❌ Not Available</span>
+                    <span class="form-name">Benefit Limited Liability Company (BLLC)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for BLLC formation in Texas.</p>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="form-header">
+                    <span class="form-status failed">❌ Not Available</span>
+                    <span class="form-name">Statutory Public Benefit Limited Partnership (SPBLP)</span>
+                </div>
+                <div class="form-details">
+                    <p>No legislative activity recorded for SPBLP formation in Texas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h2>Legislative Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-content">
+                        <h4>Social Purpose Corporation Act Enacted</h4>
+                        <p>Texas enacted legislation allowing corporations to adopt social purposes. Unlike other states, this did not create a new corporate form but allowed existing corporations to designate social purposes.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-content">
+                        <h4>L3C Legislation Failed</h4>
+                        <p>HB 2622, which would have created the Low-profit Limited Liability Company form, was introduced but died in the House Business and Industry Committee.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2017</div>
+                    <div class="timeline-content">
+                        <h4>Benefit Corporation Act Enacted</h4>
+                        <p>Texas passed comprehensive benefit corporation legislation, with the statute taking effect on September 1, 2017. Texas was one of four states to enact benefit corporation legislation that year.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
