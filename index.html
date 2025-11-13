@@ -414,7 +414,7 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 40px !important;  /* Adjusted for smaller size */
+                bottom: 50px !important;  /* More space between AK and HI */
                 left: 10px !important;
                 top: auto !important;
                 width: 40px;  /* Even smaller on mobile */
@@ -1729,6 +1729,8 @@
                             padding: [10, 10],
                             animate: false
                         });
+                        // Force zoom in by 0.5 levels to cut off Mexico
+                        this.map.setZoom(this.map.getZoom() + 0.5);
                     }, 100);
                 }
             }
