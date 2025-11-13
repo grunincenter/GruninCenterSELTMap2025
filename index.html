@@ -30,7 +30,7 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 0;  /* No bottom padding */
+            padding-bottom: 10px;  /* Minimal bottom padding */
         }
 
         .header {
@@ -92,6 +92,11 @@
             margin-bottom: 25px;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Remove bottom margin from the last content section */
+        .content-section:last-of-type {
+            margin-bottom: 0;
         }
 
         .content-section h2 {
@@ -529,6 +534,7 @@
                 flex: 1;
                 max-width: 50px;
                 min-width: 0;  /* Allow shrinking as needed */
+                margin-bottom: 25px;  /* Space for label below */
             }
             
             .form-bar-wrapper {
@@ -541,18 +547,21 @@
             }
             
             .form-bar-label {
-                font-size: 8px !important;  /* Increased from 5px to 8px for better readability */
+                font-size: 10px !important;  /* Readable size for mobile */
                 writing-mode: initial;  /* Horizontal text */
                 text-orientation: initial;
                 padding: 2px 1px;
                 text-align: center;
                 line-height: 1;
-                overflow: hidden;  /* Hide overflow to keep contained */
                 width: 100%;
                 display: block;
-                white-space: normal;  /* Allow wrapping if needed */
-                word-wrap: break-word;  /* Break long words to prevent overflow */
-                max-width: 100%;  /* Ensure it stays within bounds */
+                white-space: nowrap;  /* Keep on single line */
+                position: absolute;
+                bottom: -20px;  /* Position below bar */
+                left: 0;
+                background: transparent;
+                border: none;
+                margin-top: 0;
             }
             
             .form-bar-count {
@@ -645,6 +654,7 @@
                 min-width: 0;
                 max-width: 40px;
                 flex: 1;
+                margin-bottom: 25px;  /* Space for label */
             }
             
             .form-bar-wrapper {
@@ -656,17 +666,20 @@
             }
             
             .form-bar-label {
-                font-size: 9px !important;  /* Increased to 9px for better readability */
+                font-size: 10px !important;  /* Keep readable */
                 writing-mode: initial;  /* Keep horizontal */
                 text-orientation: initial;
                 padding: 2px 1px;
                 line-height: 1.1;
                 display: block;
                 text-align: center;
-                overflow: hidden;  /* Keep text contained */
-                white-space: normal;  /* Allow wrapping if needed */
-                word-wrap: break-word;  /* Break long words */
-                max-width: 100%;  /* Ensure containment */
+                white-space: nowrap;  /* Single line */
+                position: absolute;
+                bottom: -20px;  /* Below bar */
+                left: 0;
+                width: 100%;
+                background: transparent;
+                border: none;
             }
             
             .form-bar-count {
@@ -1057,11 +1070,11 @@
         .stats-bar {
             background: linear-gradient(to bottom, #f8f9fa, #ffffff);
             border-top: 2px solid #00abce;
-            padding: 25px 30px;
+            padding: 15px 20px;  /* Reduced from 25px 30px */
             display: flex;
             align-items: stretch;
-            gap: 40px;
-            min-height: 180px;
+            gap: 20px;  /* Reduced from 40px */
+            min-height: 140px;  /* Reduced from 180px */
             overflow: hidden;
             position: relative;
         }
@@ -1079,12 +1092,12 @@
         .year-badge {
             background: linear-gradient(135deg, #00abce, #73a535);
             color: white;
-            padding: 12px 24px;
+            padding: 10px 20px;  /* Reduced from 12px 24px */
             border-radius: 25px;
             font-weight: 700;
-            font-size: 1.8em;
+            font-size: 1.6em;  /* Reduced from 1.8em */
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            margin-bottom: 10px;
+            margin-bottom: 5px;  /* Reduced from 10px */
         }
 
         .year-label {
@@ -1102,10 +1115,10 @@
             display: flex;
             gap: 25px;
             align-items: flex-end;
-            padding: 20px 0;
+            padding: 10px 0;  /* Reduced from 20px 0 */
             justify-content: center;
             overflow: hidden;
-            min-height: 140px;
+            min-height: 100px;  /* Reduced from 140px */
         }
         
         /* Clickable Form Bar */
@@ -1119,6 +1132,7 @@
             position: relative;
             cursor: pointer;
             transition: transform 0.2s ease;
+            margin-bottom: 30px;  /* Space for label below */
         }
 
         .form-bar:hover {
@@ -1153,7 +1167,7 @@
         .form-bar-fill {
             width: 60px;
             background: linear-gradient(180deg, #00abce, #73a535);
-            border-radius: 10px 10px 0 0;
+            border-radius: 10px;  /* Rounded on all corners now */
             transition: all 0.3s ease;
             position: relative;
             min-height: 10px;
@@ -1166,18 +1180,21 @@
         }
 
         .form-bar-label {
-            background: rgba(146, 83, 51, 0.1);
-            padding: 8px 15px;
-            border-radius: 0 0 10px 10px;
+            background: transparent;  /* Remove background */
+            padding: 4px 2px;
+            border-radius: 0;
             width: 100%;
             text-align: center;
-            font-size: 0.85em;
+            font-size: 0.75em;  /* Smaller but readable */
             font-weight: 600;
             color: #925333;
-            border: 2px solid rgba(146, 83, 51, 0.2);
-            border-top: none;
-            margin-top: -2px;
+            border: none;  /* Remove border */
+            margin-top: 5px;  /* Space between bar and label */
             transition: all 0.3s ease;
+            position: absolute;
+            bottom: -25px;  /* Position below the bar */
+            left: 0;
+            white-space: nowrap;  /* Keep on one line */
         }
 
         .form-bar:hover .form-bar-label {
