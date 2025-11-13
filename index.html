@@ -374,6 +374,7 @@
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
+                padding-bottom: 0;  /* Ensure no bottom padding on mobile */
             }
             
             .grunin-branding {
@@ -398,6 +399,11 @@
             .content-section {
                 padding: 15px;  /* Reduced from 20px */
                 margin-bottom: 10px;  /* Reduced from 15px */
+            }
+            
+            /* Remove bottom margin from last content section */
+            .content-section:last-child {
+                margin-bottom: 0;
             }
             
             .content-section h2 {
@@ -484,17 +490,19 @@
                 padding: 8px;  /* Reduced from 10px */
             }
             
-            .forms-visual {
-                gap: 5px;
-                padding: 5px 0;  /* Reduced from 10px */
-                justify-content: center;
-                display: flex;
-                flex-wrap: nowrap;
-                max-width: 100%;
-                overflow: hidden;
-                min-height: 120px;  /* Reduced from 140px */
+            /* Reduced stats bar spacing */
+            .stats-bar {
+                padding: 15px 20px;  /* Reduced from 25px 30px */
+                min-height: 120px;  /* Reduced from 180px */
+                gap: 20px;  /* Reduced from 40px */
             }
             
+            .stats-year-indicator {
+                padding: 0 10px;  /* Reduced from 0 20px */
+                min-width: 120px;  /* Reduced from 160px */
+            }
+            
+            /* Reduced year badge spacing */
             .year-badge {
                 padding: 8px 16px;  /* Reduced from 12px 24px */
                 font-size: 1.5em;  /* Reduced from 1.8em */
@@ -503,6 +511,18 @@
             
             .year-label {
                 font-size: 0.75em;  /* Smaller */
+                margin-bottom: 0;  /* Remove bottom margin */
+            }
+            
+            .forms-visual {
+                gap: 5px;
+                padding: 5px 0;  /* Reduced from 10px */
+                justify-content: center;
+                display: flex;
+                flex-wrap: nowrap;
+                max-width: 100%;
+                overflow: hidden;
+                min-height: 100px;  /* Reduced from 140px */
             }
             
             .form-bar {
@@ -521,16 +541,18 @@
             }
             
             .form-bar-label {
-                font-size: 5px !important;  /* Much smaller font */
+                font-size: 8px !important;  /* Increased from 5px to 8px for better readability */
                 writing-mode: initial;  /* Horizontal text */
                 text-orientation: initial;
-                padding: 2px 0px;
+                padding: 2px 1px;
                 text-align: center;
                 line-height: 1;
-                overflow: hidden;  /* Hide overflow */
+                overflow: hidden;  /* Hide overflow to keep contained */
                 width: 100%;
                 display: block;
-                white-space: nowrap;  /* Don't wrap text */
+                white-space: normal;  /* Allow wrapping if needed */
+                word-wrap: break-word;  /* Break long words to prevent overflow */
+                max-width: 100%;  /* Ensure it stays within bounds */
             }
             
             .form-bar-count {
@@ -609,6 +631,14 @@
             .forms-visual {
                 gap: 3px;
                 overflow: hidden;  /* Prevent any overflow */
+                min-height: 90px;  /* Further reduced from 100px */
+            }
+            
+            /* Further reduced stats bar for small screens */
+            .stats-bar {
+                padding: 12px 15px;  /* Further reduced */
+                min-height: 100px;  /* Further reduced */
+                gap: 15px;  /* Further reduced */
             }
             
             .form-bar {
@@ -626,14 +656,17 @@
             }
             
             .form-bar-label {
-                font-size: 7px;  /* Readable size */
+                font-size: 9px !important;  /* Increased to 9px for better readability */
                 writing-mode: initial;  /* Keep horizontal */
                 text-orientation: initial;
                 padding: 2px 1px;
                 line-height: 1.1;
                 display: block;
                 text-align: center;
-                overflow: visible;
+                overflow: hidden;  /* Keep text contained */
+                white-space: normal;  /* Allow wrapping if needed */
+                word-wrap: break-word;  /* Break long words */
+                max-width: 100%;  /* Ensure containment */
             }
             
             .form-bar-count {
