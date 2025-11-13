@@ -1688,10 +1688,10 @@
                 // Detect if mobile
                 const isMobile = window.innerWidth <= 768;
                 
-                // For mobile: EXTREMELY tight focus - just continental US
+                // For mobile: zoom out to see full continental US
                 // Desktop stays the same
-                const mapCenter = isMobile ? [38.5, -95.5] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 5.2 : 4;  // VERY zoomed in - cuts off at borders
+                const mapCenter = isMobile ? [39, -97] : [38.5, -98.5795];
+                const mapZoom = isMobile ? 3.0 : 4;  // Wider view to see coast to coast
                 
                 // Initialize map
                 this.map = L.map('map', {
@@ -1722,13 +1722,13 @@
                     // Try multiple times to ensure the view is set correctly
                     setTimeout(() => {
                         this.map.invalidateSize();
-                        // Force view to continental US only - no Mexico/Canada
-                        this.map.setView([38.5, -95.5], 5.2);  // VERY tight zoom
+                        // Zoom OUT to see full continental US from coast to coast
+                        this.map.setView([39, -97], 3.0);  // Much wider view
                     }, 100);
                     
                     // Try again after a longer delay to make sure it sticks
                     setTimeout(() => {
-                        this.map.setView([38.5, -95.5], 5.2);
+                        this.map.setView([39, -97], 3.0);
                     }, 500);
                 }
             }
