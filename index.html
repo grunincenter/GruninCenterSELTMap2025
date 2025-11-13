@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- FIXED VERSION - Updated with reduced spacing fixes -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -95,8 +96,11 @@
         }
         
         /* Remove bottom margin from the last content section */
-        .content-section:last-of-type {
-            margin-bottom: 0;
+        .content-section:last-of-type,
+        .content-section:last-child,
+        .container > .content-section:last-child {
+            margin-bottom: 0 !important;
+            padding-bottom: 20px !important;
         }
 
         .content-section h2 {
@@ -1070,11 +1074,11 @@
         .stats-bar {
             background: linear-gradient(to bottom, #f8f9fa, #ffffff);
             border-top: 2px solid #00abce;
-            padding: 15px 20px;  /* Reduced from 25px 30px */
+            padding: 10px 15px;  /* DRAMATICALLY reduced */
             display: flex;
             align-items: stretch;
-            gap: 20px;  /* Reduced from 40px */
-            min-height: 140px;  /* Reduced from 180px */
+            gap: 15px;  /* Further reduced */
+            min-height: 120px;  /* Further reduced */
             overflow: hidden;
             position: relative;
         }
