@@ -402,44 +402,26 @@
                 font-size: 1.4em;
             }
             
-            /* Map container needs special handling on mobile */
+            /* Map section same width as other sections */
             .map-section {
-                margin-left: -10px;
-                margin-right: -10px;
-                border-radius: 0;
+                margin-bottom: 20px;
             }
             
+            /* Map just needs to fit, no scrolling */
             .map-content {
-                height: 500px;
-                overflow-x: auto;
-                overflow-y: hidden;
-                position: relative;
+                height: 400px;
             }
             
-            #map {
-                min-width: 600px; /* Ensure map has minimum width to show all states */
-                height: 100%;
-            }
-            
-            /* Reposition inset boxes on mobile to avoid overlapping */
+            /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                position: fixed !important;
-                bottom: 100px !important;
+                bottom: 60px !important;
                 left: 10px !important;
                 top: auto !important;
-                z-index: 2000;
-                background: rgba(255, 255, 255, 0.95) !important;
-                backdrop-filter: blur(5px);
             }
             
             .hawaii-box {
-                position: fixed !important;
-                bottom: 100px !important;
-                right: 10px !important;
-                left: auto !important;
-                z-index: 2000;
-                background: rgba(255, 255, 255, 0.95) !important;
-                backdrop-filter: blur(5px);
+                bottom: 10px !important;
+                left: 10px !important;
             }
             
             /* Map controls responsive */
@@ -464,7 +446,7 @@
                 gap: 8px;
             }
             
-            /* Forms visualization responsive */
+            /* Forms visualization responsive - make bars smaller to fit */
             .forms-section {
                 padding: 15px;
             }
@@ -474,17 +456,15 @@
             }
             
             .forms-visual {
-                overflow-x: auto;
-                padding-bottom: 10px;
-                min-width: 100%;
-                display: flex;
-                gap: 10px;
-                justify-content: flex-start;
+                gap: 8px;
+                padding: 10px 0;
+                justify-content: center;
             }
             
             .form-bar {
-                flex-shrink: 0;
-                min-width: 60px;
+                flex: 1;
+                max-width: 60px;
+                min-width: 40px;
             }
             
             .form-bar-wrapper {
@@ -521,22 +501,6 @@
             .state-modal-body {
                 padding: 20px;
             }
-            
-            /* Add scroll hint for map on mobile */
-            .map-content::after {
-                content: "↔ Scroll to see all states";
-                position: absolute;
-                bottom: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(0, 0, 0, 0.7);
-                color: white;
-                padding: 5px 10px;
-                border-radius: 15px;
-                font-size: 12px;
-                z-index: 1000;
-                pointer-events: none;
-            }
         }
         
         /* Smaller mobile screens */
@@ -568,26 +532,31 @@
                 font-size: 12px;
                 padding: 4px 10px;
             }
-        }
-        
-        /* Landscape mobile orientation */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .map-content {
-                height: 350px;
+            
+            /* Make form bars even smaller on small screens */
+            .forms-visual {
+                gap: 5px;
             }
             
-            /* Move insets to top corners in landscape */
-            .alaska-box {
-                bottom: auto !important;
-                top: 10px !important;
-                left: 10px !important;
+            .form-bar {
+                min-width: 35px;
+                max-width: 45px;
             }
             
-            .hawaii-box {
-                bottom: auto !important;
-                top: 10px !important;
-                right: 10px !important;
-                left: auto !important;
+            .form-bar-wrapper {
+                padding: 3px;
+            }
+            
+            .form-bar-label {
+                font-size: 9px;
+            }
+            
+            .form-bar-count {
+                font-size: 11px;
+            }
+            
+            .form-bar-states {
+                display: none;
             }
         }
         
@@ -1011,8 +980,7 @@
             align-items: flex-end;
             padding: 20px 0;
             justify-content: center;
-            overflow-x: auto;
-            overflow-y: hidden;
+            overflow: hidden;
             min-height: 140px;
         }
         
@@ -1651,9 +1619,9 @@
                 // Detect if mobile
                 const isMobile = window.innerWidth <= 768;
                 
-                // Adjust zoom and center for mobile
+                // Adjust zoom for mobile to fit all states
                 const mapCenter = isMobile ? [39.5, -98.5795] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 3.5 : 4;
+                const mapZoom = isMobile ? 3.2 : 4;  // Zoom out more on mobile
                 
                 // Initialize map with locked view
                 this.map = L.map('map', {
@@ -1665,7 +1633,7 @@
                     touchZoom: false, // Disable touch zoom
                     boxZoom: false, // Disable box zoom
                     keyboard: false, // Disable keyboard navigation
-                    dragging: isMobile // Enable dragging on mobile only
+                    dragging: false // Disable map dragging - no scrolling!
                 });
                 
                 // Store original view
