@@ -204,12 +204,189 @@
             position: relative;
         }
         
-        /* State Details Bar (below map) */
+        /* Hide the old state details section below map */
         .state-details-section {
-            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-            padding: 20px;
-            border-top: 2px solid #00abce;
-            min-height: 140px;
+            display: none;
+        }
+        
+        /* Modal Overlay for State Details */
+        .state-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .state-modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Modal Content */
+        .state-modal {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+        }
+
+        /* Modal Header */
+        .state-modal-header {
+            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .state-modal-title {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .state-modal-year {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .state-modal-close {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .state-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        /* Modal Body */
+        .state-modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-detail-section {
+            margin-bottom: 25px;
+        }
+
+        .modal-detail-title {
+            font-weight: 600;
+            color: #00abce;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .modal-form-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .modal-form-item {
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #73a535;
+            border-radius: 4px;
+        }
+
+        .modal-form-item.pending {
+            border-left-color: #f39c12;
+            background: #fef5e7;
+        }
+
+        .modal-form-item.failed {
+            border-left-color: #e74c3c;
+            background: #fdeaea;
+        }
+
+        .modal-empty-state {
+            color: #999;
+            font-style: italic;
+            padding: 10px;
+        }
+
+        .modal-history-btn {
+            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .modal-history-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .state-modal {
+                width: 95%;
+                max-height: 90vh;
+                margin: 20px;
+            }
+            
+            .state-modal-header {
+                padding: 15px 20px;
+            }
+            
+            .state-modal-title {
+                font-size: 1.5em;
+            }
+            
+            .state-modal-body {
+                padding: 20px;
+            }
         }
         
         .state-details-placeholder {
@@ -432,43 +609,84 @@
         /* Inset Boxes for Alaska and Hawaii */
         .inset-box {
             position: absolute;
-            background: #e6f3f7;
-            border: 2px solid #999;
+            background: white;
+            border: 2.5px solid #666;
             border-radius: 8px;
-            padding: 8px 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            padding: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
             z-index: 1000;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .inset-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-color: #00abce;
         }
         
         .alaska-box {
             top: 20px;
             left: 20px;
-            width: 110px;
-            height: 85px;
+            width: 85px;
+            height: 50px;
         }
         
         .hawaii-box {
             bottom: 20px;
             left: 20px;
-            width: 110px;
-            height: 65px;
+            width: 85px;
+            height: 50px;
         }
         
-        /* SVG state shapes */
-        .state-shape-svg {
-            width: 100%;
-            height: calc(100% - 25px);
-            position: absolute;
-            top: 0;
-            left: 0;
+        .inset-box.selected {
+            border-color: #ff6b6b;
+            border-width: 3px;
+            background: #fff9f0;
         }
         
-        .state-shape-path, .hawaii-island {
-            fill: #e6f3f7;
-            stroke: #666;
-            stroke-width: 1;
+        /* Inset state label styling to match regular state badges */
+        .inset-state-badge {
+            background: white;
+            border: 2px solid #73a535;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             transition: all 0.3s;
+        }
+        
+        .inset-box:hover .inset-state-badge {
+            border-color: #00abce;
+            transform: scale(1.1);
+        }
+        
+        .inset-box.selected .inset-state-badge {
+            background: #ffebeb;
+            border-color: #ff6b6b;
+            border-width: 3px;
+        }
+        
+        /* Small text above inset boxes */
+        .inset-label-text {
+            position: absolute;
+            top: -18px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         
         .inset-box:hover .state-shape-path,
@@ -1296,9 +1514,14 @@
                             this.selectedState = stateCode;
                             // Bring selected marker to front
                             marker.setZIndexOffset(1000);
+                            
+                            // Show modal with state details
+                            const stateName = stateNames[stateCode];
+                            const activity = getStateActivity(stateCode, this.currentYear);
+                            showStateModal(stateCode, stateName, activity, this.currentYear);
                         }
                         this.updateDisplay();
-                        this.updateSidebar();
+                        this.updateFormBars();
                     });
                     
                     this.stateMarkers.set(stateCode, marker);
@@ -1329,9 +1552,14 @@
                             this.selectedState = stateCode;
                             // Bring selected marker to front
                             marker.setZIndexOffset(1000);
+                            
+                            // Show modal with state details
+                            const stateName = stateNames[stateCode];
+                            const activity = getStateActivity(stateCode, this.currentYear);
+                            showStateModal(stateCode, stateName, activity, this.currentYear);
                         }
                         this.updateDisplay();
-                        this.updateSidebar();
+                        this.updateFormBars();
                     });
                     
                     this.stateMarkers.set(stateCode, marker);
@@ -1344,52 +1572,19 @@
             createInsetBoxes() {
                 const mapContainer = document.getElementById('map');
                 
-                // Create Alaska inset box with state shape
+                // Create Alaska inset box with simple text badge
                 const alaskaBox = document.createElement('div');
                 alaskaBox.className = 'inset-box alaska-box';
                 alaskaBox.innerHTML = `
-                    <svg class="state-shape-svg" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Alaska with distinctive shape including panhandle -->
-                        <g id="alaska-shape">
-                            <!-- Main body of Alaska -->
-                            <path class="state-shape-path alaska-main" 
-                                  d="M 25 50 L 20 45 L 15 40 L 12 32 L 14 25 L 20 20 L 30 18 L 40 16 L 50 17 L 58 20 L 63 25 L 65 32 L 62 38 L 58 42 L 52 45 L 45 48 L 38 50 L 30 51 Z"/>
-                            <!-- Aleutian Islands chain -->
-                            <circle class="state-shape-path" cx="68" cy="45" r="1.5"/>
-                            <circle class="state-shape-path" cx="72" cy="47" r="1"/>
-                            <circle class="state-shape-path" cx="75" cy="48" r="1"/>
-                            <!-- Southeast panhandle -->
-                            <path class="state-shape-path" 
-                                  d="M 58 42 L 60 45 L 62 48 L 61 52 L 59 50 L 57 46 Z"/>
-                        </g>
-                    </svg>
-                    <div class="inset-state-label" id="alaska-label">AK ⚪</div>
+                    <div class="inset-state-badge" id="alaska-label">AK ⚪</div>
                 `;
                 mapContainer.appendChild(alaskaBox);
                 
-                // Create Hawaii inset box with island chain shape  
+                // Create Hawaii inset box with simple text badge  
                 const hawaiiBox = document.createElement('div');
                 hawaiiBox.className = 'inset-box hawaii-box';
                 hawaiiBox.innerHTML = `
-                    <svg class="state-shape-svg" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Hawaiian islands from northwest to southeast -->
-                        <g id="hawaii-shape">
-                            <!-- Kauai -->
-                            <circle class="state-shape-path hawaii-island" cx="20" cy="22" r="3"/>
-                            <!-- Oahu -->  
-                            <ellipse class="state-shape-path hawaii-island" cx="30" cy="24" rx="3.5" ry="2.5"/>
-                            <!-- Molokai -->
-                            <ellipse class="state-shape-path hawaii-island" cx="40" cy="25" rx="4" ry="1.5"/>
-                            <!-- Lanai -->
-                            <circle class="state-shape-path hawaii-island" cx="42" cy="29" r="1.8"/>
-                            <!-- Maui -->
-                            <path class="state-shape-path hawaii-island" d="M 48 24 L 52 23 L 54 25 L 53 28 L 50 29 L 47 27 Z"/>
-                            <!-- Big Island (Hawaii) -->
-                            <path class="state-shape-path hawaii-island" 
-                                  d="M 65 28 L 70 25 L 75 26 L 77 30 L 76 34 L 72 36 L 68 35 L 65 32 Z"/>
-                        </g>
-                    </svg>
-                    <div class="inset-state-label" id="hawaii-label">HI ⚪</div>
+                    <div class="inset-state-badge" id="hawaii-label">HI ⚪</div>
                 `;
                 mapContainer.appendChild(hawaiiBox);
                 
@@ -1400,9 +1595,13 @@
                         this.selectedState = null;
                     } else {
                         this.selectedState = 'AK';
+                        // Show modal with state details
+                        const stateName = stateNames['AK'];
+                        const activity = getStateActivity('AK', this.currentYear);
+                        showStateModal('AK', stateName, activity, this.currentYear);
                     }
                     this.updateDisplay();
-                    this.updateSidebar();
+                    this.updateFormBars();
                     this.updateInsetBoxes();
                 });
                 
@@ -1413,15 +1612,17 @@
                         this.selectedState = null;
                     } else {
                         this.selectedState = 'HI';
+                        // Show modal with state details
+                        const stateName = stateNames['HI'];
+                        const activity = getStateActivity('HI', this.currentYear);
+                        showStateModal('HI', stateName, activity, this.currentYear);
                     }
                     this.updateDisplay();
-                    this.updateSidebar();
+                    this.updateFormBars();
                     this.updateInsetBoxes();
                 });
                 
                 // Store references for updating
-                this.alaskaShapes = document.querySelectorAll('.alaska-box .state-shape-path');
-                this.hawaiiIslands = document.querySelectorAll('.hawaii-island');
                 this.alaskaLabel = document.getElementById('alaska-label');
                 this.hawaiiLabel = document.getElementById('hawaii-label');
             }
@@ -1430,18 +1631,24 @@
                 // Update Alaska
                 const akActivity = getStateActivity('AK', this.currentYear);
                 this.alaskaLabel.textContent = `AK ${akActivity.emoji}`;
-                this.alaskaShapes.forEach(shape => {
-                    shape.className.baseVal = this.selectedState === 'AK' ? 
-                        'state-shape-path selected' : 'state-shape-path';
-                });
+                
+                const alaskaBox = document.querySelector('.alaska-box');
+                if (this.selectedState === 'AK') {
+                    alaskaBox.classList.add('selected');
+                } else {
+                    alaskaBox.classList.remove('selected');
+                }
                 
                 // Update Hawaii
                 const hiActivity = getStateActivity('HI', this.currentYear);
                 this.hawaiiLabel.textContent = `HI ${hiActivity.emoji}`;
-                this.hawaiiIslands.forEach(island => {
-                    island.className.baseVal = this.selectedState === 'HI' ? 
-                        'state-shape-path hawaii-island selected' : 'state-shape-path hawaii-island';
-                });
+                
+                const hawaiiBox = document.querySelector('.hawaii-box');
+                if (this.selectedState === 'HI') {
+                    hawaiiBox.classList.add('selected');
+                } else {
+                    hawaiiBox.classList.remove('selected');
+                }
             }
             
             setupControls() {
@@ -1457,7 +1664,6 @@
                 yearSelect.addEventListener('change', (e) => {
                     this.currentYear = e.target.value;
                     this.updateDisplay();
-                    this.updateSidebar();
                     this.updateFormBars();
                     // Update year badge
                     document.getElementById('yearBadge').textContent = this.currentYear;
@@ -1674,10 +1880,130 @@
             }
         }
         
+        // Modal Functions
+        function showStateModal(stateCode, stateName, activity, year) {
+            // Update modal header
+            document.getElementById('modalStateName').textContent = stateName;
+            document.getElementById('modalStateYear').textContent = `Activity in ${year}`;
+            
+            // Generate modal body content
+            let bodyHTML = '';
+            
+            // Enacted forms section
+            if (activity.forms && activity.forms.length > 0) {
+                bodyHTML += `
+                    <div class="modal-detail-section">
+                        <div class="modal-detail-title">✅ Enacted This Year</div>
+                        <ul class="modal-form-list">`;
+                activity.forms.forEach(form => {
+                    const formName = corporateForms[form] || form;
+                    bodyHTML += `<li class="modal-form-item">${formName}</li>`;
+                });
+                bodyHTML += `</ul></div>`;
+            }
+            
+            // Under consideration section
+            if (activity.underConsideration && activity.underConsideration.length > 0) {
+                bodyHTML += `
+                    <div class="modal-detail-section">
+                        <div class="modal-detail-title">⏳ Under Consideration</div>
+                        <ul class="modal-form-list">`;
+                activity.underConsideration.forEach(form => {
+                    const formName = corporateForms[form] || form;
+                    bodyHTML += `<li class="modal-form-item pending">${formName}</li>`;
+                });
+                bodyHTML += `</ul></div>`;
+            }
+            
+            // Failed legislation section
+            if (activity.failed && activity.failed.length > 0) {
+                bodyHTML += `
+                    <div class="modal-detail-section">
+                        <div class="modal-detail-title">❌ Failed This Year</div>
+                        <ul class="modal-form-list">`;
+                activity.failed.forEach(form => {
+                    const formName = corporateForms[form] || form;
+                    bodyHTML += `<li class="modal-form-item failed">${formName}</li>`;
+                });
+                bodyHTML += `</ul></div>`;
+            }
+            
+            // Currently available forms section
+            bodyHTML += `
+                <div class="modal-detail-section">
+                    <div class="modal-detail-title">📋 Currently Available Forms</div>`;
+            
+            if (activity.availableForms && activity.availableForms.length > 0) {
+                bodyHTML += `<ul class="modal-form-list">`;
+                activity.availableForms.forEach(form => {
+                    const formName = corporateForms[form] || form;
+                    bodyHTML += `<li class="modal-form-item">${formName}</li>`;
+                });
+                bodyHTML += `</ul>`;
+            } else {
+                bodyHTML += `<p class="modal-empty-state">No forms currently available</p>`;
+            }
+            bodyHTML += `</div>`;
+            
+            // View complete history button
+            bodyHTML += `
+                <div class="modal-detail-section">
+                    <button onclick="window.open('states/${stateCode.toLowerCase()}.html', '_blank')" 
+                            class="modal-history-btn">
+                        📜 View Complete Legislative History
+                    </button>
+                </div>`;
+            
+            // Update modal body
+            document.getElementById('modalStateBody').innerHTML = bodyHTML;
+            
+            // Show modal
+            document.getElementById('stateModalOverlay').classList.add('show');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeStateModal() {
+            document.getElementById('stateModalOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        
         // Initialize the application
         document.addEventListener('DOMContentLoaded', () => {
             new EnhancedSELTMap();
+            
+            // Modal event listeners
+            document.getElementById('stateModalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeStateModal();
+                }
+            });
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeStateModal();
+            }
         });
     </script>
+    
+    <!-- Modal for State Details -->
+    <div id="stateModalOverlay" class="state-modal-overlay">
+        <div class="state-modal">
+            <div class="state-modal-header">
+                <div>
+                    <div class="state-modal-title" id="modalStateName">State Name</div>
+                    <div class="state-modal-year" id="modalStateYear">Activity in 2024</div>
+                </div>
+                <button class="state-modal-close" onclick="closeStateModal()" aria-label="Close">×</button>
+            </div>
+            <div class="state-modal-body" id="modalStateBody">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
