@@ -414,18 +414,18 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 45px !important;  /* Adjusted for smaller size */
+                bottom: 40px !important;  /* Adjusted for smaller size */
                 left: 10px !important;
                 top: auto !important;
-                width: 45px;  /* Smaller on mobile */
-                height: 30px;
+                width: 40px;  /* Even smaller on mobile */
+                height: 25px;
             }
             
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
-                width: 45px;  /* Same smaller size as Alaska */
-                height: 30px;
+                width: 40px;  /* Same smaller size as Alaska */
+                height: 25px;
             }
             
             /* Map controls responsive */
@@ -571,14 +571,14 @@
             
             /* Even more compact inset boxes on very small screens */
             .alaska-box, .hawaii-box {
-                width: 45px;  /* Keep same as mobile */
-                height: 30px;
-                padding: 4px;
+                width: 40px;  /* Keep same as mobile */
+                height: 25px;
+                padding: 3px;
             }
             
             .inset-state-badge {
-                font-size: 10px;  /* Smaller text for smaller boxes */
-                padding: 3px 6px;
+                font-size: 9px;  /* Even smaller text for tiny boxes */
+                padding: 2px 4px;
             }
             
             /* Make form bars even smaller on small screens */
@@ -1688,12 +1688,12 @@
                 // Detect if mobile
                 const isMobile = window.innerWidth <= 768;
                 
-                // For mobile: tighter focus on continental US
+                // For mobile: EXTREMELY tight focus - just continental US
                 // Desktop stays the same
-                const mapCenter = isMobile ? [38, -97] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 3.5 : 4;  // Start with this zoom, fitBounds will adjust
+                const mapCenter = isMobile ? [38.5, -95.5] : [38.5, -98.5795];
+                const mapZoom = isMobile ? 5.2 : 4;  // VERY zoomed in - cuts off at borders
                 
-                // Initialize map with locked view
+                // Initialize map
                 this.map = L.map('map', {
                     center: mapCenter,
                     zoom: mapZoom,
@@ -1703,9 +1703,7 @@
                     touchZoom: false, // Disable touch zoom
                     boxZoom: false, // Disable box zoom
                     keyboard: false, // Disable keyboard navigation
-                    dragging: false, // Disable map dragging - no scrolling!
-                    maxBounds: isMobile ? [[24, -126], [50, -66]] : null,  // Tight bounds on mobile only
-                    maxBoundsViscosity: 1.0
+                    dragging: false // Disable map dragging - no scrolling!
                 });
                 
                 // Store original view
@@ -1721,13 +1719,17 @@
                 
                 // On mobile, ensure map fits properly and apply bounds
                 if (isMobile) {
+                    // Try multiple times to ensure the view is set correctly
                     setTimeout(() => {
                         this.map.invalidateSize();
-                        // Apply tight bounds after map is ready
-                        this.map.fitBounds([[24, -126], [50, -66]], {
-                            padding: [5, 5]
-                        });
+                        // Force view to continental US only - no Mexico/Canada
+                        this.map.setView([38.5, -95.5], 5.2);  // VERY tight zoom
                     }, 100);
+                    
+                    // Try again after a longer delay to make sure it sticks
+                    setTimeout(() => {
+                        this.map.setView([38.5, -95.5], 5.2);
+                    }, 500);
                 }
             }
             
