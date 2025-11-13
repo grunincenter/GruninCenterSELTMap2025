@@ -1684,10 +1684,10 @@
                 // Detect if mobile
                 const isMobile = window.innerWidth <= 768;
                 
-                // For mobile: zoom in more to focus on US, less Canada/Mexico
-                // Zoom in to reduce visible borders
+                // For mobile: zoom out to see both coasts
+                // Reduced zoom by 20% to show full US width
                 const mapCenter = isMobile ? [39, -96.5] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 3.8 : 4;  // More zoomed in on mobile
+                const mapZoom = isMobile ? 3.0 : 4;  // Zoomed out 20% to see coasts
                 
                 // Initialize map with locked view
                 this.map = L.map('map', {
