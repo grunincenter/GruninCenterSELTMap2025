@@ -1721,7 +1721,14 @@
                 if (isMobile) {
                     setTimeout(() => {
                         this.map.invalidateSize();
-                        // No need to set view again - it's already set above
+                        // Force exact US boundaries after resize
+                        this.map.fitBounds([
+                            [25, -125],  // Southwest: Southern Florida to California
+                            [49, -66]    // Northeast: Northern states to Maine
+                        ], {
+                            padding: [10, 10],
+                            animate: false
+                        });
                     }, 100);
                 }
             }
