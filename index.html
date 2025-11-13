@@ -30,7 +30,7 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 10px;  /* Reduce bottom padding */
+            padding-bottom: 0;  /* No bottom padding */
         }
 
         .header {
@@ -521,15 +521,16 @@
             }
             
             .form-bar-label {
-                font-size: 8px;  /* Readable size */
+                font-size: 5px !important;  /* Much smaller font */
                 writing-mode: initial;  /* Horizontal text */
                 text-orientation: initial;
-                padding: 4px 2px;
+                padding: 2px 0px;
                 text-align: center;
-                line-height: 1.2;
-                overflow: visible;  /* Don't hide overflow */
+                line-height: 1;
+                overflow: hidden;  /* Hide overflow */
                 width: 100%;
-                display: block;  /* Normal block display */
+                display: block;
+                white-space: nowrap;  /* Don't wrap text */
             }
             
             .form-bar-count {
@@ -1254,6 +1255,7 @@
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
+            margin-bottom: 0;  /* No bottom margin */
         }
 
         .acknowledgment h3 {
@@ -1355,10 +1357,8 @@
 <body>
     <div class="container">
         <div class="grunin-branding">
-            <img src="https://www.law.nyu.edu/sites/default/files/styles/teaser_two_column/public/2022-11/GruninCenterLogo.jpg" 
-                 alt="Grunin Center Logo" 
-                 class="grunin-logo-img">
-            <div class="grunin-title">
+            <!-- Logo removed - not loading -->
+            <div class="grunin-title" style="text-align: center; width: 100%;">
                 <div class="grunin-name">Grunin Center for Law and Social Entrepreneurship</div>
                 <div class="grunin-subtitle">NYU School of Law</div>
             </div>
@@ -1745,9 +1745,9 @@
                         // Set bounds to show all US states
                         this.map.fitBounds([
                             [24, -125],  // Southwest: Southern Florida to California
-                            [49, -66]    // Northeast: Northern states to Maine
+                            [49, -64]    // Northeast: Extended east to show all northeast state labels
                         ], {
-                            padding: [5, 5],
+                            padding: [5, 15],  /* More padding on sides for state labels */
                             animate: false
                         });
                         // Don't add extra zoom - let fitBounds handle it
