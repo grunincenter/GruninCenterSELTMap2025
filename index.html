@@ -414,14 +414,18 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 60px !important;
+                bottom: 45px !important;  /* Adjusted for smaller size */
                 left: 10px !important;
                 top: auto !important;
+                width: 45px;  /* Smaller on mobile */
+                height: 30px;
             }
             
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
+                width: 45px;  /* Same smaller size as Alaska */
+                height: 30px;
             }
             
             /* Map controls responsive */
@@ -567,14 +571,14 @@
             
             /* Even more compact inset boxes on very small screens */
             .alaska-box, .hawaii-box {
-                width: 60px;  /* Smaller and same size */
-                height: 35px;
-                padding: 5px;
+                width: 45px;  /* Keep same as mobile */
+                height: 30px;
+                padding: 4px;
             }
             
             .inset-state-badge {
-                font-size: 12px;
-                padding: 4px 10px;
+                font-size: 10px;  /* Smaller text for smaller boxes */
+                padding: 3px 6px;
             }
             
             /* Make form bars even smaller on small screens */
@@ -1684,10 +1688,10 @@
                 // Detect if mobile
                 const isMobile = window.innerWidth <= 768;
                 
-                // For mobile: zoom out to see both coasts
-                // Reduced zoom by 20% to show full US width
-                const mapCenter = isMobile ? [39, -96.5] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 3.0 : 4;  // Zoomed out 20% to see coasts
+                // For mobile: tighter focus on continental US
+                // Desktop stays the same
+                const mapCenter = isMobile ? [37, -96] : [38.5, -98.5795];
+                const mapZoom = isMobile ? 4.0 : 4;  // Zoom in more on mobile to focus on US
                 
                 // Initialize map with locked view
                 this.map = L.map('map', {
@@ -1699,7 +1703,9 @@
                     touchZoom: false, // Disable touch zoom
                     boxZoom: false, // Disable box zoom
                     keyboard: false, // Disable keyboard navigation
-                    dragging: false // Disable map dragging - no scrolling!
+                    dragging: false, // Disable map dragging - no scrolling!
+                    maxBounds: isMobile ? [[24, -126], [50, -66]] : null,  // Tight bounds on mobile only
+                    maxBoundsViscosity: 1.0
                 });
                 
                 // Store original view
@@ -1712,6 +1718,13 @@
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: ''
                 }).addTo(this.map);
+                
+                // On mobile, fit to bounds to ensure we see the full US
+                if (isMobile) {
+                    this.map.fitBounds([[24, -126], [50, -66]], {
+                        padding: [10, 10]
+                    });
+                }
                 
                 // On mobile, ensure map fits properly
                 if (isMobile) {
