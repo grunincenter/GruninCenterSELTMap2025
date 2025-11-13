@@ -1690,8 +1690,8 @@
                 
                 // For mobile: tighter focus on continental US
                 // Desktop stays the same
-                const mapCenter = isMobile ? [37, -96] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 4.0 : 4;  // Zoom in more on mobile to focus on US
+                const mapCenter = isMobile ? [38, -97] : [38.5, -98.5795];
+                const mapZoom = isMobile ? 3.5 : 4;  // Start with this zoom, fitBounds will adjust
                 
                 // Initialize map with locked view
                 this.map = L.map('map', {
@@ -1719,17 +1719,14 @@
                     attribution: ''
                 }).addTo(this.map);
                 
-                // On mobile, fit to bounds to ensure we see the full US
-                if (isMobile) {
-                    this.map.fitBounds([[24, -126], [50, -66]], {
-                        padding: [10, 10]
-                    });
-                }
-                
-                // On mobile, ensure map fits properly
+                // On mobile, ensure map fits properly and apply bounds
                 if (isMobile) {
                     setTimeout(() => {
                         this.map.invalidateSize();
+                        // Apply tight bounds after map is ready
+                        this.map.fitBounds([[24, -126], [50, -66]], {
+                            padding: [5, 5]
+                        });
                     }, 100);
                 }
             }
