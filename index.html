@@ -432,17 +432,17 @@
             
             /* Make state badges smaller on mobile to prevent overlap */
             .state-badge-marker {
-                transform: scale(0.8);
+                transform: scale(0.7);  /* Even smaller for mobile */
             }
             
             .state-badge {
-                font-size: 11px !important;
-                padding: 4px 8px !important;
+                font-size: 10px !important;
+                padding: 3px 6px !important;
             }
             
             .state-badge.northeast {
-                font-size: 10px !important;
-                padding: 3px 6px !important;
+                font-size: 9px !important;
+                padding: 2px 5px !important;
             }
             
             .control-group {
@@ -488,16 +488,32 @@
             
             .form-bar-wrapper {
                 padding: 3px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                height: 100%;
             }
             
             .form-bar-label {
                 font-size: 9px;
-                writing-mode: vertical-lr;  /* Vertical text to save space */
-                text-orientation: upright;
+                writing-mode: initial;  /* Keep horizontal */
+                text-orientation: initial;
+                padding: 4px 2px;
+                text-align: center;
+                line-height: 1;
+                overflow: hidden;
+                width: 100%;
             }
             
             .form-bar-count {
                 font-size: 10px;
+                margin-bottom: 4px;
+            }
+            
+            .form-bar-fill {
+                width: 100%;
+                max-width: 40px;
             }
             
             .form-bar-states {
@@ -576,16 +592,26 @@
             
             .form-bar-wrapper {
                 padding: 2px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
             }
             
             .form-bar-label {
                 font-size: 8px;
-                writing-mode: initial;  /* Back to horizontal on very small */
-                text-orientation: initial;
+                padding: 2px 1px;
+                line-height: 1;
             }
             
             .form-bar-count {
                 font-size: 10px;
+                margin-bottom: 2px;
+            }
+            
+            .form-bar-fill {
+                width: 100%;
+                max-width: 35px;
             }
             
             .form-bar-states {
@@ -1652,10 +1678,10 @@
                 // Detect if mobile
                 const isMobile = window.innerWidth <= 768;
                 
-                // For mobile: center on US and zoom to show just the 48 states
-                // Shift center south to cut off Canada, north to cut off Mexico
-                const mapCenter = isMobile ? [41, -98.5795] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 3.7 : 4;  // Zoom IN to focus on just US
+                // For mobile: need to see from CA to ME, WA to FL
+                // Zoom out enough to see all states, center on US
+                const mapCenter = isMobile ? [40, -96.5] : [38.5, -98.5795];
+                const mapZoom = isMobile ? 3.4 : 4;  // Zoom out to see all coastal states
                 
                 // Initialize map with locked view
                 this.map = L.map('map', {
@@ -1685,10 +1711,6 @@
                 if (isMobile) {
                     setTimeout(() => {
                         this.map.invalidateSize();
-                        // Set max bounds to prevent showing too much outside US
-                        const southWest = L.latLng(25, -125); // Cut off most of Mexico
-                        const northEast = L.latLng(50, -66);   // Cut off most of Canada
-                        this.map.setMaxBounds(L.latLngBounds(southWest, northEast));
                     }, 100);
                 }
             }
@@ -1700,15 +1722,15 @@
                 // Northeast states with maximum spacing to prevent any overlap
                 // On mobile, push callouts even further out
                 const northeastStates = {
-                    'ME': { actual: [44.693947, -69.381927], callout: isMobile ? [47, -63] : [46.5, -64.5] },
-                    'NH': { actual: [43.452492, -71.563896], callout: isMobile ? [46, -65] : [45, -66] },
-                    'VT': { actual: [44.045876, -72.710686], callout: isMobile ? [45, -67] : [44, -68] },
-                    'MA': { actual: [42.230171, -71.530106], callout: isMobile ? [43, -64] : [42.5, -65] },
-                    'RI': { actual: [41.680893, -71.511780], callout: isMobile ? [41.5, -65.5] : [41, -66.5] },
-                    'CT': { actual: [41.597782, -72.755371], callout: isMobile ? [40.5, -67.5] : [40, -68.5] },
-                    'NJ': { actual: [40.298904, -74.521011], callout: isMobile ? [39, -69.5] : [38.8, -70.5] },
-                    'DE': { actual: [39.318523, -75.507141], callout: isMobile ? [37.8, -71] : [37.5, -72] },
-                    'MD': { actual: [39.063946, -76.802101], callout: isMobile ? [36.8, -73] : [36.5, -74] }
+                    'ME': { actual: [44.693947, -69.381927], callout: isMobile ? [47.5, -62] : [46.5, -64.5] },
+                    'NH': { actual: [43.452492, -71.563896], callout: isMobile ? [46.5, -64] : [45, -66] },
+                    'VT': { actual: [44.045876, -72.710686], callout: isMobile ? [45.5, -66] : [44, -68] },
+                    'MA': { actual: [42.230171, -71.530106], callout: isMobile ? [43.5, -63] : [42.5, -65] },
+                    'RI': { actual: [41.680893, -71.511780], callout: isMobile ? [42, -64.5] : [41, -66.5] },
+                    'CT': { actual: [41.597782, -72.755371], callout: isMobile ? [41, -66.5] : [40, -68.5] },
+                    'NJ': { actual: [40.298904, -74.521011], callout: isMobile ? [39.5, -68.5] : [38.8, -70.5] },
+                    'DE': { actual: [39.318523, -75.507141], callout: isMobile ? [38, -70] : [37.5, -72] },
+                    'MD': { actual: [39.063946, -76.802101], callout: isMobile ? [37, -72] : [36.5, -74] }
                 };
                 
                 // Create leader lines for Northeast states
