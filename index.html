@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 4 - Further reduced mobile white space -->
+<!-- FIXED VERSION 5 - Year dropdown width fixed, AK/HI smaller, legend compact -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -439,6 +439,25 @@
             
             .control-group {
                 margin-bottom: 0 !important;  /* Remove extra margin */
+                display: flex;
+                flex-direction: row !important;  /* Keep label and dropdown on same line */
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .control-label {
+                font-weight: 600;
+                color: #925333;
+                margin-right: 5px;
+            }
+            
+            #yearSelect {
+                flex: 0 1 auto !important;  /* Don't stretch */
+                width: auto !important;  /* Auto width based on content */
+                min-width: 100px !important;  /* Minimum width */
+                max-width: 150px !important;  /* Maximum width */
+                padding: 6px 10px !important;
+                font-size: 14px !important;
             }
             
             /* Map height optimized for mobile */
@@ -455,18 +474,27 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 55px !important;  /* Even more space between AK and HI */
+                bottom: 45px !important;  /* Position higher */
                 left: 10px !important;
                 top: auto !important;
-                width: 40px;  /* Even smaller on mobile */
-                height: 25px;
+                width: 30px !important;  /* Much smaller */
+                height: 20px !important;  /* Much smaller */
+                padding: 2px !important;
+                border-width: 1.5px !important;
             }
             
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
-                width: 40px;  /* Same smaller size as Alaska */
-                height: 25px;
+                width: 30px !important;  /* Much smaller */
+                height: 20px !important;  /* Much smaller */
+                padding: 2px !important;
+                border-width: 1.5px !important;
+            }
+            
+            .inset-state-badge {
+                font-size: 8px !important;  /* Smaller text */
+                font-weight: 600 !important;
             }
             
             /* Map controls responsive */
@@ -503,10 +531,18 @@
             
             .legend {
                 flex-direction: column;
-                gap: 2px !important;  /* Tiny gap between items */
-                padding: 3px !important;  /* Minimal padding */
-                margin-top: 3px !important;  /* Tiny top margin */
+                gap: 0 !important;  /* No gap between items */
+                padding: 2px !important;  /* Minimal padding */
+                margin-top: 2px !important;  /* Tiny top margin */
                 margin-bottom: 0 !important;  /* No bottom margin */
+            }
+            
+            .legend-item {
+                font-size: 11px !important;  /* Slightly smaller text */
+                gap: 4px !important;  /* Small gap between box and text */
+                margin-bottom: 1px !important;  /* Tiny margin between items */
+                padding: 1px 0 !important;
+                line-height: 1.2 !important;
             }
             
             .legend-item {
@@ -542,7 +578,7 @@
             
             .stats-year-indicator {
                 padding: 0 5px !important;  /* Very minimal side padding */
-                min-width: 80px !important;  /* Smaller */
+                min-width: 70px !important;  /* Even smaller */
                 border-right: 1px solid rgba(0,171,206,0.2) !important;  /* Thinner */
                 border-bottom: none !important;  /* Remove bottom border on mobile */
                 padding-bottom: 0 !important;
@@ -551,34 +587,41 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 2px !important;  /* Tiny gap between badge and text */
+                gap: 1px !important;  /* Tiny gap between badge and text */
             }
             
             /* Reduced year badge spacing */
             .year-badge {
-                padding: 5px 10px !important;  /* Even smaller */
-                font-size: 1.1em !important;  /* Smaller font */
+                padding: 4px 8px !important;  /* Even smaller */
+                font-size: 1em !important;  /* Smaller font */
                 margin-bottom: 0 !important;  /* No margin */
                 margin-top: 0 !important;
             }
             
             .year-label {
-                font-size: 0.65em !important;  /* Smaller */
+                font-size: 0.55em !important;  /* Even smaller */
                 margin: 0 !important;  /* No margins */
-                line-height: 1 !important;
+                line-height: 0.9 !important;  /* Tighter */
                 text-align: center !important;
+                letter-spacing: -0.3px !important;  /* Tighter letters */
+                text-transform: uppercase;
+                max-width: 60px !important;
             }
             
             .forms-visual {
                 gap: 5px;
-                padding: 5px 0 20px 0 !important;  /* Bottom padding for labels */
+                padding: 8px 0 20px 0 !important;  /* Bit more top padding */
                 justify-content: center;
                 display: flex;
                 flex-wrap: nowrap;
                 max-width: 100%;
                 overflow: visible !important;  /* Allow labels to show */
-                min-height: 70px !important;  /* Height for bars plus labels */
+                min-height: 80px !important;  /* Slightly taller */
                 position: relative;
+            }
+            
+            .form-bar-fill {
+                min-height: 15px !important;  /* Minimum height for bars */
             }
             
             .form-bar {
@@ -673,14 +716,15 @@
             
             /* Even more compact inset boxes on very small screens */
             .alaska-box, .hawaii-box {
-                width: 40px;  /* Keep same as mobile */
-                height: 25px;
-                padding: 3px;
+                width: 28px !important;  /* Even smaller */
+                height: 18px !important;
+                padding: 1px !important;
+                border-width: 1px !important;
             }
             
             .inset-state-badge {
-                font-size: 9px;  /* Even smaller text for tiny boxes */
-                padding: 2px 4px;
+                font-size: 7px !important;  /* Tiny text */
+                padding: 1px 2px !important;
             }
             
             /* Make form bars even smaller on small screens */
