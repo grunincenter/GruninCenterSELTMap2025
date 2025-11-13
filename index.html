@@ -23,6 +23,7 @@
             background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
             min-height: 100vh;
             color: #333;
+            padding-bottom: 0;  /* Remove any bottom padding */
         }
 
         .container {
@@ -520,17 +521,15 @@
             }
             
             .form-bar-label {
-                font-size: 7px;  /* Smaller font for mobile */
-                writing-mode: initial;  /* Keep horizontal */
+                font-size: 8px;  /* Readable size */
+                writing-mode: initial;  /* Horizontal text */
                 text-orientation: initial;
-                padding: 3px 1px;
+                padding: 4px 2px;
                 text-align: center;
-                line-height: 1.1;
-                overflow: hidden;
+                line-height: 1.2;
+                overflow: visible;  /* Don't hide overflow */
                 width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                display: block;  /* Normal block display */
             }
             
             .form-bar-count {
@@ -626,15 +625,14 @@
             }
             
             .form-bar-label {
-                font-size: 5px;  /* Smaller to prevent cutoff */
-                padding: 1px;
-                line-height: 1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                word-break: break-word;  /* Allow text to wrap */
+                font-size: 7px;  /* Readable size */
+                writing-mode: initial;  /* Keep horizontal */
+                text-orientation: initial;
+                padding: 2px 1px;
+                line-height: 1.1;
+                display: block;
                 text-align: center;
-                min-height: 25px;  /* Ensure consistent height */
+                overflow: visible;
             }
             
             .form-bar-count {
@@ -1357,10 +1355,9 @@
 <body>
     <div class="container">
         <div class="grunin-branding">
-            <img src="https://www.law.nyu.edu/sites/default/files/Grunin-Center-Logo_1.jpg" 
+            <img src="https://www.law.nyu.edu/sites/default/files/styles/teaser_two_column/public/2022-11/GruninCenterLogo.jpg" 
                  alt="Grunin Center Logo" 
-                 class="grunin-logo-img" 
-                 onerror="this.style.display='none'; this.parentElement.style.justifyContent='center'">
+                 class="grunin-logo-img">
             <div class="grunin-title">
                 <div class="grunin-name">Grunin Center for Law and Social Entrepreneurship</div>
                 <div class="grunin-subtitle">NYU School of Law</div>
@@ -1745,16 +1742,15 @@
                 if (isMobile) {
                     setTimeout(() => {
                         this.map.invalidateSize();
-                        // Force exact US boundaries after resize
+                        // Set bounds to show all US states
                         this.map.fitBounds([
-                            [25, -125],  // Southwest: Southern Florida to California
+                            [24, -125],  // Southwest: Southern Florida to California
                             [49, -66]    // Northeast: Northern states to Maine
                         ], {
-                            padding: [10, 10],
+                            padding: [5, 5],
                             animate: false
                         });
-                        // Force zoom in by 0.5 levels to cut off Mexico
-                        this.map.setZoom(this.map.getZoom() + 0.5);
+                        // Don't add extra zoom - let fitBounds handle it
                     }, 100);
                 }
             }
