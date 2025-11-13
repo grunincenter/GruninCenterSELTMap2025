@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION - Updated with reduced spacing fixes -->
+<!-- FIXED VERSION 2 - Mobile spacing dramatically reduced -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -421,7 +421,11 @@
             
             /* Map section same width as other sections */
             .map-section {
-                margin-bottom: 20px;
+                margin-bottom: 10px !important;  /* Reduced from 20px */
+            }
+            
+            .map-controls {
+                padding: 8px !important;  /* Much reduced from 20px */
             }
             
             /* Map height optimized for mobile */
@@ -479,9 +483,9 @@
             
             .legend {
                 flex-direction: column;
-                gap: 5px;  /* Reduced from 8px */
-                padding: 10px;  /* Reduced padding */
-                margin-top: 10px;  /* Reduced from default */
+                gap: 3px !important;  /* Very small gap */
+                padding: 5px !important;  /* Reduced padding */
+                margin-top: 5px !important;  /* Reduced margin */
             }
             
             .legend-item {
@@ -501,9 +505,9 @@
             
             /* Reduced stats bar spacing */
             .stats-bar {
-                padding: 15px 20px;  /* Reduced from 25px 30px */
-                min-height: 120px;  /* Reduced from 180px */
-                gap: 20px;  /* Reduced from 40px */
+                padding: 8px 10px !important;  /* VERY reduced for mobile */
+                min-height: 80px !important;  /* Much smaller for mobile */
+                gap: 10px !important;  /* Smaller gap */
             }
             
             .stats-year-indicator {
@@ -513,25 +517,26 @@
             
             /* Reduced year badge spacing */
             .year-badge {
-                padding: 8px 16px;  /* Reduced from 12px 24px */
-                font-size: 1.5em;  /* Reduced from 1.8em */
-                margin-bottom: 5px;  /* Reduced from 10px */
+                padding: 6px 12px !important;  /* Much smaller */
+                font-size: 1.2em !important;  /* Smaller font */
+                margin-bottom: 2px !important;  /* Tiny margin */
             }
             
             .year-label {
-                font-size: 0.75em;  /* Smaller */
-                margin-bottom: 0;  /* Remove bottom margin */
+                font-size: 0.7em !important;  /* Smaller */
+                margin-bottom: 0 !important;  /* No margin */
+                line-height: 1 !important;
             }
             
             .forms-visual {
                 gap: 5px;
-                padding: 5px 0;  /* Reduced from 10px */
+                padding: 3px 0 !important;  /* VERY reduced padding */
                 justify-content: center;
                 display: flex;
                 flex-wrap: nowrap;
                 max-width: 100%;
                 overflow: hidden;
-                min-height: 100px;  /* Reduced from 140px */
+                min-height: 60px !important;  /* Much reduced */
             }
             
             .form-bar {
@@ -644,14 +649,15 @@
             .forms-visual {
                 gap: 3px;
                 overflow: hidden;  /* Prevent any overflow */
-                min-height: 90px;  /* Further reduced from 100px */
+                min-height: 50px !important;  /* Much smaller */
+                padding: 2px 0 !important;
             }
             
             /* Further reduced stats bar for small screens */
             .stats-bar {
-                padding: 12px 15px;  /* Further reduced */
-                min-height: 100px;  /* Further reduced */
-                gap: 15px;  /* Further reduced */
+                padding: 6px 8px !important;  /* Very small padding */
+                min-height: 70px !important;  /* Much smaller */
+                gap: 8px !important;  /* Tiny gap */
             }
             
             .form-bar {
