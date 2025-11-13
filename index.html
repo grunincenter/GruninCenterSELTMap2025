@@ -29,6 +29,7 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            padding-bottom: 10px;  /* Reduce bottom padding */
         }
 
         .header {
@@ -625,12 +626,15 @@
             }
             
             .form-bar-label {
-                font-size: 6px;  /* Even smaller for tiny screens */
-                padding: 2px 1px;
-                line-height: 1.1;
+                font-size: 5px;  /* Smaller to prevent cutoff */
+                padding: 1px;
+                line-height: 1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                word-break: break-word;  /* Allow text to wrap */
+                text-align: center;
+                min-height: 25px;  /* Ensure consistent height */
             }
             
             .form-bar-count {
@@ -1353,9 +1357,10 @@
 <body>
     <div class="container">
         <div class="grunin-branding">
-            <img src="https://socialenterprise.law.nyu.edu/wp-content/uploads/2022/07/grunin-homepage-logo-150x150.png" 
+            <img src="https://www.law.nyu.edu/sites/default/files/Grunin-Center-Logo_1.jpg" 
                  alt="Grunin Center Logo" 
-                 class="grunin-logo-img">
+                 class="grunin-logo-img" 
+                 onerror="this.style.display='none'; this.parentElement.style.justifyContent='center'">
             <div class="grunin-title">
                 <div class="grunin-name">Grunin Center for Law and Social Entrepreneurship</div>
                 <div class="grunin-subtitle">NYU School of Law</div>
