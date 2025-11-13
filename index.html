@@ -1690,8 +1690,8 @@
                 
                 // For mobile: Show full continental US without Mexico/Central America
                 // Desktop stays the same
-                const mapCenter = isMobile ? [39, -96] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 4.0 : 4;  // Zoom 4.0 should show US without Central America
+                const mapCenter = isMobile ? [39, -97] : [38.5, -98.5795];
+                const mapZoom = isMobile ? 3.5 : 4;  // Zoom 3.5 - midpoint between too close and too far
                 
                 // Initialize map
                 this.map = L.map('map', {
