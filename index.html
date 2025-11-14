@@ -388,6 +388,23 @@
                 min-height: auto !important;  /* Don't force 100vh on mobile */
             }
             
+            /* FIX FOR YEAR PLACEMENT - Put year below bars */
+            #statsBar {
+                flex-direction: column-reverse !important;
+            }
+            
+            .stats-year-indicator {
+                order: 2 !important;
+                border-right: none !important;
+                border-top: 2px solid #e0e0e0 !important;
+                padding-top: 10px !important;
+                width: 100% !important;
+            }
+            
+            .forms-visual {
+                order: 1 !important;
+            }
+            
             html {
                 padding-bottom: 0 !important;
                 margin-bottom: 0 !important;
@@ -563,21 +580,32 @@
             }
             
             .legend {
-                flex-direction: row !important;  /* Keep horizontal */
-                gap: 8px !important;  /* Small gap */
-                padding: 5px !important;  /* Minimal padding */
+                flex-direction: column;
+                gap: 4px !important;  /* Reasonable gap */
+                padding: 8px !important;  /* More padding */
                 margin-top: 5px !important;
                 margin-bottom: 0 !important;
-                flex-wrap: wrap !important;
-                justify-content: center !important;
+                background: rgba(255,255,255,0.15) !important;  /* Subtle background */
+                border-radius: 8px !important;  /* Rounded corners */
             }
             
             .legend-item {
-                font-size: 11px !important;  /* Smaller text */
-                gap: 3px !important;  /* Tiny gap between emoji and text */
-                margin-bottom: 0 !important;
-                padding: 2px 4px !important;
-                line-height: 1.2 !important;
+                font-size: 12px !important;  /* Better size */
+                gap: 6px !important;  /* Gap between emoji and text */
+                margin-bottom: 2px !important;
+                padding: 3px 5px !important;  /* Add padding */
+                line-height: 1.3 !important;
+                display: flex !important;
+                align-items: center !important;
+                background: rgba(255,255,255,0.6) !important;  /* Light background */
+                border-radius: 5px !important;  /* Rounded */
+            }
+            
+            .legend-item {
+                font-size: 12px !important;  /* Smaller text */
+                gap: 5px !important;  /* Smaller gap between box and text */
+                margin-bottom: 2px !important;  /* Tiny margin between items */
+                padding: 2px 0 !important;
             }
             
             .legend-box {
@@ -600,7 +628,7 @@
                 padding: 5px 8px 10px 8px !important;  /* Much less bottom padding */
                 min-height: auto !important;  /* Auto height */
                 gap: 0 !important;  /* No gap between sections */
-                flex-direction: column-reverse !important;  /* REVERSED - year at bottom */
+                flex-direction: column !important;  /* Normal order - bars then year */
                 border-top: 1px solid #00abce !important;
                 display: flex;
                 align-items: stretch;
@@ -619,24 +647,6 @@
                 gap: 10px !important;
                 background: transparent !important;  /* No background */
                 border-radius: 0 !important;  /* No rounding */
-                order: 2 !important;  /* Put at bottom */
-            }
-            
-            .forms-visual {
-                gap: 4px !important;
-                padding: 5px 5px 20px 5px !important;  /* Less padding */
-                justify-content: center;
-                display: flex !important;
-                flex-wrap: nowrap;
-                max-width: 100%;
-                overflow: visible !important;
-                min-height: 70px !important;  /* Smaller height */
-                position: relative;
-                align-items: flex-end !important;
-                flex: 1;
-                background: transparent;
-                margin-bottom: 0 !important;  /* No bottom margin */
-                order: 1 !important;  /* Put at top */
             }
             
             /* Reduced year badge spacing */
