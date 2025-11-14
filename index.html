@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 7 - Desktop/mobile fixes: AK/HI position, year below bars, form labels -->
+<!-- FIXED VERSION 8 - Fixed bars, AK/HI positioning, mobile spacing -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -384,6 +384,7 @@
             .container {
                 padding: 10px;
                 padding-bottom: 0 !important;  /* No bottom padding on mobile */
+                margin-bottom: 0 !important;
             }
             
             /* Remove ALL bottom spacing from last content section on mobile */
@@ -391,6 +392,12 @@
             .content-section:last-of-type {
                 margin-bottom: 0 !important;
                 padding-bottom: 10px !important;  /* Minimal padding */
+            }
+            
+            /* Also remove margin from acknowledgment section specifically */
+            .acknowledgment {
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
             }
             
             .grunin-branding {
@@ -486,28 +493,28 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 50px !important;  /* Move higher for more separation */
+                bottom: 55px !important;  /* Move higher for more separation */
                 left: 10px !important;
                 top: auto !important;
-                width: 36px !important;  /* Larger */
-                height: 24px !important;  
-                padding: 2px !important;
+                width: 45px !important;  /* Bigger to match other states */
+                height: 28px !important;  
+                padding: 3px !important;
                 border-width: 2px !important;
-                border-radius: 4px !important;
+                border-radius: 6px !important;
             }
             
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
-                width: 36px !important;  /* Match Alaska */
-                height: 24px !important;  
-                padding: 2px !important;
+                width: 45px !important;  /* Match Alaska */
+                height: 28px !important;  
+                padding: 3px !important;
                 border-width: 2px !important;
-                border-radius: 4px !important;
+                border-radius: 6px !important;
             }
             
             .inset-state-badge {
-                font-size: 10px !important;  /* Larger text */
+                font-size: 12px !important;  /* Match other state font sizes */
                 font-weight: 700 !important;
             }
             
@@ -583,11 +590,13 @@
             
             /* Reduced stats bar spacing */
             .stats-bar {
-                padding: 3px 8px 30px 8px !important;  /* Less top padding */
-                min-height: 100px !important;  /* Taller to show labels */
+                padding: 5px 8px 35px 8px !important;  /* More bottom padding */
+                min-height: 120px !important;  /* Taller to ensure bars show */
                 gap: 10px !important;  /* Smaller gap */
                 flex-direction: column-reverse !important;  /* Year info at bottom */
                 border-top: 1px solid #00abce !important;  /* Thinner border */
+                display: flex;
+                align-items: stretch;
             }
             
             .stats-year-indicator {
@@ -627,15 +636,16 @@
             
             .forms-visual {
                 gap: 5px;
-                padding: 10px 0 20px 0 !important;  /* More top padding */
+                padding: 10px 0 25px 0 !important;  /* More padding for labels */
                 justify-content: center;
                 display: flex;
                 flex-wrap: nowrap;
                 max-width: 100%;
                 overflow: visible !important;  /* Allow labels to show */
-                min-height: 90px !important;  /* Taller for more dramatic bars */
+                min-height: 100px !important;  /* Taller to show bars */
                 position: relative;
-                align-items: flex-end !important;  /* Align to bottom */
+                align-items: flex-end !important;  /* Align bars to bottom */
+                flex: 1;  /* Take available space */
             }
             
             .form-bar-fill {
@@ -1055,14 +1065,14 @@
         
         .alaska-box {
             top: 20px;
-            left: 50px;  /* Move more to the right */
+            left: 80px;  /* Move closer to mainland */
             width: 85px;
             height: 50px;
         }
         
         .hawaii-box {
             bottom: 20px;
-            left: 50px;  /* Move more to the right */
+            left: 80px;  /* Move closer to mainland */
             width: 85px;
             height: 50px;
         }
@@ -1249,7 +1259,7 @@
             position: relative;
             cursor: pointer;
             transition: transform 0.2s ease;
-            margin-bottom: 30px;  /* Space for label below */
+            margin-bottom: 5px;  /* Small margin */
         }
 
         .form-bar:hover {
@@ -1308,10 +1318,10 @@
             font-weight: 600;
             color: #925333;
             border: none;  /* Remove border */
-            margin-top: 5px;  /* Space between bar and label */
+            margin-top: 8px;  /* More space between bar and label */
             transition: all 0.3s ease;
-            position: absolute;
-            bottom: -28px;  /* Position below the bar with more space */
+            position: relative;  /* Change from absolute */
+            bottom: auto;  /* Reset bottom */
             left: 0;
             white-space: nowrap;  /* Keep on one line */
         }
