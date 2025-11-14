@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 6 - Left-justified year dropdown, better proportions -->
+<!-- FIXED VERSION 7 - Desktop/mobile fixes: AK/HI position, year below bars, form labels -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -383,7 +383,14 @@
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
-                padding-bottom: 0;  /* Ensure no bottom padding on mobile */
+                padding-bottom: 0 !important;  /* No bottom padding on mobile */
+            }
+            
+            /* Remove ALL bottom spacing from last content section on mobile */
+            .content-section:last-child,
+            .content-section:last-of-type {
+                margin-bottom: 0 !important;
+                padding-bottom: 10px !important;  /* Minimal padding */
             }
             
             .grunin-branding {
@@ -482,8 +489,8 @@
                 bottom: 50px !important;  /* Move higher for more separation */
                 left: 10px !important;
                 top: auto !important;
-                width: 32px !important;  /* Slightly bigger */
-                height: 22px !important;  
+                width: 36px !important;  /* Larger */
+                height: 24px !important;  
                 padding: 2px !important;
                 border-width: 2px !important;
                 border-radius: 4px !important;
@@ -492,15 +499,15 @@
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
-                width: 32px !important;  /* Match Alaska */
-                height: 22px !important;  
+                width: 36px !important;  /* Match Alaska */
+                height: 24px !important;  
                 padding: 2px !important;
                 border-width: 2px !important;
                 border-radius: 4px !important;
             }
             
             .inset-state-badge {
-                font-size: 9px !important;  /* Readable size */
+                font-size: 10px !important;  /* Larger text */
                 font-weight: 700 !important;
             }
             
@@ -579,22 +586,24 @@
                 padding: 3px 8px 30px 8px !important;  /* Less top padding */
                 min-height: 100px !important;  /* Taller to show labels */
                 gap: 10px !important;  /* Smaller gap */
-                flex-direction: row !important;  /* Keep horizontal on mobile */
+                flex-direction: column-reverse !important;  /* Year info at bottom */
                 border-top: 1px solid #00abce !important;  /* Thinner border */
             }
             
             .stats-year-indicator {
-                padding: 0 5px !important;  /* Very minimal side padding */
-                min-width: 70px !important;  /* Even smaller */
-                border-right: 1px solid rgba(0,171,206,0.2) !important;  /* Thinner */
-                border-bottom: none !important;  /* Remove bottom border on mobile */
+                padding: 5px !important;  /* Minimal padding */
+                min-width: 100% !important;  /* Full width */
+                border-right: none !important;  /* No side border */
+                border-top: 1px solid rgba(0,171,206,0.2) !important;  /* Top border instead */
+                border-bottom: none !important;
                 padding-bottom: 0 !important;
                 margin-bottom: 0 !important;
+                margin-top: 10px !important;
                 display: flex;
-                flex-direction: column;
+                flex-direction: row !important;  /* Horizontal layout */
                 justify-content: center;
                 align-items: center;
-                gap: 1px !important;  /* Tiny gap between badge and text */
+                gap: 8px !important;  /* Space between year and text */
             }
             
             /* Reduced year badge spacing */
@@ -1046,14 +1055,14 @@
         
         .alaska-box {
             top: 20px;
-            left: 20px;
+            left: 50px;  /* Move more to the right */
             width: 85px;
             height: 50px;
         }
         
         .hawaii-box {
             bottom: 20px;
-            left: 20px;
+            left: 50px;  /* Move more to the right */
             width: 85px;
             height: 50px;
         }
@@ -1259,13 +1268,15 @@
         .form-bar-count {
             background: #925333;
             color: white;
-            padding: 4px 12px;
+            padding: 6px 14px;  /* Bigger padding */
             border-radius: 15px;
-            font-size: 0.9em;
+            font-size: 1.1em;  /* Bigger font */
             font-weight: 600;
             margin-bottom: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: background 0.3s ease;
+            position: relative;
+            z-index: 2;  /* Above the bar */
         }
 
         .form-bar:hover .form-bar-count {
@@ -1293,14 +1304,14 @@
             border-radius: 0;
             width: 100%;
             text-align: center;
-            font-size: 0.75em;  /* Smaller but readable */
+            font-size: 0.85em;  /* Bigger font */
             font-weight: 600;
             color: #925333;
             border: none;  /* Remove border */
             margin-top: 5px;  /* Space between bar and label */
             transition: all 0.3s ease;
             position: absolute;
-            bottom: -25px;  /* Position below the bar */
+            bottom: -28px;  /* Position below the bar with more space */
             left: 0;
             white-space: nowrap;  /* Keep on one line */
         }
@@ -1311,10 +1322,15 @@
         }
 
         .form-bar-states {
-            font-size: 0.7em;
+            font-size: 0.8em;  /* Bigger font */
             color: #666;
-            font-weight: 400;
-            margin-top: 2px;
+            font-weight: 500;  /* Bolder */
+            margin-top: 3px;
+            position: absolute;
+            bottom: -45px;  /* Position below label */
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
 
         .click-hint {
