@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 8 - Fixed bars, AK/HI positioning, mobile spacing -->
+<!-- FIXED VERSION 9 - Mobile bars restored, year section balanced, bottom spacing fixed -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -381,6 +381,16 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            body {
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            
+            html {
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            
             .container {
                 padding: 10px;
                 padding-bottom: 0 !important;  /* No bottom padding on mobile */
@@ -600,57 +610,92 @@
             }
             
             .stats-year-indicator {
-                padding: 5px !important;  /* Minimal padding */
-                min-width: 100% !important;  /* Full width */
-                border-right: none !important;  /* No side border */
-                border-top: 1px solid rgba(0,171,206,0.2) !important;  /* Top border instead */
+                padding: 5px !important;
+                width: 100% !important;  /* Full width */
+                border-right: none !important;
+                border-top: 1px solid rgba(0,171,206,0.2) !important;
                 border-bottom: none !important;
-                padding-bottom: 0 !important;
+                padding-bottom: 5px !important;
                 margin-bottom: 0 !important;
                 margin-top: 10px !important;
                 display: flex;
                 flex-direction: row !important;  /* Horizontal layout */
                 justify-content: center;
                 align-items: center;
-                gap: 8px !important;  /* Space between year and text */
+                gap: 10px !important;  /* Space between elements */
             }
             
             /* Reduced year badge spacing */
             .year-badge {
-                padding: 4px 8px !important;  /* Even smaller */
-                font-size: 1em !important;  /* Smaller font */
-                margin-bottom: 0 !important;  /* No margin */
-                margin-top: 0 !important;
+                padding: 6px 12px !important;  /* Compact */
+                font-size: 1.2em !important;
+                margin: 0 !important;
+                border-radius: 20px !important;
+                display: inline-block !important;
             }
             
             .year-label {
-                font-size: 0.6em !important;  /* Slightly bigger */
-                margin: 0 !important;  /* No margins */
-                line-height: 1.1 !important;  /* Slightly more space */
-                text-align: center !important;
-                letter-spacing: -0.2px !important;  /* Less tight */
+                font-size: 0.75em !important;
+                margin: 0 !important;
+                line-height: 1.2 !important;
+                text-align: left !important;
+                letter-spacing: normal !important;
                 text-transform: uppercase;
-                max-width: 70px !important;  /* Wider to fit better */
+                max-width: none !important;
                 font-weight: 600 !important;
+                color: #925333 !important;
+                display: inline-block !important;
             }
             
             .forms-visual {
                 gap: 5px;
-                padding: 10px 0 25px 0 !important;  /* More padding for labels */
+                padding: 10px 0 25px 0 !important;
                 justify-content: center;
-                display: flex;
+                display: flex !important;  /* Force display */
                 flex-wrap: nowrap;
                 max-width: 100%;
-                overflow: visible !important;  /* Allow labels to show */
-                min-height: 100px !important;  /* Taller to show bars */
+                overflow: visible !important;
+                min-height: 100px !important;
                 position: relative;
-                align-items: flex-end !important;  /* Align bars to bottom */
-                flex: 1;  /* Take available space */
+                align-items: flex-end !important;
+                flex: 1;
+                background: transparent;  /* Ensure no background hiding bars */
+            }
+            
+            /* Ensure form bars are visible on mobile */
+            .form-bar {
+                flex: 1;
+                max-width: 50px;
+                min-width: 0;
+                margin-bottom: 25px !important;  /* Space for label */
+                display: flex !important;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                position: relative;
+                height: auto !important;
+                visibility: visible !important;
+            }
+            
+            .form-bar-wrapper {
+                padding: 3px;
+                display: flex !important;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                height: 100%;
+                width: 100%;
             }
             
             .form-bar-fill {
-                min-height: 20px !important;  /* Taller minimum */
-                max-height: 70px !important;  /* Allow taller bars */
+                min-height: 20px !important;
+                max-height: 70px !important;
+                width: 100% !important;
+                max-width: 40px !important;
+                display: block !important;
+                visibility: visible !important;
+                background: linear-gradient(180deg, #00abce, #73a535) !important;
+                border-radius: 10px 10px 0 0 !important;
             }
             
             .form-bar {
@@ -688,8 +733,14 @@
             }
             
             .form-bar-count {
-                font-size: 10px;
-                margin-bottom: 4px;
+                font-size: 11px !important;
+                margin-bottom: 4px !important;
+                padding: 3px 6px !important;
+                background: #925333 !important;
+                color: white !important;
+                border-radius: 12px !important;
+                display: block !important;
+                font-weight: 600 !important;
             }
             
             .form-bar-fill {
