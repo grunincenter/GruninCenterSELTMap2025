@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 9 - Mobile bars restored, year section balanced, bottom spacing fixed -->
+<!-- FIXED VERSION 10 - Mobile: fixed 5 bars, year section, removed white spaces -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +25,7 @@
             min-height: 100vh;
             color: #333;
             padding-bottom: 0;  /* Remove any bottom padding */
+            margin-bottom: 0;  /* Remove any bottom margin */
         }
 
         .container {
@@ -384,6 +385,7 @@
             body {
                 padding-bottom: 0 !important;
                 margin-bottom: 0 !important;
+                min-height: auto !important;  /* Don't force 100vh on mobile */
             }
             
             html {
@@ -392,8 +394,7 @@
             }
             
             .container {
-                padding: 10px;
-                padding-bottom: 0 !important;  /* No bottom padding on mobile */
+                padding: 10px 10px 0 10px !important;  /* No bottom padding */
                 margin-bottom: 0 !important;
             }
             
@@ -600,43 +601,45 @@
             
             /* Reduced stats bar spacing */
             .stats-bar {
-                padding: 5px 8px 35px 8px !important;  /* More bottom padding */
-                min-height: 120px !important;  /* Taller to ensure bars show */
-                gap: 10px !important;  /* Smaller gap */
+                padding: 5px 8px 25px 8px !important;  /* Less padding */
+                min-height: auto !important;  /* Auto height */
+                gap: 5px !important;  /* Smaller gap */
                 flex-direction: column-reverse !important;  /* Year info at bottom */
                 border-top: 1px solid #00abce !important;  /* Thinner border */
                 display: flex;
                 align-items: stretch;
+                background: transparent !important;  /* Remove white background */
             }
             
             .stats-year-indicator {
-                padding: 5px !important;
-                width: 100% !important;  /* Full width */
-                border-right: none !important;
-                border-top: 1px solid rgba(0,171,206,0.2) !important;
-                border-bottom: none !important;
-                padding-bottom: 5px !important;
-                margin-bottom: 0 !important;
-                margin-top: 10px !important;
-                display: flex;
-                flex-direction: row !important;  /* Horizontal layout */
+                padding: 3px 10px !important;  /* Compact padding */
+                width: auto !important;  /* Auto width */
+                border: none !important;  /* Remove borders */
+                margin: 5px auto 0 auto !important;  /* Center it */
+                display: inline-flex !important;  /* Inline flex */
+                flex-direction: row !important;  /* Horizontal */
                 justify-content: center;
                 align-items: center;
-                gap: 10px !important;  /* Space between elements */
+                gap: 8px !important;  /* Small gap */
+                background: rgba(255,255,255,0.9) !important;  /* Light background */
+                border-radius: 25px !important;  /* Rounded */
             }
             
             /* Reduced year badge spacing */
             .year-badge {
-                padding: 6px 12px !important;  /* Compact */
-                font-size: 1.2em !important;
+                padding: 4px 10px !important;  /* Compact */
+                font-size: 1.1em !important;
                 margin: 0 !important;
-                border-radius: 20px !important;
+                border-radius: 15px !important;
                 display: inline-block !important;
+                background: linear-gradient(135deg, #00abce, #73a535) !important;
+                color: white !important;
             }
             
             .year-label {
-                font-size: 0.75em !important;
+                font-size: 0.7em !important;
                 margin: 0 !important;
+                padding-right: 5px !important;
                 line-height: 1.2 !important;
                 text-align: left !important;
                 letter-spacing: normal !important;
@@ -648,14 +651,14 @@
             }
             
             .forms-visual {
-                gap: 5px;
-                padding: 10px 0 25px 0 !important;
+                gap: 4px !important;  /* Smaller gap for 5 bars */
+                padding: 8px 5px 25px 5px !important;  /* Adjusted padding */
                 justify-content: center;
                 display: flex !important;  /* Force display */
                 flex-wrap: nowrap;
                 max-width: 100%;
                 overflow: visible !important;
-                min-height: 100px !important;
+                min-height: 80px !important;  /* Reasonable height */
                 position: relative;
                 align-items: flex-end !important;
                 flex: 1;
@@ -664,9 +667,9 @@
             
             /* Ensure form bars are visible on mobile */
             .form-bar {
-                flex: 1;
-                max-width: 50px;
-                min-width: 0;
+                flex: 1 1 18% !important;  /* Each bar takes ~18% (for 5 bars) */
+                max-width: 45px !important;  /* Slightly smaller max width */
+                min-width: 35px !important;  /* Minimum width */
                 margin-bottom: 25px !important;  /* Space for label */
                 display: flex !important;
                 flex-direction: column;
