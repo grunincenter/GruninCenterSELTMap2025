@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 5 - Year dropdown width fixed, AK/HI smaller, legend compact -->
+<!-- FIXED VERSION 6 - Left-justified year dropdown, better proportions -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -442,22 +442,27 @@
                 display: flex;
                 flex-direction: row !important;  /* Keep label and dropdown on same line */
                 align-items: center;
+                justify-content: flex-start !important;  /* Left justify */
                 gap: 10px;
+                width: 100%;
             }
             
             .control-label {
                 font-weight: 600;
                 color: #925333;
-                margin-right: 5px;
+                margin-right: 8px;
+                font-size: 14px !important;
             }
             
             #yearSelect {
                 flex: 0 1 auto !important;  /* Don't stretch */
                 width: auto !important;  /* Auto width based on content */
-                min-width: 100px !important;  /* Minimum width */
-                max-width: 150px !important;  /* Maximum width */
-                padding: 6px 10px !important;
-                font-size: 14px !important;
+                min-width: 120px !important;  /* Bigger minimum */
+                max-width: 180px !important;  /* Bigger maximum */
+                padding: 8px 12px !important;  /* Bigger tap target */
+                font-size: 15px !important;  /* Slightly larger font */
+                border: 2px solid #00abce !important;
+                border-radius: 6px !important;
             }
             
             /* Map height optimized for mobile */
@@ -474,27 +479,29 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 45px !important;  /* Position higher */
+                bottom: 50px !important;  /* Move higher for more separation */
                 left: 10px !important;
                 top: auto !important;
-                width: 30px !important;  /* Much smaller */
-                height: 20px !important;  /* Much smaller */
+                width: 32px !important;  /* Slightly bigger */
+                height: 22px !important;  
                 padding: 2px !important;
-                border-width: 1.5px !important;
+                border-width: 2px !important;
+                border-radius: 4px !important;
             }
             
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
-                width: 30px !important;  /* Much smaller */
-                height: 20px !important;  /* Much smaller */
+                width: 32px !important;  /* Match Alaska */
+                height: 22px !important;  
                 padding: 2px !important;
-                border-width: 1.5px !important;
+                border-width: 2px !important;
+                border-radius: 4px !important;
             }
             
             .inset-state-badge {
-                font-size: 8px !important;  /* Smaller text */
-                font-weight: 600 !important;
+                font-size: 9px !important;  /* Readable size */
+                font-weight: 700 !important;
             }
             
             /* Map controls responsive */
@@ -599,29 +606,32 @@
             }
             
             .year-label {
-                font-size: 0.55em !important;  /* Even smaller */
+                font-size: 0.6em !important;  /* Slightly bigger */
                 margin: 0 !important;  /* No margins */
-                line-height: 0.9 !important;  /* Tighter */
+                line-height: 1.1 !important;  /* Slightly more space */
                 text-align: center !important;
-                letter-spacing: -0.3px !important;  /* Tighter letters */
+                letter-spacing: -0.2px !important;  /* Less tight */
                 text-transform: uppercase;
-                max-width: 60px !important;
+                max-width: 70px !important;  /* Wider to fit better */
+                font-weight: 600 !important;
             }
             
             .forms-visual {
                 gap: 5px;
-                padding: 8px 0 20px 0 !important;  /* Bit more top padding */
+                padding: 10px 0 20px 0 !important;  /* More top padding */
                 justify-content: center;
                 display: flex;
                 flex-wrap: nowrap;
                 max-width: 100%;
                 overflow: visible !important;  /* Allow labels to show */
-                min-height: 80px !important;  /* Slightly taller */
+                min-height: 90px !important;  /* Taller for more dramatic bars */
                 position: relative;
+                align-items: flex-end !important;  /* Align to bottom */
             }
             
             .form-bar-fill {
-                min-height: 15px !important;  /* Minimum height for bars */
+                min-height: 20px !important;  /* Taller minimum */
+                max-height: 70px !important;  /* Allow taller bars */
             }
             
             .form-bar {
