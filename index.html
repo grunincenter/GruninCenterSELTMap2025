@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 10 - Mobile: fixed 5 bars, year section, removed white spaces -->
+<!-- FIXED VERSION 11 - Mobile: bigger AK/HI, year spread under bars, better legend, less white space -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -402,13 +402,14 @@
             .content-section:last-child,
             .content-section:last-of-type {
                 margin-bottom: 0 !important;
-                padding-bottom: 10px !important;  /* Minimal padding */
+                padding-bottom: 5px !important;  /* Very minimal padding */
             }
             
             /* Also remove margin from acknowledgment section specifically */
             .acknowledgment {
                 margin-bottom: 0 !important;
-                padding-bottom: 0 !important;
+                padding-bottom: 5px !important;  /* Minimal padding */
+                margin-top: 10px !important;
             }
             
             .grunin-branding {
@@ -504,29 +505,29 @@
             
             /* Keep inset boxes in map, just reposition to avoid overlap */
             .alaska-box {
-                bottom: 55px !important;  /* Move higher for more separation */
+                bottom: 60px !important;  /* Higher position */
                 left: 10px !important;
                 top: auto !important;
-                width: 45px !important;  /* Bigger to match other states */
-                height: 28px !important;  
-                padding: 3px !important;
+                width: 55px !important;  /* Much bigger to match states */
+                height: 35px !important;  
+                padding: 4px !important;
                 border-width: 2px !important;
-                border-radius: 6px !important;
+                border-radius: 8px !important;
             }
             
             .hawaii-box {
                 bottom: 10px !important;
                 left: 10px !important;
-                width: 45px !important;  /* Match Alaska */
-                height: 28px !important;  
-                padding: 3px !important;
+                width: 55px !important;  /* Match Alaska - bigger */
+                height: 35px !important;  
+                padding: 4px !important;
                 border-width: 2px !important;
-                border-radius: 6px !important;
+                border-radius: 8px !important;
             }
             
             .inset-state-badge {
-                font-size: 12px !important;  /* Match other state font sizes */
-                font-weight: 700 !important;
+                font-size: 13px !important;  /* Same as other state badges */
+                font-weight: 600 !important;  /* Match other states */
             }
             
             /* Map controls responsive */
@@ -563,18 +564,24 @@
             
             .legend {
                 flex-direction: column;
-                gap: 0 !important;  /* No gap between items */
-                padding: 2px !important;  /* Minimal padding */
-                margin-top: 2px !important;  /* Tiny top margin */
-                margin-bottom: 0 !important;  /* No bottom margin */
+                gap: 4px !important;  /* Reasonable gap */
+                padding: 8px !important;  /* More padding */
+                margin-top: 5px !important;
+                margin-bottom: 0 !important;
+                background: rgba(255,255,255,0.15) !important;  /* Subtle background */
+                border-radius: 8px !important;  /* Rounded corners */
             }
             
             .legend-item {
-                font-size: 11px !important;  /* Slightly smaller text */
-                gap: 4px !important;  /* Small gap between box and text */
-                margin-bottom: 1px !important;  /* Tiny margin between items */
-                padding: 1px 0 !important;
-                line-height: 1.2 !important;
+                font-size: 12px !important;  /* Better size */
+                gap: 6px !important;  /* Gap between emoji and text */
+                margin-bottom: 2px !important;
+                padding: 3px 5px !important;  /* Add padding */
+                line-height: 1.3 !important;
+                display: flex !important;
+                align-items: center !important;
+                background: rgba(255,255,255,0.6) !important;  /* Light background */
+                border-radius: 5px !important;  /* Rounded */
             }
             
             .legend-item {
@@ -601,28 +608,28 @@
             
             /* Reduced stats bar spacing */
             .stats-bar {
-                padding: 5px 8px 25px 8px !important;  /* Less padding */
+                padding: 5px 8px 10px 8px !important;  /* Much less bottom padding */
                 min-height: auto !important;  /* Auto height */
-                gap: 5px !important;  /* Smaller gap */
-                flex-direction: column-reverse !important;  /* Year info at bottom */
-                border-top: 1px solid #00abce !important;  /* Thinner border */
+                gap: 0 !important;  /* No gap between sections */
+                flex-direction: column !important;  /* Normal order - bars then year */
+                border-top: 1px solid #00abce !important;
                 display: flex;
                 align-items: stretch;
-                background: transparent !important;  /* Remove white background */
+                background: transparent !important;
             }
             
             .stats-year-indicator {
-                padding: 3px 10px !important;  /* Compact padding */
-                width: auto !important;  /* Auto width */
-                border: none !important;  /* Remove borders */
-                margin: 5px auto 0 auto !important;  /* Center it */
-                display: inline-flex !important;  /* Inline flex */
+                padding: 8px !important;  /* Simple padding */
+                width: 100% !important;  /* Full width */
+                border: none !important;  /* No borders */
+                margin: 0 !important;  /* No margins */
+                display: flex !important;
                 flex-direction: row !important;  /* Horizontal */
                 justify-content: center;
                 align-items: center;
-                gap: 8px !important;  /* Small gap */
-                background: rgba(255,255,255,0.9) !important;  /* Light background */
-                border-radius: 25px !important;  /* Rounded */
+                gap: 10px !important;
+                background: transparent !important;  /* No background */
+                border-radius: 0 !important;  /* No rounding */
             }
             
             /* Reduced year badge spacing */
@@ -651,18 +658,19 @@
             }
             
             .forms-visual {
-                gap: 4px !important;  /* Smaller gap for 5 bars */
-                padding: 8px 5px 25px 5px !important;  /* Adjusted padding */
+                gap: 4px !important;
+                padding: 5px 5px 20px 5px !important;  /* Less padding */
                 justify-content: center;
-                display: flex !important;  /* Force display */
+                display: flex !important;
                 flex-wrap: nowrap;
                 max-width: 100%;
                 overflow: visible !important;
-                min-height: 80px !important;  /* Reasonable height */
+                min-height: 70px !important;  /* Smaller height */
                 position: relative;
                 align-items: flex-end !important;
                 flex: 1;
-                background: transparent;  /* Ensure no background hiding bars */
+                background: transparent;
+                margin-bottom: 0 !important;  /* No bottom margin */
             }
             
             /* Ensure form bars are visible on mobile */
