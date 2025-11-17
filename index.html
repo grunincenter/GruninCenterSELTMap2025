@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<!-- FIXED VERSION 11 - Mobile: bigger AK/HI, year spread under bars, better legend, less white space -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SELT Map - Social Enterprise Legislative Tracker</title>
     
     <!-- Leaflet CSS -->
@@ -24,15 +23,12 @@
             background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
             min-height: 100vh;
             color: #333;
-            padding-bottom: 0;  /* Remove any bottom padding */
-            margin-bottom: 0;  /* Remove any bottom margin */
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 10px;  /* Minimal bottom padding */
         }
 
         .header {
@@ -94,14 +90,6 @@
             margin-bottom: 25px;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        /* Remove bottom margin from the last content section */
-        .content-section:last-of-type,
-        .content-section:last-child,
-        .container > .content-section:last-child {
-            margin-bottom: 0 !important;
-            padding-bottom: 20px !important;
         }
 
         .content-section h2 {
@@ -216,691 +204,12 @@
             position: relative;
         }
         
-        /* Hide the old state details section below map */
+        /* State Details Bar (below map) */
         .state-details-section {
-            display: none;
-        }
-        
-        /* Modal Overlay for State Details */
-        .state-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .state-modal-overlay.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Modal Content */
-        .state-modal {
-            background: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            animation: slideUp 0.3s ease;
-        }
-
-        /* Modal Header */
-        .state-modal-header {
-            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
-            color: white;
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .state-modal-title {
-            font-size: 1.8em;
-            font-weight: 700;
-        }
-
-        .state-modal-year {
-            font-size: 0.9em;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        .state-modal-close {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .state-modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-
-        /* Modal Body */
-        .state-modal-body {
-            padding: 25px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .modal-detail-section {
-            margin-bottom: 25px;
-        }
-
-        .modal-detail-title {
-            font-weight: 600;
-            color: #00abce;
-            font-size: 1.2em;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .modal-form-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .modal-form-item {
-            padding: 8px 15px;
-            margin-bottom: 8px;
-            background: #f8f9fa;
-            border-left: 4px solid #73a535;
-            border-radius: 4px;
-        }
-
-        .modal-form-item.pending {
-            border-left-color: #f39c12;
-            background: #fef5e7;
-        }
-
-        .modal-form-item.failed {
-            border-left-color: #e74c3c;
-            background: #fdeaea;
-        }
-
-        .modal-empty-state {
-            color: #999;
-            font-style: italic;
-            padding: 10px;
-        }
-
-        .modal-history-btn {
-            background: linear-gradient(135deg, #00abce 0%, #73a535 100%);
-            color: white;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.2s;
-        }
-
-        .modal-history-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-                min-height: auto !important;  /* Don't force 100vh on mobile */
-            }
-            
-            /* FIX FOR YEAR PLACEMENT - Put year below bars */
-            #statsBar {
-                flex-direction: column-reverse !important;
-            }
-            
-            .stats-year-indicator {
-                order: 2 !important;
-                border-right: none !important;
-                border-top: 2px solid #e0e0e0 !important;
-                padding-top: 10px !important;
-                width: 100% !important;
-            }
-            
-            .forms-visual {
-                order: 1 !important;
-            }
-            
-            html {
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-            }
-            
-            .container {
-                padding: 10px 10px 0 10px !important;  /* No bottom padding */
-                margin-bottom: 0 !important;
-            }
-            
-            /* Remove ALL bottom spacing from last content section on mobile */
-            .content-section:last-child,
-            .content-section:last-of-type {
-                margin-bottom: 0 !important;
-                padding-bottom: 5px !important;  /* Very minimal padding */
-            }
-            
-            /* Also remove margin from acknowledgment section specifically */
-            .acknowledgment {
-                margin-bottom: 0 !important;
-                padding-bottom: 5px !important;  /* Minimal padding */
-                margin-top: 10px !important;
-            }
-            
-            .grunin-branding {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 20px;
-            }
-            
-            .grunin-logo-img {
-                width: 200px;
-            }
-            
-            .grunin-title {
-                text-align: center;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .content-section {
-                padding: 15px;  /* Reduced from 20px */
-                margin-bottom: 10px;  /* Reduced from 15px */
-            }
-            
-            /* Remove bottom margin from last content section */
-            .content-section:last-child {
-                margin-bottom: 0;
-            }
-            
-            .content-section h2 {
-                font-size: 1.4em;
-            }
-            
-            /* Map section same width as other sections */
-            .map-section {
-                margin-bottom: 10px !important;  /* Reduced from 20px */
-            }
-            
-            .map-controls {
-                padding: 5px !important;  /* Even less padding */
-                background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-                margin-bottom: 0 !important;
-                border-bottom: 1px solid #e0e0e0 !important;  /* Thinner border */
-            }
-            
-            .controls-row {
-                flex-direction: column;
-                gap: 5px !important;  /* Even smaller gap */
-                margin-bottom: 0 !important;
-            }
-            
-            .control-group {
-                margin-bottom: 0 !important;  /* Remove extra margin */
-                display: flex;
-                flex-direction: row !important;  /* Keep label and dropdown on same line */
-                align-items: center;
-                justify-content: flex-start !important;  /* Left justify */
-                gap: 10px;
-                width: 100%;
-            }
-            
-            .control-label {
-                font-weight: 600;
-                color: #925333;
-                margin-right: 8px;
-                font-size: 14px !important;
-            }
-            
-            #yearSelect {
-                flex: 0 1 auto !important;  /* Don't stretch */
-                width: auto !important;  /* Auto width based on content */
-                min-width: 120px !important;  /* Bigger minimum */
-                max-width: 180px !important;  /* Bigger maximum */
-                padding: 8px 12px !important;  /* Bigger tap target */
-                font-size: 15px !important;  /* Slightly larger font */
-                border: 2px solid #00abce !important;
-                border-radius: 6px !important;
-            }
-            
-            /* Map height optimized for mobile */
-            .map-content {
-                height: 260px !important;  /* Slightly smaller */
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            
-            #map {
-                height: 100% !important;
-                margin: 0 !important;
-            }
-            
-            /* Keep inset boxes in map, just reposition to avoid overlap */
-            .alaska-box {
-                bottom: 60px !important;  /* Higher position */
-                left: 10px !important;
-                top: auto !important;
-                width: 55px !important;  /* Much bigger to match states */
-                height: 35px !important;  
-                padding: 4px !important;
-                border-width: 2px !important;
-                border-radius: 8px !important;
-            }
-            
-            .hawaii-box {
-                bottom: 10px !important;
-                left: 10px !important;
-                width: 55px !important;  /* Match Alaska - bigger */
-                height: 35px !important;  
-                padding: 4px !important;
-                border-width: 2px !important;
-                border-radius: 8px !important;
-            }
-            
-            .inset-state-badge {
-                font-size: 13px !important;  /* Same as other state badges */
-                font-weight: 600 !important;  /* Match other states */
-            }
-            
-            /* Map controls responsive */
-            .controls-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            /* Make state badges smaller on mobile to prevent overlap */
-            .state-badge-marker {
-                transform: scale(0.8);  /* Slightly bigger for better clicking */
-            }
-            
-            .state-badge {
-                font-size: 10px !important;
-                padding: 3px 6px !important;
-            }
-            
-            .state-badge.northeast {
-                font-size: 9px !important;
-                padding: 2px 5px !important;
-            }
-            
-            .control-group {
-                width: 100%;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-            
-            select, button {
-                width: auto;
-                min-width: 120px;
-            }
-            
-            .legend {
-                flex-direction: column;
-                gap: 4px !important;  /* Reasonable gap */
-                padding: 8px !important;  /* More padding */
-                margin-top: 5px !important;
-                margin-bottom: 0 !important;
-                background: rgba(255,255,255,0.15) !important;  /* Subtle background */
-                border-radius: 8px !important;  /* Rounded corners */
-            }
-            
-            .legend-item {
-                font-size: 12px !important;  /* Better size */
-                gap: 6px !important;  /* Gap between emoji and text */
-                margin-bottom: 2px !important;
-                padding: 3px 5px !important;  /* Add padding */
-                line-height: 1.3 !important;
-                display: flex !important;
-                align-items: center !important;
-                background: rgba(255,255,255,0.6) !important;  /* Light background */
-                border-radius: 5px !important;  /* Rounded */
-            }
-            
-            .legend-item {
-                font-size: 12px !important;  /* Smaller text */
-                gap: 5px !important;  /* Smaller gap between box and text */
-                margin-bottom: 2px !important;  /* Tiny margin between items */
-                padding: 2px 0 !important;
-            }
-            
-            .legend-box {
-                width: 16px !important;  /* Smaller boxes */
-                height: 16px !important;
-            }
-            
-            /* Forms visualization responsive - make bars smaller to fit */
-            .forms-section {
-                padding: 10px;  /* Reduced from 15px */
-                margin-bottom: 10px;  /* Reduced margin */
-            }
-            
-            .forms-content {
-                padding: 8px;  /* Reduced from 10px */
-            }
-            
-            /* Reduced stats bar spacing */
-            .stats-bar {
-                padding: 5px 8px 10px 8px !important;  /* Much less bottom padding */
-                min-height: auto !important;  /* Auto height */
-                gap: 0 !important;  /* No gap between sections */
-                flex-direction: column !important;  /* Normal order - bars then year */
-                border-top: 1px solid #00abce !important;
-                display: flex;
-                align-items: stretch;
-                background: transparent !important;
-            }
-            
-            .stats-year-indicator {
-                padding: 8px !important;  /* Simple padding */
-                width: 100% !important;  /* Full width */
-                border: none !important;  /* No borders */
-                margin: 0 !important;  /* No margins */
-                display: flex !important;
-                flex-direction: row !important;  /* Horizontal */
-                justify-content: center;
-                align-items: center;
-                gap: 10px !important;
-                background: transparent !important;  /* No background */
-                border-radius: 0 !important;  /* No rounding */
-            }
-            
-            /* Reduced year badge spacing */
-            .year-badge {
-                padding: 4px 10px !important;  /* Compact */
-                font-size: 1.1em !important;
-                margin: 0 !important;
-                border-radius: 15px !important;
-                display: inline-block !important;
-                background: linear-gradient(135deg, #00abce, #73a535) !important;
-                color: white !important;
-            }
-            
-            .year-label {
-                font-size: 0.7em !important;
-                margin: 0 !important;
-                padding-right: 5px !important;
-                line-height: 1.2 !important;
-                text-align: left !important;
-                letter-spacing: normal !important;
-                text-transform: uppercase;
-                max-width: none !important;
-                font-weight: 600 !important;
-                color: #925333 !important;
-                display: inline-block !important;
-            }
-            
-            .forms-visual {
-                gap: 4px !important;
-                padding: 5px 5px 20px 5px !important;  /* Less padding */
-                justify-content: center;
-                display: flex !important;
-                flex-wrap: nowrap;
-                max-width: 100%;
-                overflow: visible !important;
-                min-height: 70px !important;  /* Smaller height */
-                position: relative;
-                align-items: flex-end !important;
-                flex: 1;
-                background: transparent;
-                margin-bottom: 0 !important;  /* No bottom margin */
-            }
-            
-            /* Ensure form bars are visible on mobile */
-            .form-bar {
-                flex: 1 1 18% !important;  /* Each bar takes ~18% (for 5 bars) */
-                max-width: 45px !important;  /* Slightly smaller max width */
-                min-width: 35px !important;  /* Minimum width */
-                margin-bottom: 25px !important;  /* Space for label */
-                display: flex !important;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-end;
-                position: relative;
-                height: auto !important;
-                visibility: visible !important;
-            }
-            
-            .form-bar-wrapper {
-                padding: 3px;
-                display: flex !important;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-end;
-                height: 100%;
-                width: 100%;
-            }
-            
-            .form-bar-fill {
-                min-height: 20px !important;
-                max-height: 70px !important;
-                width: 100% !important;
-                max-width: 40px !important;
-                display: block !important;
-                visibility: visible !important;
-                background: linear-gradient(180deg, #00abce, #73a535) !important;
-                border-radius: 10px 10px 0 0 !important;
-            }
-            
-            .form-bar {
-                flex: 1;
-                max-width: 50px;
-                min-width: 0;  /* Allow shrinking as needed */
-                margin-bottom: 25px;  /* Space for label below */
-            }
-            
-            .form-bar-wrapper {
-                padding: 3px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-end;
-                height: 100%;
-            }
-            
-            .form-bar-label {
-                font-size: 10px !important;  /* Readable size for mobile */
-                writing-mode: initial;  /* Horizontal text */
-                text-orientation: initial;
-                padding: 2px 1px;
-                text-align: center;
-                line-height: 1;
-                width: 100%;
-                display: block;
-                white-space: nowrap;  /* Keep on single line */
-                position: absolute;
-                bottom: -20px;  /* Position below bar */
-                left: 0;
-                background: transparent;
-                border: none;
-                margin-top: 0;
-            }
-            
-            .form-bar-count {
-                font-size: 11px !important;
-                margin-bottom: 4px !important;
-                padding: 3px 6px !important;
-                background: #925333 !important;
-                color: white !important;
-                border-radius: 12px !important;
-                display: block !important;
-                font-weight: 600 !important;
-            }
-            
-            .form-bar-fill {
-                width: 100%;
-                max-width: 40px;
-            }
-            
-            .form-bar-states {
-                display: none;
-            }
-            
-            .click-hint {
-                display: none;
-            }
-            
-            /* Modal adjustments for mobile */
-            .state-modal {
-                width: 95%;
-                max-height: 90vh;
-                margin: 20px;
-            }
-            
-            .state-modal-header {
-                padding: 15px 20px;
-            }
-            
-            .state-modal-title {
-                font-size: 1.5em;
-            }
-            
-            .state-modal-body {
-                padding: 20px;
-            }
-        }
-        
-        /* Smaller mobile screens */
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.5em;
-            }
-            
-            .grunin-logo-img {
-                width: 150px;
-            }
-            
-            .grunin-name {
-                font-size: 1.4em;
-            }
-            
-            .grunin-subtitle {
-                font-size: 1em;
-            }
-            
-            /* Even more compact inset boxes on very small screens */
-            .alaska-box, .hawaii-box {
-                width: 28px !important;  /* Even smaller */
-                height: 18px !important;
-                padding: 1px !important;
-                border-width: 1px !important;
-            }
-            
-            .inset-state-badge {
-                font-size: 7px !important;  /* Tiny text */
-                padding: 1px 2px !important;
-            }
-            
-            /* Make form bars even smaller on small screens */
-            .forms-section {
-                padding: 10px;
-            }
-            
-            .forms-visual {
-                gap: 3px;
-                overflow: visible !important;  /* Allow labels to show */
-                min-height: 65px !important;  /* Room for bars and labels */
-                padding: 5px 0 20px 0 !important;
-            }
-            
-            /* Further reduced stats bar for small screens */
-            .stats-bar {
-                padding: 3px 5px 25px 5px !important;  /* Less top padding */
-                min-height: 90px !important;  /* Taller for labels */
-                gap: 8px !important;  /* Tiny gap */
-                flex-direction: row !important;  /* Stay horizontal */
-                border-top: 1px solid #00abce !important;
-            }
-            
-            .form-bar {
-                min-width: 0;
-                max-width: 40px;
-                flex: 1;
-                margin-bottom: 25px;  /* Space for label */
-            }
-            
-            .form-bar-wrapper {
-                padding: 2px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-end;
-            }
-            
-            .form-bar-label {
-                font-size: 10px !important;  /* Keep readable */
-                writing-mode: initial;  /* Keep horizontal */
-                text-orientation: initial;
-                padding: 2px 1px;
-                line-height: 1.1;
-                display: block;
-                text-align: center;
-                white-space: nowrap;  /* Single line */
-                position: absolute;
-                bottom: -20px;  /* Below bar */
-                left: 0;
-                width: 100%;
-                background: transparent;
-                border: none;
-            }
-            
-            .form-bar-count {
-                font-size: 10px;
-                margin-bottom: 2px;
-            }
-            
-            .form-bar-fill {
-                width: 100%;
-                max-width: 35px;
-            }
-            
-            .form-bar-states {
-                display: none;
-            }
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            padding: 20px;
+            border-top: 2px solid #00abce;
+            min-height: 140px;
         }
         
         .state-details-placeholder {
@@ -1123,84 +432,43 @@
         /* Inset Boxes for Alaska and Hawaii */
         .inset-box {
             position: absolute;
-            background: white;
-            border: 2.5px solid #666;
+            background: #e6f3f7;
+            border: 2px solid #999;
             border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            padding: 8px 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             z-index: 1000;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .inset-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border-color: #00abce;
         }
         
         .alaska-box {
             top: 20px;
-            left: 80px;  /* Move closer to mainland */
-            width: 85px;
-            height: 50px;
+            left: 20px;
+            width: 110px;
+            height: 85px;
         }
         
         .hawaii-box {
             bottom: 20px;
-            left: 80px;  /* Move closer to mainland */
-            width: 85px;
-            height: 50px;
+            left: 20px;
+            width: 110px;
+            height: 65px;
         }
         
-        .inset-box.selected {
-            border-color: #ff6b6b;
-            border-width: 3px;
-            background: #fff9f0;
-        }
-        
-        /* Inset state label styling to match regular state badges */
-        .inset-state-badge {
-            background: white;
-            border: 2px solid #73a535;
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transition: all 0.3s;
-        }
-        
-        .inset-box:hover .inset-state-badge {
-            border-color: #00abce;
-            transform: scale(1.1);
-        }
-        
-        .inset-box.selected .inset-state-badge {
-            background: #ffebeb;
-            border-color: #ff6b6b;
-            border-width: 3px;
-        }
-        
-        /* Small text above inset boxes */
-        .inset-label-text {
+        /* SVG state shapes */
+        .state-shape-svg {
+            width: 100%;
+            height: calc(100% - 25px);
             position: absolute;
-            top: -18px;
+            top: 0;
             left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 10px;
-            color: #666;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        }
+        
+        .state-shape-path, .hawaii-island {
+            fill: #e6f3f7;
+            stroke: #666;
+            stroke-width: 1;
+            transition: all 0.3s;
         }
         
         .inset-box:hover .state-shape-path,
@@ -1276,11 +544,11 @@
         .stats-bar {
             background: linear-gradient(to bottom, #f8f9fa, #ffffff);
             border-top: 2px solid #00abce;
-            padding: 10px 15px;  /* DRAMATICALLY reduced */
+            padding: 25px 30px;
             display: flex;
             align-items: stretch;
-            gap: 15px;  /* Further reduced */
-            min-height: 120px;  /* Further reduced */
+            gap: 40px;
+            min-height: 180px;
             overflow: hidden;
             position: relative;
         }
@@ -1298,12 +566,12 @@
         .year-badge {
             background: linear-gradient(135deg, #00abce, #73a535);
             color: white;
-            padding: 10px 20px;  /* Reduced from 12px 24px */
+            padding: 12px 24px;
             border-radius: 25px;
             font-weight: 700;
-            font-size: 1.6em;  /* Reduced from 1.8em */
+            font-size: 1.8em;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            margin-bottom: 5px;  /* Reduced from 10px */
+            margin-bottom: 10px;
         }
 
         .year-label {
@@ -1321,10 +589,10 @@
             display: flex;
             gap: 25px;
             align-items: flex-end;
-            padding: 10px 0;  /* Reduced from 20px 0 */
+            padding: 20px 0;
             justify-content: center;
             overflow: hidden;
-            min-height: 100px;  /* Reduced from 140px */
+            min-height: 140px;
         }
         
         /* Clickable Form Bar */
@@ -1338,7 +606,6 @@
             position: relative;
             cursor: pointer;
             transition: transform 0.2s ease;
-            margin-bottom: 5px;  /* Small margin */
         }
 
         .form-bar:hover {
@@ -1357,15 +624,13 @@
         .form-bar-count {
             background: #925333;
             color: white;
-            padding: 6px 14px;  /* Bigger padding */
+            padding: 4px 12px;
             border-radius: 15px;
-            font-size: 1.1em;  /* Bigger font */
+            font-size: 0.9em;
             font-weight: 600;
             margin-bottom: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: background 0.3s ease;
-            position: relative;
-            z-index: 2;  /* Above the bar */
         }
 
         .form-bar:hover .form-bar-count {
@@ -1375,7 +640,7 @@
         .form-bar-fill {
             width: 60px;
             background: linear-gradient(180deg, #00abce, #73a535);
-            border-radius: 10px;  /* Rounded on all corners now */
+            border-radius: 10px 10px 0 0;
             transition: all 0.3s ease;
             position: relative;
             min-height: 10px;
@@ -1388,21 +653,18 @@
         }
 
         .form-bar-label {
-            background: transparent;  /* Remove background */
-            padding: 4px 2px;
-            border-radius: 0;
+            background: rgba(146, 83, 51, 0.1);
+            padding: 8px 15px;
+            border-radius: 0 0 10px 10px;
             width: 100%;
             text-align: center;
-            font-size: 0.85em;  /* Bigger font */
+            font-size: 0.85em;
             font-weight: 600;
             color: #925333;
-            border: none;  /* Remove border */
-            margin-top: 8px;  /* More space between bar and label */
+            border: 2px solid rgba(146, 83, 51, 0.2);
+            border-top: none;
+            margin-top: -2px;
             transition: all 0.3s ease;
-            position: relative;  /* Change from absolute */
-            bottom: auto;  /* Reset bottom */
-            left: 0;
-            white-space: nowrap;  /* Keep on one line */
         }
 
         .form-bar:hover .form-bar-label {
@@ -1411,15 +673,10 @@
         }
 
         .form-bar-states {
-            font-size: 0.8em;  /* Bigger font */
+            font-size: 0.7em;
             color: #666;
-            font-weight: 500;  /* Bolder */
-            margin-top: 3px;
-            position: absolute;
-            bottom: -45px;  /* Position below label */
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
+            font-weight: 400;
+            margin-top: 2px;
         }
 
         .click-hint {
@@ -1518,7 +775,6 @@
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
-            margin-bottom: 0;  /* No bottom margin */
         }
 
         .acknowledgment h3 {
@@ -1615,13 +871,138 @@
                 margin-bottom: 20px;
             }
         }
-    </style>
+   /* MOBILE-ONLY FIXES - Added for better mobile experience */
+        @media (max-width: 768px) {
+            /* Fix 1: Remove excess white space at end of page */
+            body {
+                min-height: auto !important;
+                overflow-x: hidden;
+            }
+            
+            .container {
+                padding-bottom: 10px !important;
+            }
+            
+            .content-section:last-child {
+                margin-bottom: 15px !important;
+            }
+            
+            /* Fix 2: Expand bar graph area in 3 directions */
+            .stats-bar {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+                margin-left: -10px !important;
+                margin-right: -10px !important;
+                min-height: 220px !important;
+            }
+            
+            .forms-visual {
+                padding: 15px 5px 20px !important;
+                min-height: 160px !important;
+                gap: 10px !important;
+                width: 100% !important;
+            }
+            
+            .form-bar {
+                max-width: none !important;
+                flex: 1 !important;
+                min-width: 50px !important;
+            }
+            
+            .form-bar-fill {
+                width: 45px !important;
+            }
+            
+            .form-bar-wrapper {
+                width: 100% !important;
+            }
+            
+            .form-bar-label {
+                font-size: 0.75em !important;
+                padding: 6px 10px !important;
+            }
+            
+            .form-bar-states {
+                font-size: 0.65em !important;
+            }
+            
+            /* Fix 3: Reorganize legend/emoji key */
+            .legend {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+                padding: 10px 0 !important;
+                width: 100% !important;
+            }
+            
+            .legend-item {
+                font-size: 11px !important;
+                gap: 5px !important;
+                padding: 5px !important;
+                background: rgba(248, 249, 250, 0.8) !important;
+                border-radius: 6px !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+            }
+            
+            .legend-item span:first-child {
+                font-size: 14px !important;
+                min-width: 20px !important;
+                text-align: center !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 8px !important;
+                padding-bottom: 5px !important;
+            }
+            
+            .stats-bar {
+                margin-left: -8px !important;
+                margin-right: -8px !important;
+                padding: 15px 5px !important;
+                min-height: 240px !important;
+            }
+            
+            .forms-visual {
+                padding: 12px 3px 15px !important;
+                gap: 6px !important;
+                min-height: 180px !important;
+            }
+            
+            .form-bar-fill {
+                width: 35px !important;
+            }
+            
+            .form-bar-label {
+                font-size: 0.7em !important;
+                padding: 5px 8px !important;
+            }
+            
+            .legend-item {
+                font-size: 10px !important;
+                padding: 4px !important;
+                gap: 3px !important;
+            }
+            
+            .legend-item span:first-child {
+                font-size: 13px !important;
+            }
+            
+            #map {
+                height: 350px !important;
+            }
+        }
+    </style> </style>
 </head>
 <body>
     <div class="container">
         <div class="grunin-branding">
-            <!-- Logo removed - not loading -->
-            <div class="grunin-title" style="text-align: center; width: 100%;">
+            <img src="https://socialenterprise.law.nyu.edu/wp-content/uploads/2022/07/grunin-homepage-logo-150x150.png" 
+                 alt="Grunin Center Logo" 
+                 class="grunin-logo-img">
+            <div class="grunin-title">
                 <div class="grunin-name">Grunin Center for Law and Social Entrepreneurship</div>
                 <div class="grunin-subtitle">NYU School of Law</div>
             </div>
@@ -1969,71 +1350,43 @@
             }
             
             initMap() {
-                // Detect if mobile
-                const isMobile = window.innerWidth <= 768;
-                
-                // For mobile: Show full continental US without Mexico/Central America
-                // Desktop stays the same
-                const mapCenter = isMobile ? [39, -97] : [38.5, -98.5795];
-                const mapZoom = isMobile ? 3.5 : 4;  // Zoom 3.5 - midpoint between too close and too far
-                
-                // Initialize map
+                // Initialize map with locked view
                 this.map = L.map('map', {
-                    center: mapCenter,
-                    zoom: mapZoom,
+                    center: [38.5, -98.5795],
+                    zoom: 4,
                     zoomControl: false, // Disable zoom controls
                     scrollWheelZoom: false, // Disable scroll zoom
                     doubleClickZoom: false, // Disable double click zoom
                     touchZoom: false, // Disable touch zoom
                     boxZoom: false, // Disable box zoom
                     keyboard: false, // Disable keyboard navigation
-                    dragging: false // Disable map dragging - no scrolling!
+                    dragging: false // Disable map dragging
                 });
                 
                 // Store original view
                 this.originalView = {
-                    center: mapCenter,
-                    zoom: mapZoom
+                    center: [38.5, -98.5795],
+                    zoom: 4
                 };
                 
                 // Simple tile layer
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: ''
                 }).addTo(this.map);
-                
-                // On mobile, ensure map renders properly
-                if (isMobile) {
-                    setTimeout(() => {
-                        this.map.invalidateSize();
-                        // Set bounds to show all US states
-                        this.map.fitBounds([
-                            [24, -125],  // Southwest: Southern Florida to California
-                            [49, -64]    // Northeast: Extended east to show all northeast state labels
-                        ], {
-                            padding: [5, 15],  /* More padding on sides for state labels */
-                            animate: false
-                        });
-                        // Don't add extra zoom - let fitBounds handle it
-                    }, 100);
-                }
             }
             
             createStateMarkers() {
-                // Detect mobile for different positioning
-                const isMobile = window.innerWidth <= 768;
-                
                 // Northeast states with maximum spacing to prevent any overlap
-                // On mobile, push callouts even further out
                 const northeastStates = {
-                    'ME': { actual: [44.693947, -69.381927], callout: isMobile ? [47.5, -62] : [46.5, -64.5] },
-                    'NH': { actual: [43.452492, -71.563896], callout: isMobile ? [46.5, -64] : [45, -66] },
-                    'VT': { actual: [44.045876, -72.710686], callout: isMobile ? [45.5, -66] : [44, -68] },
-                    'MA': { actual: [42.230171, -71.530106], callout: isMobile ? [43.5, -63] : [42.5, -65] },
-                    'RI': { actual: [41.680893, -71.511780], callout: isMobile ? [42, -64.5] : [41, -66.5] },
-                    'CT': { actual: [41.597782, -72.755371], callout: isMobile ? [41, -66.5] : [40, -68.5] },
-                    'NJ': { actual: [40.298904, -74.521011], callout: isMobile ? [39.5, -68.5] : [38.8, -70.5] },
-                    'DE': { actual: [39.318523, -75.507141], callout: isMobile ? [38, -70] : [37.5, -72] },
-                    'MD': { actual: [39.063946, -76.802101], callout: isMobile ? [37, -72] : [36.5, -74] }
+                    'ME': { actual: [44.693947, -69.381927], callout: [46.5, -64.5] },   // Far north-east
+                    'NH': { actual: [43.452492, -71.563896], callout: [45, -66] },       // Below ME, right
+                    'VT': { actual: [44.045876, -72.710686], callout: [44, -68] },       // Left of NH
+                    'MA': { actual: [42.230171, -71.530106], callout: [42.5, -65] },     // Below NH, right
+                    'RI': { actual: [41.680893, -71.511780], callout: [41, -66.5] },     // Below MA, slightly left
+                    'CT': { actual: [41.597782, -72.755371], callout: [40, -68.5] },     // Below VT, left
+                    'NJ': { actual: [40.298904, -74.521011], callout: [38.8, -70.5] },   // Further down and left
+                    'DE': { actual: [39.318523, -75.507141], callout: [37.5, -72] },     // Below NJ
+                    'MD': { actual: [39.063946, -76.802101], callout: [36.5, -74] }      // Southernmost
                 };
                 
                 // Create leader lines for Northeast states
@@ -2066,14 +1419,9 @@
                             this.selectedState = stateCode;
                             // Bring selected marker to front
                             marker.setZIndexOffset(1000);
-                            
-                            // Show modal with state details
-                            const stateName = stateNames[stateCode];
-                            const activity = getStateActivity(stateCode, this.currentYear);
-                            showStateModal(stateCode, stateName, activity, this.currentYear);
                         }
                         this.updateDisplay();
-                        this.updateFormBars();
+                        this.updateSidebar();
                     });
                     
                     this.stateMarkers.set(stateCode, marker);
@@ -2104,14 +1452,9 @@
                             this.selectedState = stateCode;
                             // Bring selected marker to front
                             marker.setZIndexOffset(1000);
-                            
-                            // Show modal with state details
-                            const stateName = stateNames[stateCode];
-                            const activity = getStateActivity(stateCode, this.currentYear);
-                            showStateModal(stateCode, stateName, activity, this.currentYear);
                         }
                         this.updateDisplay();
-                        this.updateFormBars();
+                        this.updateSidebar();
                     });
                     
                     this.stateMarkers.set(stateCode, marker);
@@ -2124,19 +1467,52 @@
             createInsetBoxes() {
                 const mapContainer = document.getElementById('map');
                 
-                // Create Alaska inset box with simple text badge
+                // Create Alaska inset box with state shape
                 const alaskaBox = document.createElement('div');
                 alaskaBox.className = 'inset-box alaska-box';
                 alaskaBox.innerHTML = `
-                    <div class="inset-state-badge" id="alaska-label">AK ⚪</div>
+                    <svg class="state-shape-svg" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Alaska with distinctive shape including panhandle -->
+                        <g id="alaska-shape">
+                            <!-- Main body of Alaska -->
+                            <path class="state-shape-path alaska-main" 
+                                  d="M 25 50 L 20 45 L 15 40 L 12 32 L 14 25 L 20 20 L 30 18 L 40 16 L 50 17 L 58 20 L 63 25 L 65 32 L 62 38 L 58 42 L 52 45 L 45 48 L 38 50 L 30 51 Z"/>
+                            <!-- Aleutian Islands chain -->
+                            <circle class="state-shape-path" cx="68" cy="45" r="1.5"/>
+                            <circle class="state-shape-path" cx="72" cy="47" r="1"/>
+                            <circle class="state-shape-path" cx="75" cy="48" r="1"/>
+                            <!-- Southeast panhandle -->
+                            <path class="state-shape-path" 
+                                  d="M 58 42 L 60 45 L 62 48 L 61 52 L 59 50 L 57 46 Z"/>
+                        </g>
+                    </svg>
+                    <div class="inset-state-label" id="alaska-label">AK ⚪</div>
                 `;
                 mapContainer.appendChild(alaskaBox);
                 
-                // Create Hawaii inset box with simple text badge  
+                // Create Hawaii inset box with island chain shape  
                 const hawaiiBox = document.createElement('div');
                 hawaiiBox.className = 'inset-box hawaii-box';
                 hawaiiBox.innerHTML = `
-                    <div class="inset-state-badge" id="hawaii-label">HI ⚪</div>
+                    <svg class="state-shape-svg" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hawaiian islands from northwest to southeast -->
+                        <g id="hawaii-shape">
+                            <!-- Kauai -->
+                            <circle class="state-shape-path hawaii-island" cx="20" cy="22" r="3"/>
+                            <!-- Oahu -->  
+                            <ellipse class="state-shape-path hawaii-island" cx="30" cy="24" rx="3.5" ry="2.5"/>
+                            <!-- Molokai -->
+                            <ellipse class="state-shape-path hawaii-island" cx="40" cy="25" rx="4" ry="1.5"/>
+                            <!-- Lanai -->
+                            <circle class="state-shape-path hawaii-island" cx="42" cy="29" r="1.8"/>
+                            <!-- Maui -->
+                            <path class="state-shape-path hawaii-island" d="M 48 24 L 52 23 L 54 25 L 53 28 L 50 29 L 47 27 Z"/>
+                            <!-- Big Island (Hawaii) -->
+                            <path class="state-shape-path hawaii-island" 
+                                  d="M 65 28 L 70 25 L 75 26 L 77 30 L 76 34 L 72 36 L 68 35 L 65 32 Z"/>
+                        </g>
+                    </svg>
+                    <div class="inset-state-label" id="hawaii-label">HI ⚪</div>
                 `;
                 mapContainer.appendChild(hawaiiBox);
                 
@@ -2147,13 +1523,9 @@
                         this.selectedState = null;
                     } else {
                         this.selectedState = 'AK';
-                        // Show modal with state details
-                        const stateName = stateNames['AK'];
-                        const activity = getStateActivity('AK', this.currentYear);
-                        showStateModal('AK', stateName, activity, this.currentYear);
                     }
                     this.updateDisplay();
-                    this.updateFormBars();
+                    this.updateSidebar();
                     this.updateInsetBoxes();
                 });
                 
@@ -2164,17 +1536,15 @@
                         this.selectedState = null;
                     } else {
                         this.selectedState = 'HI';
-                        // Show modal with state details
-                        const stateName = stateNames['HI'];
-                        const activity = getStateActivity('HI', this.currentYear);
-                        showStateModal('HI', stateName, activity, this.currentYear);
                     }
                     this.updateDisplay();
-                    this.updateFormBars();
+                    this.updateSidebar();
                     this.updateInsetBoxes();
                 });
                 
                 // Store references for updating
+                this.alaskaShapes = document.querySelectorAll('.alaska-box .state-shape-path');
+                this.hawaiiIslands = document.querySelectorAll('.hawaii-island');
                 this.alaskaLabel = document.getElementById('alaska-label');
                 this.hawaiiLabel = document.getElementById('hawaii-label');
             }
@@ -2183,24 +1553,18 @@
                 // Update Alaska
                 const akActivity = getStateActivity('AK', this.currentYear);
                 this.alaskaLabel.textContent = `AK ${akActivity.emoji}`;
-                
-                const alaskaBox = document.querySelector('.alaska-box');
-                if (this.selectedState === 'AK') {
-                    alaskaBox.classList.add('selected');
-                } else {
-                    alaskaBox.classList.remove('selected');
-                }
+                this.alaskaShapes.forEach(shape => {
+                    shape.className.baseVal = this.selectedState === 'AK' ? 
+                        'state-shape-path selected' : 'state-shape-path';
+                });
                 
                 // Update Hawaii
                 const hiActivity = getStateActivity('HI', this.currentYear);
                 this.hawaiiLabel.textContent = `HI ${hiActivity.emoji}`;
-                
-                const hawaiiBox = document.querySelector('.hawaii-box');
-                if (this.selectedState === 'HI') {
-                    hawaiiBox.classList.add('selected');
-                } else {
-                    hawaiiBox.classList.remove('selected');
-                }
+                this.hawaiiIslands.forEach(island => {
+                    island.className.baseVal = this.selectedState === 'HI' ? 
+                        'state-shape-path hawaii-island selected' : 'state-shape-path hawaii-island';
+                });
             }
             
             setupControls() {
@@ -2216,6 +1580,7 @@
                 yearSelect.addEventListener('change', (e) => {
                     this.currentYear = e.target.value;
                     this.updateDisplay();
+                    this.updateSidebar();
                     this.updateFormBars();
                     // Update year badge
                     document.getElementById('yearBadge').textContent = this.currentYear;
@@ -2432,141 +1797,10 @@
             }
         }
         
-        // Modal Functions
-        function showStateModal(stateCode, stateName, activity, year) {
-            // Update modal header
-            document.getElementById('modalStateName').textContent = stateName;
-            document.getElementById('modalStateYear').textContent = `Activity in ${year}`;
-            
-            // Generate modal body content
-            let bodyHTML = '';
-            
-            // Enacted forms section
-            if (activity.forms && activity.forms.length > 0) {
-                bodyHTML += `
-                    <div class="modal-detail-section">
-                        <div class="modal-detail-title">✅ Enacted This Year</div>
-                        <ul class="modal-form-list">`;
-                activity.forms.forEach(form => {
-                    const formName = corporateForms[form] || form;
-                    bodyHTML += `<li class="modal-form-item">${formName}</li>`;
-                });
-                bodyHTML += `</ul></div>`;
-            }
-            
-            // Under consideration section
-            if (activity.underConsideration && activity.underConsideration.length > 0) {
-                bodyHTML += `
-                    <div class="modal-detail-section">
-                        <div class="modal-detail-title">⏳ Under Consideration</div>
-                        <ul class="modal-form-list">`;
-                activity.underConsideration.forEach(form => {
-                    const formName = corporateForms[form] || form;
-                    bodyHTML += `<li class="modal-form-item pending">${formName}</li>`;
-                });
-                bodyHTML += `</ul></div>`;
-            }
-            
-            // Failed legislation section
-            if (activity.failed && activity.failed.length > 0) {
-                bodyHTML += `
-                    <div class="modal-detail-section">
-                        <div class="modal-detail-title">❌ Failed This Year</div>
-                        <ul class="modal-form-list">`;
-                activity.failed.forEach(form => {
-                    const formName = corporateForms[form] || form;
-                    bodyHTML += `<li class="modal-form-item failed">${formName}</li>`;
-                });
-                bodyHTML += `</ul></div>`;
-            }
-            
-            // Currently available forms section
-            bodyHTML += `
-                <div class="modal-detail-section">
-                    <div class="modal-detail-title">📋 Currently Available Forms</div>`;
-            
-            if (activity.availableForms && activity.availableForms.length > 0) {
-                bodyHTML += `<ul class="modal-form-list">`;
-                activity.availableForms.forEach(form => {
-                    const formName = corporateForms[form] || form;
-                    bodyHTML += `<li class="modal-form-item">${formName}</li>`;
-                });
-                bodyHTML += `</ul>`;
-            } else {
-                bodyHTML += `<p class="modal-empty-state">No forms currently available</p>`;
-            }
-            bodyHTML += `</div>`;
-            
-            // View complete history button
-            bodyHTML += `
-                <div class="modal-detail-section">
-                    <button onclick="window.open('states/${stateCode.toLowerCase()}.html', '_blank')" 
-                            class="modal-history-btn">
-                        📜 View Complete Legislative History
-                    </button>
-                </div>`;
-            
-            // Update modal body
-            document.getElementById('modalStateBody').innerHTML = bodyHTML;
-            
-            // Show modal
-            document.getElementById('stateModalOverlay').classList.add('show');
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeStateModal() {
-            document.getElementById('stateModalOverlay').classList.remove('show');
-            document.body.style.overflow = '';
-        }
-        
         // Initialize the application
         document.addEventListener('DOMContentLoaded', () => {
-            const seltMap = new EnhancedSELTMap();
-            
-            // Handle window resize for mobile responsiveness
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    if (seltMap.map) {
-                        seltMap.map.invalidateSize();
-                    }
-                }, 250);
-            });
-            
-            // Modal event listeners
-            document.getElementById('stateModalOverlay').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeStateModal();
-                }
-            });
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeStateModal();
-            }
+            new EnhancedSELTMap();
         });
     </script>
-    
-    <!-- Modal for State Details -->
-    <div id="stateModalOverlay" class="state-modal-overlay">
-        <div class="state-modal">
-            <div class="state-modal-header">
-                <div>
-                    <div class="state-modal-title" id="modalStateName">State Name</div>
-                    <div class="state-modal-year" id="modalStateYear">Activity in 2024</div>
-                </div>
-                <button class="state-modal-close" onclick="closeStateModal()" aria-label="Close">×</button>
-            </div>
-            <div class="state-modal-body" id="modalStateBody">
-                <!-- Content will be inserted here -->
-            </div>
-        </div>
-    </div>
-    
 </body>
 </html>
