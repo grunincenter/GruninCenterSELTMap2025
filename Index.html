@@ -204,208 +204,9 @@
             position: relative;
         }
         
-        /* State Details Bar (below map) */
-        .state-details-section {
-            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-            padding: 20px;
-            border-top: 2px solid #00abce;
-            min-height: 140px;
-        }
+      
         
-        .state-details-placeholder {
-            color: #a0aec0;
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .state-details-placeholder-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-        
-        .state-details-placeholder h3 {
-            font-size: 1.2em;
-            color: #925333;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .state-details-placeholder p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        /* State Details Styling when populated */
-        .state-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            align-items: flex-start;
-        }
-        
-        .state-header {
-            flex: 0 0 auto;
-            padding-right: 30px;
-            border-right: 2px solid #e0e0e0;
-        }
-        
-        .state-name {
-            color: #925333;
-            font-size: 1.6em;
-            font-weight: 700;
-            margin: 0 0 5px 0;
-        }
-        
-        .state-subtitle {
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        .detail-section {
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .detail-title {
-            color: #00abce;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .form-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .form-item {
-            background: rgba(115,165,53,0.1);
-            padding: 8px 12px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            font-size: 0.9em;
-            border-left: 3px solid #73a535;
-        }
-        
-        .form-item.pending {
-            background: rgba(255,193,7,0.1);
-            border-left-color: #ffc107;
-        }
-        
-        .form-item.failed {
-            background: rgba(220,53,69,0.1);
-            border-left-color: #dc3545;
-        }
-        
-        .empty-state {
-            color: #999;
-            font-style: italic;
-            font-size: 0.9em;
-        }
-        
-        .history-btn {
-            background: linear-gradient(135deg, #00abce, #73a535);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95em;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-        
-        .history-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        
-        .sidebar-placeholder h3 {
-            font-size: 1.4em;
-            margin-bottom: 10px;
-            color: #925333;
-        }
-        
-        /* State Details */
-        .state-details {
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .state-header {
-            border-bottom: 3px solid #00abce;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .state-name {
-            color: #925333;
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-        
-        .state-subtitle {
-            color: #73a535;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-        
-        .detail-section {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #73a535;
-        }
-        
-        .detail-title {
-            font-weight: 600;
-            color: #925333;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        .form-list {
-            list-style: none;
-        }
-        
-        .form-item {
-            padding: 8px 12px;
-            background: white;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            border: 1px solid #ddd;
-            transition: all 0.3s;
-        }
-        
-        .form-item:hover {
-            border-color: #00abce;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .form-item.pending {
-            background: #fff4e5;
-            border-color: #ffa500;
-        }
-        
-        .form-item.failed {
-            background: #ffebee;
-            border-color: #e74c3c;
-        }
-        
-        .empty-state {
-            color: #a0aec0;
-            font-style: italic;
-        }
+
         
         .history-btn {
             width: 100%;
@@ -871,7 +672,129 @@
                 margin-bottom: 20px;
             }
         }
-    </style>
+  /* MOBILE-ONLY FIXES */
+@media (max-width: 768px) {
+    /* Fix 1: Remove excess white space at end of page */
+    body {
+        min-height: auto !important;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding-bottom: 10px !important;
+    }
+    
+    .content-section:last-child {
+        margin-bottom: 15px !important;
+    }
+    
+    /* Fix 2: Expand bar graph area in 3 directions */
+    .stats-bar {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin-left: -10px !important;
+        margin-right: -10px !important;
+        min-height: 220px !important;
+    }
+    
+    .forms-visual {
+        padding: 15px 5px 20px !important;
+        min-height: 160px !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+    
+    .form-bar {
+        max-width: none !important;
+        flex: 1 !important;
+        min-width: 50px !important;
+    }
+    
+    .form-bar-fill {
+        width: 45px !important;
+    }
+    
+    .form-bar-wrapper {
+        width: 100% !important;
+    }
+    
+    .form-bar-label {
+        font-size: 0.75em !important;
+        padding: 6px 10px !important;
+    }
+    
+    .form-bar-states {
+        font-size: 0.65em !important;
+    }
+    
+    /* Fix 3: Reorganize legend/emoji key */
+    .legend {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 10px 0 !important;
+        width: 100% !important;
+    }
+    
+    .legend-item {
+        font-size: 11px !important;
+        gap: 5px !important;
+        padding: 5px !important;
+        background: rgba(248, 249, 250, 0.8) !important;
+        border-radius: 6px !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+    }
+    
+    .legend-item span:first-child {
+        font-size: 14px !important;
+        min-width: 20px !important;
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px !important;
+        padding-bottom: 5px !important;
+    }
+    
+    .stats-bar {
+        margin-left: -8px !important;
+        margin-right: -8px !important;
+        padding: 15px 5px !important;
+        min-height: 240px !important;
+    }
+    
+    .forms-visual {
+        padding: 12px 3px 15px !important;
+        gap: 6px !important;
+        min-height: 180px !important;
+    }
+    
+    .form-bar-fill {
+        width: 35px !important;
+    }
+    
+    .form-bar-label {
+        font-size: 0.7em !important;
+        padding: 5px 8px !important;
+    }
+    
+    .legend-item {
+        font-size: 10px !important;
+        padding: 4px !important;
+        gap: 3px !important;
+    }
+    
+    .legend-item span:first-child {
+        font-size: 13px !important;
+    }
+    
+    #map {
+        height: 350px !important;
+    }
+}  </style>
 </head>
 <body>
     <div class="container">
@@ -933,14 +856,7 @@
                 <div id="map"></div>
             </div>
             
-            <!-- State Details Section (moved from sidebar) -->
-            <div class="state-details-section" id="stateDetails">
-                <div class="state-details-placeholder">
-                    <div class="state-details-placeholder-icon">📍</div>
-                    <h3>Select a State</h3>
-                    <p>Click on any state to view details</p>
-                </div>
-            </div>
+           
             
             <!-- Stats Bar with Form Visualization -->
             <div class="stats-bar" id="statsBar">
@@ -1298,7 +1214,6 @@
                             marker.setZIndexOffset(1000);
                         }
                         this.updateDisplay();
-                        this.updateSidebar();
                     });
                     
                     this.stateMarkers.set(stateCode, marker);
@@ -1331,7 +1246,6 @@
                             marker.setZIndexOffset(1000);
                         }
                         this.updateDisplay();
-                        this.updateSidebar();
                     });
                     
                     this.stateMarkers.set(stateCode, marker);
@@ -1512,83 +1426,7 @@
                 }
             }
             
-            updateSidebar() {
-                const stateDetails = document.getElementById('stateDetails');
-                
-                if (!this.selectedState) {
-                    stateDetails.innerHTML = `
-                        <div class="state-details-placeholder">
-                            <div class="state-details-placeholder-icon">📍</div>
-                            <h3>Select a State</h3>
-                            <p>Click on any state to view details</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                const stateName = stateNames[this.selectedState];
-                const activity = getStateActivity(this.selectedState, this.currentYear);
-                
-                stateDetails.innerHTML = `
-                    <div class="state-details">
-                        <div class="state-header">
-                            <h2 class="state-name">${stateName}</h2>
-                            <div class="state-subtitle">Activity in ${this.currentYear}</div>
-                        </div>
-                        
-                        ${activity.forms && activity.forms.length > 0 ? `
-                            <div class="detail-section">
-                                <div class="detail-title">Enacted This Year</div>
-                                <ul class="form-list">
-                                    ${activity.forms.map(form => `
-                                        <li class="form-item">${corporateForms[form] || form}</li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                        ` : ''}
-                        
-                        ${activity.underConsideration && activity.underConsideration.length > 0 ? `
-                            <div class="detail-section">
-                                <div class="detail-title">Under Consideration</div>
-                                <ul class="form-list">
-                                    ${activity.underConsideration.map(form => `
-                                        <li class="form-item pending">${corporateForms[form] || form}</li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                        ` : ''}
-                        
-                        ${activity.failed && activity.failed.length > 0 ? `
-                            <div class="detail-section">
-                                <div class="detail-title">Failed This Year</div>
-                                <ul class="form-list">
-                                    ${activity.failed.map(form => `
-                                        <li class="form-item failed">${corporateForms[form] || form}</li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                        ` : ''}
-                        
-                        <div class="detail-section">
-                            <div class="detail-title">Currently Available Forms</div>
-                            ${activity.availableForms.length > 0 ? `
-                                <ul class="form-list">
-                                    ${activity.availableForms.map(form => `
-                                        <li class="form-item">${corporateForms[form] || form}</li>
-                                    `).join('')}
-                                </ul>
-                            ` : '<p class="empty-state">No forms currently available</p>'}
-                        </div>
-                        
-                        <div class="detail-section">
-                            <button onclick="window.open('states/${this.selectedState.toLowerCase()}.html', '_blank')" 
-                                    class="history-btn">
-                                📜 View Complete Legislative History
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
+            
             
             updateLegend() {
                 const legend = document.getElementById('legend');
