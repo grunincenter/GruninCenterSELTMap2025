@@ -791,7 +791,20 @@
 body, .container {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
-}}
+}/* More aggressive white space removal */
+    .content-section {
+        margin-bottom: 10px !important;
+    }
+    
+    .content-section:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    html, body {
+        height: auto !important;
+        min-height: auto !important;
+    }
+}
 
 @media (max-width: 480px) {
     .container {
