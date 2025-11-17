@@ -782,21 +782,22 @@
     display: none !important;
 }
 
-/* Adjust map height */
+/* Hide map on mobile and show message instead */
 #map {
-    height: 400px !important;
-}
-/* Fix map zoom and positioning on mobile */
-.leaflet-container {
-    zoom: 0.7 !important;  /* Browser zoom, not transform */
+    display: none !important;
 }
 
-/* Ensure full width */
-.map-content {
-    overflow: visible !important;
-    width: 100vw !important;
-    margin-left: -10px !important;
-    margin-right: -10px !important;
+.map-content::before {
+    content: "Map view available on desktop. Select a state from the list below.";
+    display: block;
+    padding: 20px;
+    text-align: center;
+    background: #f0f9ff;
+    border: 1px solid #00abce;
+    border-radius: 8px;
+    color: #333;
+    margin: 10px;
+}
 }/* Remove bottom padding */
 body, .container {
     padding-bottom: 0 !important;
