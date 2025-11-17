@@ -782,11 +782,13 @@
     display: none !important;
 }
 
-/* Adjust map height */
+/* Force map to zoom out more on mobile */
 #map {
-    height: 400px !important;
+    height: 350px !important;
+    transform: scale(0.8);  /* Shrink map to 80% */
+    transform-origin: center;
+    margin: -30px -20px;  /* Compensate for shrinking */
 }
-
 /* Remove bottom padding */
 body, .container {
     padding-bottom: 0 !important;
