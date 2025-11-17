@@ -751,7 +751,50 @@
         min-width: 20px !important;
         text-align: center !important;
     }
-}
+.legend-item span:first-child {
+        font-size: 14px !important;
+        min-width: 20px !important;
+        text-align: center !important;
+    }
+    
+    /* ADD NEW FIXES HERE */
+    /* Fix 1: Year selector not full width */
+    #yearSelect {
+        width: auto !important;
+        min-width: 100px !important;
+        max-width: 150px !important;
+    }
+    
+    .control-group {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+    
+    /* Fix 2: Remove grey rectangles behind emojis */
+    .legend-item {
+        background: transparent !important;
+        padding: 3px !important;
+    }
+    
+    /* Fix 3: Fix map view and move AK/HI to bottom */
+    #map {
+        height: 450px !important;
+    }
+    
+    .alaska-box {
+        bottom: 10px !important;
+        top: auto !important;
+        left: 10px !important;
+        z-index: 1000 !important;
+    }
+    
+    .hawaii-box {
+        bottom: 10px !important;
+        left: 100px !important;
+        z-index: 1000 !important;
+    }
+}  /* This is the existing closing bracket on line 754 */}
 
 @media (max-width: 480px) {
     .container {
@@ -1316,7 +1359,7 @@
                         this.selectedState = 'AK';
                     }
                     this.updateDisplay();
-                    this.updateSidebar();
+// this.updateSidebar(); // Commented out - function was removed
                     this.updateInsetBoxes();
                 });
                 
@@ -1329,7 +1372,7 @@
                         this.selectedState = 'HI';
                     }
                     this.updateDisplay();
-                    this.updateSidebar();
+// this.updateSidebar(); // Commented out - function was removed
                     this.updateInsetBoxes();
                 });
                 
@@ -1371,7 +1414,7 @@
                 yearSelect.addEventListener('change', (e) => {
                     this.currentYear = e.target.value;
                     this.updateDisplay();
-                    this.updateSidebar();
+// this.updateSidebar(); // Commented out - function was removed
                     this.updateFormBars();
                     // Update year badge
                     document.getElementById('yearBadge').textContent = this.currentYear;
