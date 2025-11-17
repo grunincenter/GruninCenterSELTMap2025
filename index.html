@@ -777,33 +777,21 @@
         padding: 3px !important;
     }
     
-/* Fix 3: Fix map view and move AK/HI to bottom */
+/* Fix 3: Hide AK/HI on mobile for now */
+.alaska-box, .hawaii-box {
+    display: none !important;
+}
+
+/* Adjust map height */
 #map {
-    height: 500px !important;  /* Increased from 450px */
+    height: 400px !important;
 }
 
-.alaska-box {
-    position: fixed !important;  /* Changed to fixed positioning */
-    bottom: 20px !important;
-    left: 10px !important;
-    width: 80px !important;
-    height: 65px !important;
-    z-index: 1000 !important;
-    background: white !important;
-    border: 2px solid #999 !important;
-}
-
-.hawaii-box {
-    position: fixed !important;  /* Changed to fixed positioning */
-    bottom: 20px !important;
-    left: 100px !important;
-    width: 70px !important;
-    height: 50px !important;
-    z-index: 1000 !important;
-    background: white !important;
-    border: 2px solid #999 !important;
-}
-}  /* This is the existing closing bracket on line 754 */}
+/* Remove bottom padding */
+body, .container {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}}
 
 @media (max-width: 480px) {
     .container {
