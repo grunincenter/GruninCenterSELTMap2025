@@ -1368,7 +1368,7 @@
                         this.selectedState = 'AK';
                     }
                     this.updateDisplay();
- this.updateSidebar(); // Commented out - function was removed
+ this.updateSidebar();
                     this.updateInsetBoxes();
                 });
                 
@@ -1381,7 +1381,7 @@
                         this.selectedState = 'HI';
                     }
                     this.updateDisplay();
- this.updateSidebar(); // Commented out - function was removed
+ this.updateSidebar(); 
                     this.updateInsetBoxes();
                 });
                 
@@ -1423,7 +1423,7 @@
                 yearSelect.addEventListener('change', (e) => {
                     this.currentYear = e.target.value;
                     this.updateDisplay();
- this.updateSidebar(); // Commented out - function was removed
+ this.updateSidebar(); 
                     this.updateFormBars();
                     // Update year badge
                     document.getElementById('yearBadge').textContent = this.currentYear;
@@ -1502,7 +1502,6 @@
                 }
             }
             
-            updateLegend() {  // This starts at line 1483  
             
             updateLegend() {
                 const legend = document.getElementById('legend');
