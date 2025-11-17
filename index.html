@@ -782,14 +782,22 @@
     display: none !important;
 }
 
-/* Force map to zoom out more on mobile */
+/* Adjust map height */
 #map {
-    height: 350px !important;
-    transform: scale(0.8);  /* Shrink map to 80% */
-    transform-origin: center;
-    margin: -30px -20px;  /* Compensate for shrinking */
+    height: 400px !important;
 }
-/* Remove bottom padding */
+/* Fix map zoom and positioning on mobile */
+.leaflet-container {
+    zoom: 0.7 !important;  /* Browser zoom, not transform */
+}
+
+/* Ensure full width */
+.map-content {
+    overflow: visible !important;
+    width: 100vw !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+}/* Remove bottom padding */
 body, .container {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
@@ -1483,27 +1491,13 @@ body, .container {
             
           // Whatever code ends here (probably line 1479 or 1480)
             
-            updateSidebar() {
-                // Simple mobile popup for state details
-                if (this.selectedState) {
-                    const stateName = stateNames[this.selectedState];
-                    const activity = getStateActivity(this.selectedState, this.currentYear);
-                    
-                    let message = `${stateName}\n\n`;
-                    
-                    if (activity.forms && activity.forms.length > 0) {
-                        message += `Enacted: ${activity.forms.join(', ')}\n`;
-                    }
-                    
-                    if (activity.availableForms && activity.availableForms.length > 0) {
-                        message += `Available Forms: ${activity.availableForms.join(', ')}\n`;
-                    }
-                    
-                    message += `\nView full details: states/${this.selectedState.toLowerCase()}.html`;
-                    
-                    alert(message);
-                }
-            }
+updateSidebar() {
+    // Simple mobile popup for state details  
+    if (this.selectedState) {
+        const stateName = stateNames[this.selectedState] || this.selectedState;
+        alert(`${stateName}\n\nView details at: states/${this.selectedState.toLowerCase()}.html`);
+    }
+}
             
             
             updateLegend() {
