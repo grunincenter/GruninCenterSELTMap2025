@@ -594,94 +594,111 @@
             display: none !important;
         }
         
-        .leaflet-control-attribution
-         display: none !important;
-}
-        /* Desktop: Hide mobile list, show map */
-.mobile-state-list {
-    display: none;
-}
-/* Force hide mobile elements on desktop */ 
-@media (min-width: 769px) { 
-    .mobile-state-list { 
-        display: none !important; 
-    } 
-}
-/* Mobile styles */
-@media screen and (max-width: 768px) {
-        /* Fix bar graph on mobile */
-    .forms-visual {
-        overflow-x: auto !important;
-        width: 100% !important;
-    }
-    
-    .form-bar-container {
-        min-width: 60px !important;
-    }
-        /* Fix acknowledgments section - FIX 3 GOES HERE */
-    .content-section {
-        padding: 10px !important;
-        margin: 10px !important;
-        width: auto !important;
-    }
-    /* Hide map on mobile */
-    #map, .map-content {
-        display: none !important;
-    }
-    
-    /* Show state list on mobile */
-    .mobile-state-list {
-        display: block !important;
-        padding: 20px;
-        background: white;
-        border-radius: 10px;
-        margin: 10px;
-    }
-    
-    /* State list styles */
-    .year-context {
-        text-align: center;
-        font-size: 1.1em;
-        color: #925333;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-    
-    .state-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        max-height: 500px;
-        overflow-y: auto;
-    }
-    
-    .state-btn {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        padding: 10px;
-        background: white;
-        border: 2px solid #e0e0e0;
-        border-radius: 6px;
-        font-size: 13px;
-        text-align: left;
-        width: 100%;
-    }
-    
-    /* Basic mobile adjustments */
-    .grunin-branding {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .container {
-        padding: 10px;
-    }
-    
-    body {
-        padding-bottom: 50px;
-    }
-}
+.leaflet-control-attribution {
+            display: none !important;
+        }
+        
+        /* Desktop: Hide mobile list */
+        .mobile-state-list {
+            display: none;
+        }
+        
+        /* Mobile styles */
+        @media screen and (max-width: 768px) {
+            /* Hide map on mobile */
+            #map, .map-content {
+                display: none !important;
+            }
+            
+            /* Show state list on mobile */
+            .mobile-state-list {
+                display: block !important;
+                padding: 20px;
+                background: white;
+                border-radius: 10px;
+                margin: 10px;
+            }
+            
+            /* Fix bar graph container */
+            .stats-bar {
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                padding: 10px !important;
+            }
+            
+            .forms-visual {
+                display: flex !important;
+                overflow-x: auto !important;
+                gap: 8px !important;
+                padding: 10px 5px !important;
+                min-height: auto !important;
+            }
+            
+            .form-bar-container {
+                min-width: 50px !important;
+                flex-shrink: 0 !important;
+            }
+            
+            /* Fix content sections (acknowledgments, etc) */
+            .content-section {
+                padding: 15px !important;
+                margin: 10px !important;
+                width: calc(100% - 20px) !important;
+                box-sizing: border-box !important;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5em !important;
+            }
+            
+            .tepper-fellows-info {
+                padding: 15px !important;
+            }
+            
+            /* State list styles */
+            .year-context {
+                text-align: center;
+                font-size: 1.1em;
+                color: #925333;
+                margin-bottom: 15px;
+                font-weight: 600;
+            }
+            
+            .state-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                max-height: 500px;
+                overflow-y: auto;
+            }
+            
+            .state-btn {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                padding: 10px;
+                background: white;
+                border: 2px solid #e0e0e0;
+                border-radius: 6px;
+                font-size: 13px;
+                text-align: left;
+                width: 100%;
+            }
+            
+            /* Basic mobile adjustments */
+            .grunin-branding {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            body {
+                padding-bottom: 50px;
+            }
+        }
 @media (max-width: 480px) {
     .container {
         padding: 8px !important;
