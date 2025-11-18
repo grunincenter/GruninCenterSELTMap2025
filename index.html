@@ -599,7 +599,12 @@
 .mobile-state-list {
     display: none;
 }
-
+/* Force hide mobile elements on desktop */ 
+@media (min-width: 769px) { 
+    .mobile-state-list { 
+        display: none !important; 
+    } 
+}
 /* Mobile styles */
 @media screen and (max-width: 768px) {
     /* Hide map on mobile */
