@@ -1713,14 +1713,19 @@ body, .container {
                     yearSelect.appendChild(option);
                 }
                 
-                yearSelect.addEventListener('change', (e) => {
-                    this.currentYear = e.target.value;
-                    this.updateDisplay();
- this.updateSidebar(); 
-                    this.updateFormBars();
-                    // Update year badge
-                    document.getElementById('yearBadge').textContent = this.currentYear;
-                });
+yearSelect.addEventListener('change', (e) => {
+    this.currentYear = e.target.value;
+    this.updateDisplay();
+    this.updateSidebar(); 
+    this.updateFormBars();
+    // Update year badge
+    document.getElementById('yearBadge').textContent = this.currentYear;
+    // Update mobile year display
+    const mobileYear = document.getElementById('mobileYearDisplay');
+    if (mobileYear) {
+        mobileYear.textContent = e.target.value;
+    }
+});
                 
                 // Initialize displays
                 this.updateLegend();
