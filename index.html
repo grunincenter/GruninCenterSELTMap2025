@@ -815,7 +815,74 @@ body, .container {
         height: auto !important;
         min-height: auto !important;
     }
+/* Mobile State List Styles */
+.mobile-state-list {
+    display: block !important;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    margin: 10px;
 }
+
+.year-context {
+    text-align: center;
+    font-size: 1.1em;
+    color: #925333;
+    margin-bottom: 15px;
+    font-weight: 600;
+    background: #f0f9ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.year-context span {
+    color: #00abce;
+    font-weight: 700;
+}
+
+.state-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.state-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.state-btn:active {
+    background: #f0f9ff;
+    border-color: #00abce;
+}
+
+.state-code {
+    font-weight: 700;
+    color: #00abce;
+}
+
+.state-name {
+    color: #333;
+    font-size: 12px;
+}
+
+/* Hide the broken map */
+#map, .map-content {
+    display: none !important;
+}}
 
 @media (max-width: 480px) {
     .container {
@@ -920,7 +987,219 @@ body, .container {
                 <div id="map"></div>
             </div>
             
-           
+          <!-- Mobile State List (hidden on desktop, shown on mobile) -->
+<div class="mobile-state-list" id="mobileStateList" style="display:none;">
+    <div class="year-context">
+        Showing data for: <span id="mobileYearDisplay">2024</span>
+    </div>
+    
+    <div class="state-grid">
+        <button onclick="location.href='states/al.html'" class="state-btn">
+            <span class="state-code">AL</span>
+            <span class="state-name">Alabama</span>
+        </button>
+        <button onclick="location.href='states/ak.html'" class="state-btn">
+            <span class="state-code">AK</span>
+            <span class="state-name">Alaska</span>
+        </button>
+        <button onclick="location.href='states/az.html'" class="state-btn">
+            <span class="state-code">AZ</span>
+            <span class="state-name">Arizona</span>
+        </button>
+        <button onclick="location.href='states/ar.html'" class="state-btn">
+            <span class="state-code">AR</span>
+            <span class="state-name">Arkansas</span>
+        </button>
+        <button onclick="location.href='states/ca.html'" class="state-btn">
+            <span class="state-code">CA</span>
+            <span class="state-name">California</span>
+        </button>
+        <button onclick="location.href='states/co.html'" class="state-btn">
+            <span class="state-code">CO</span>
+            <span class="state-name">Colorado</span>
+        </button>
+        <button onclick="location.href='states/ct.html'" class="state-btn">
+            <span class="state-code">CT</span>
+            <span class="state-name">Connecticut</span>
+        </button>
+        <button onclick="location.href='states/de.html'" class="state-btn">
+            <span class="state-code">DE</span>
+            <span class="state-name">Delaware</span>
+        </button>
+        <button onclick="location.href='states/dc.html'" class="state-btn">
+            <span class="state-code">DC</span>
+            <span class="state-name">District of Columbia</span>
+        </button>
+        <button onclick="location.href='states/fl.html'" class="state-btn">
+            <span class="state-code">FL</span>
+            <span class="state-name">Florida</span>
+        </button>
+        <button onclick="location.href='states/ga.html'" class="state-btn">
+            <span class="state-code">GA</span>
+            <span class="state-name">Georgia</span>
+        </button>
+        <button onclick="location.href='states/hi.html'" class="state-btn">
+            <span class="state-code">HI</span>
+            <span class="state-name">Hawaii</span>
+        </button>
+        <button onclick="location.href='states/id.html'" class="state-btn">
+            <span class="state-code">ID</span>
+            <span class="state-name">Idaho</span>
+        </button>
+        <button onclick="location.href='states/il.html'" class="state-btn">
+            <span class="state-code">IL</span>
+            <span class="state-name">Illinois</span>
+        </button>
+        <button onclick="location.href='states/in.html'" class="state-btn">
+            <span class="state-code">IN</span>
+            <span class="state-name">Indiana</span>
+        </button>
+        <button onclick="location.href='states/ia.html'" class="state-btn">
+            <span class="state-code">IA</span>
+            <span class="state-name">Iowa</span>
+        </button>
+        <button onclick="location.href='states/ks.html'" class="state-btn">
+            <span class="state-code">KS</span>
+            <span class="state-name">Kansas</span>
+        </button>
+        <button onclick="location.href='states/ky.html'" class="state-btn">
+            <span class="state-code">KY</span>
+            <span class="state-name">Kentucky</span>
+        </button>
+        <button onclick="location.href='states/la.html'" class="state-btn">
+            <span class="state-code">LA</span>
+            <span class="state-name">Louisiana</span>
+        </button>
+        <button onclick="location.href='states/me.html'" class="state-btn">
+            <span class="state-code">ME</span>
+            <span class="state-name">Maine</span>
+        </button>
+        <button onclick="location.href='states/md.html'" class="state-btn">
+            <span class="state-code">MD</span>
+            <span class="state-name">Maryland</span>
+        </button>
+        <button onclick="location.href='states/ma.html'" class="state-btn">
+            <span class="state-code">MA</span>
+            <span class="state-name">Massachusetts</span>
+        </button>
+        <button onclick="location.href='states/mi.html'" class="state-btn">
+            <span class="state-code">MI</span>
+            <span class="state-name">Michigan</span>
+        </button>
+        <button onclick="location.href='states/mn.html'" class="state-btn">
+            <span class="state-code">MN</span>
+            <span class="state-name">Minnesota</span>
+        </button>
+        <button onclick="location.href='states/ms.html'" class="state-btn">
+            <span class="state-code">MS</span>
+            <span class="state-name">Mississippi</span>
+        </button>
+        <button onclick="location.href='states/mo.html'" class="state-btn">
+            <span class="state-code">MO</span>
+            <span class="state-name">Missouri</span>
+        </button>
+        <button onclick="location.href='states/mt.html'" class="state-btn">
+            <span class="state-code">MT</span>
+            <span class="state-name">Montana</span>
+        </button>
+        <button onclick="location.href='states/ne.html'" class="state-btn">
+            <span class="state-code">NE</span>
+            <span class="state-name">Nebraska</span>
+        </button>
+        <button onclick="location.href='states/nv.html'" class="state-btn">
+            <span class="state-code">NV</span>
+            <span class="state-name">Nevada</span>
+        </button>
+        <button onclick="location.href='states/nh.html'" class="state-btn">
+            <span class="state-code">NH</span>
+            <span class="state-name">New Hampshire</span>
+        </button>
+        <button onclick="location.href='states/nj.html'" class="state-btn">
+            <span class="state-code">NJ</span>
+            <span class="state-name">New Jersey</span>
+        </button>
+        <button onclick="location.href='states/nm.html'" class="state-btn">
+            <span class="state-code">NM</span>
+            <span class="state-name">New Mexico</span>
+        </button>
+        <button onclick="location.href='states/ny.html'" class="state-btn">
+            <span class="state-code">NY</span>
+            <span class="state-name">New York</span>
+        </button>
+        <button onclick="location.href='states/nc.html'" class="state-btn">
+            <span class="state-code">NC</span>
+            <span class="state-name">North Carolina</span>
+        </button>
+        <button onclick="location.href='states/nd.html'" class="state-btn">
+            <span class="state-code">ND</span>
+            <span class="state-name">North Dakota</span>
+        </button>
+        <button onclick="location.href='states/oh.html'" class="state-btn">
+            <span class="state-code">OH</span>
+            <span class="state-name">Ohio</span>
+        </button>
+        <button onclick="location.href='states/ok.html'" class="state-btn">
+            <span class="state-code">OK</span>
+            <span class="state-name">Oklahoma</span>
+        </button>
+        <button onclick="location.href='states/or.html'" class="state-btn">
+            <span class="state-code">OR</span>
+            <span class="state-name">Oregon</span>
+        </button>
+        <button onclick="location.href='states/pa.html'" class="state-btn">
+            <span class="state-code">PA</span>
+            <span class="state-name">Pennsylvania</span>
+        </button>
+        <button onclick="location.href='states/ri.html'" class="state-btn">
+            <span class="state-code">RI</span>
+            <span class="state-name">Rhode Island</span>
+        </button>
+        <button onclick="location.href='states/sc.html'" class="state-btn">
+            <span class="state-code">SC</span>
+            <span class="state-name">South Carolina</span>
+        </button>
+        <button onclick="location.href='states/sd.html'" class="state-btn">
+            <span class="state-code">SD</span>
+            <span class="state-name">South Dakota</span>
+        </button>
+        <button onclick="location.href='states/tn.html'" class="state-btn">
+            <span class="state-code">TN</span>
+            <span class="state-name">Tennessee</span>
+        </button>
+        <button onclick="location.href='states/tx.html'" class="state-btn">
+            <span class="state-code">TX</span>
+            <span class="state-name">Texas</span>
+        </button>
+        <button onclick="location.href='states/ut.html'" class="state-btn">
+            <span class="state-code">UT</span>
+            <span class="state-name">Utah</span>
+        </button>
+        <button onclick="location.href='states/vt.html'" class="state-btn">
+            <span class="state-code">VT</span>
+            <span class="state-name">Vermont</span>
+        </button>
+        <button onclick="location.href='states/va.html'" class="state-btn">
+            <span class="state-code">VA</span>
+            <span class="state-name">Virginia</span>
+        </button>
+        <button onclick="location.href='states/wa.html'" class="state-btn">
+            <span class="state-code">WA</span>
+            <span class="state-name">Washington</span>
+        </button>
+        <button onclick="location.href='states/wv.html'" class="state-btn">
+            <span class="state-code">WV</span>
+            <span class="state-name">West Virginia</span>
+        </button>
+        <button onclick="location.href='states/wi.html'" class="state-btn">
+            <span class="state-code">WI</span>
+            <span class="state-name">Wisconsin</span>
+        </button>
+        <button onclick="location.href='states/wy.html'" class="state-btn">
+            <span class="state-code">WY</span>
+            <span class="state-name">Wyoming</span>
+        </button>
+    </div>
+</div> 
             
             <!-- Stats Bar with Form Visualization -->
             <div class="stats-bar" id="statsBar">
