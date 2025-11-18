@@ -595,6 +595,8 @@
         }
         
         .leaflet-control-attribution
+         display: none !important;
+}
         /* Desktop: Hide mobile list, show map */
 .mobile-state-list {
     display: none;
@@ -607,6 +609,21 @@
 }
 /* Mobile styles */
 @media screen and (max-width: 768px) {
+        /* Fix bar graph on mobile */
+    .forms-visual {
+        overflow-x: auto !important;
+        width: 100% !important;
+    }
+    
+    .form-bar-container {
+        min-width: 60px !important;
+    }
+        /* Fix acknowledgments section - FIX 3 GOES HERE */
+    .content-section {
+        padding: 10px !important;
+        margin: 10px !important;
+        width: auto !important;
+    }
     /* Hide map on mobile */
     #map, .map-content {
         display: none !important;
