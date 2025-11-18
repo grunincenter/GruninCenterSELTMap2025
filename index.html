@@ -594,299 +594,72 @@
             display: none !important;
         }
         
-        .leaflet-control-attribution {
-            display: none !important;
-        }
-        /* Hide mobile state list on desktop */
+        .leaflet-control-attribution
+        /* Desktop: Hide mobile list, show map */
 .mobile-state-list {
     display: none;
 }
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .grunin-branding {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .grunin-title {
-                text-align: center;
-            }
-   
-            .grunin-logo-img {
-                width: 200px;
-            }
-            
-            .map-content {
-                flex-direction: column;
-                height: auto;
-            }
-            
-            #map {
-                height: 400px;
-            }
-            
-            .controls-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .control-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .reports-content {
-                flex-direction: column;
-            }
-            
-            .tepper-fellows-info {
-                min-width: auto;
-            }
-            
-            .stats-bar {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .alaska-box {
-                top: 10px;
-                left: 10px;
-                width: 90px;
-                height: 75px;
-            }
-            
-            .hawaii-box {
-                bottom: 10px;
-                left: 10px;
-                width: 90px;
-                height: 55px;
-            }
-            
-            .inset-state-label {
-                font-size: 11px;
-                padding: 1px 5px;
-            }
-            
-            .stats-year-indicator {
-                border-right: none;
-                border-bottom: 2px solid rgba(0,171,206,0.2);
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-            }
-        }
-  /* MOBILE-ONLY FIXES */
-@media (max-width: 768px) {
-    /* Fix 1: Remove excess white space at end of page */
-    body {
-        min-height: auto !important;
-        overflow-x: hidden;
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    /* Hide map on mobile */
+    #map, .map-content {
+        display: none !important;
+    }
+    
+    /* Show state list on mobile */
+    .mobile-state-list {
+        display: block !important;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        margin: 10px;
+    }
+    
+    /* State list styles */
+    .year-context {
+        text-align: center;
+        font-size: 1.1em;
+        color: #925333;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .state-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    
+    .state-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 10px;
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 13px;
+        text-align: left;
+        width: 100%;
+    }
+    
+    /* Basic mobile adjustments */
+    .grunin-branding {
+        flex-direction: column;
+        text-align: center;
     }
     
     .container {
-        padding-bottom: 10px !important;
+        padding: 10px;
     }
     
-    .content-section:last-child {
-        margin-bottom: 15px !important;
+    body {
+        padding-bottom: 50px;
     }
-    
-    /* Fix 2: Expand bar graph area in 3 directions */
-    .stats-bar {
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-        margin-left: -10px !important;
-        margin-right: -10px !important;
-        min-height: 220px !important;
-    }
-    
-    .forms-visual {
-        padding: 15px 5px 20px !important;
-        min-height: 160px !important;
-        gap: 10px !important;
-        width: 100% !important;
-    }
-    
-    .form-bar {
-        max-width: none !important;
-        flex: 1 !important;
-        min-width: 50px !important;
-    }
-    
-    .form-bar-fill {
-        width: 45px !important;
-    }
-    
-    .form-bar-wrapper {
-        width: 100% !important;
-    }
-    
-    .form-bar-label {
-        font-size: 0.75em !important;
-        padding: 6px 10px !important;
-    }
-    
-    .form-bar-states {
-        font-size: 0.65em !important;
-    }
-    
-    /* Fix 3: Reorganize legend/emoji key */
-    .legend {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-        padding: 10px 0 !important;
-        width: 100% !important;
-    }
-    
-    .legend-item {
-        font-size: 11px !important;
-        gap: 5px !important;
-        padding: 5px !important;
-        background: rgba(248, 249, 250, 0.8) !important;
-        border-radius: 6px !important;
-        justify-content: flex-start !important;
-        align-items: center !important;
-    }
-    
-    .legend-item span:first-child {
-        font-size: 14px !important;
-        min-width: 20px !important;
-        text-align: center !important;
-    }
-.legend-item span:first-child {
-        font-size: 14px !important;
-        min-width: 20px !important;
-        text-align: center !important;
-    }
-    
-    /* ADD NEW FIXES HERE */
-    /* Fix 1: Year selector not full width */
-    #yearSelect {
-        width: auto !important;
-        min-width: 100px !important;
-        max-width: 150px !important;
-    }
-    
-    .control-group {
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 10px !important;
-    }
-    
-    /* Fix 2: Remove grey rectangles behind emojis */
-    .legend-item {
-        background: transparent !important;
-        padding: 3px !important;
-    }
-    
-/* Fix 3: Hide AK/HI on mobile for now */
-.alaska-box, .hawaii-box {
-    display: none !important;
 }
-
-/* Hide map on mobile and show message instead */
-#map {
-    display: none !important;
-}
-
-.map-content::before {
-    content: "Map view available on desktop. Select a state from the list below.";
-    display: block;
-    padding: 20px;
-    text-align: center;
-    background: #f0f9ff;
-    border: 1px solid #00abce;
-    border-radius: 8px;
-    color: #333;
-    margin: 10px;
-}
-}/* Remove bottom padding */
-body, .container {
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-}/* More aggressive white space removal */
-    .content-section {
-        margin-bottom: 10px !important;
-    }
-    
-    .content-section:last-child {
-        margin-bottom: 0 !important;
-    }
-    
-    html, body {
-        height: auto !important;
-        min-height: auto !important;
-    }    
-/* Mobile State List Styles */
-.mobile-state-list {
-    display: block !important;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    margin: 10px;
-}
-
-.year-context {
-    text-align: center;
-    font-size: 1.1em;
-    color: #925333;
-    margin-bottom: 15px;
-    font-weight: 600;
-    background: #f0f9ff;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.year-context span {
-    color: #00abce;
-    font-weight: 700;
-}
-
-.state-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    max-height: 500px;
-    overflow-y: auto;
-}
-
-.state-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 10px;
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 13px;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.state-btn:active {
-    background: #f0f9ff;
-    border-color: #00abce;
-}
-
-.state-code {
-    font-weight: 700;
-    color: #00abce;
-}
-
-.state-name {
-    color: #333;
-    font-size: 12px;
-}
-
-/* Hide the broken map */
-#map, .map-content {
-    display: none !important;
-}
-
 @media (max-width: 480px) {
     .container {
         padding: 8px !important;
