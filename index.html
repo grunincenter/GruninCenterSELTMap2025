@@ -717,7 +717,40 @@
         gap: 6px !important;
         min-height: 180px !important;
     }
+    /* Override to fix bar graph on small screens */
+    .stats-bar {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
     
+    .forms-visual {
+        display: flex !important;
+        overflow-x: auto !important;
+        width: 100% !important;
+        min-height: auto !important;
+    }
+    
+    .form-bar-container {
+        min-width: 45px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Fix content sections for small screens */
+    .content-section {
+        padding: 10px !important;
+        margin: 5px !important;
+        width: calc(100% - 10px) !important;
+        box-sizing: border-box !important;
+    }
+    
+    .content-section h2 {
+        font-size: 1.3em !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .tepper-fellows-info {
+        padding: 10px !important;
+    }
     .form-bar-fill {
         width: 35px !important;
     }
