@@ -369,7 +369,7 @@
         }
 
         .reports-main {
-            flex: 2;
+            flex: 1;
         }
 
         .reports-grid {
@@ -381,7 +381,7 @@
         }
 
         .tepper-fellows-info {
-            flex: 1;
+            flex: 2;
             background: rgba(115, 165, 53, 0.1);
             border-radius: 15px;
             padding: 25px;
@@ -668,7 +668,8 @@
 
             .form-bar-label {
                 font-size: 0.7em;
-                padding: 6px 10px;
+                padding: 6px 4px;
+                text-align: center;
             }
 
             .form-bar-states {
@@ -764,7 +765,7 @@
             <div class="stats-bar">
                 <div class="stats-year-indicator">
                     <div class="year-badge" id="yearBadge">2024</div>
-                    <div class="year-label">Active Forms</div>
+                    <div class="year-label">Number of States with Active Forms</div>
                 </div>
                 
                 <div class="forms-visual" id="formsVisual">
@@ -1314,7 +1315,6 @@
                                 <div class="form-bar-fill" style="height: ${height}px;"></div>
                                 <div class="form-bar-label">
                                     ${formCode}
-                                    <div class="form-bar-states">${stateText}</div>
                                     <div class="click-hint">Click for timeline →</div>
                                 </div>
                             </div>
