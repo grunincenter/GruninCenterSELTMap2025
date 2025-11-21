@@ -249,5 +249,3 @@ function getAvailableYears() {
 
 console.log("Map data loaded successfully");
 console.log("Available years:", getAvailableYears());
-
-
