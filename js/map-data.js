@@ -138,7 +138,7 @@ const legislativeData = {
     "DE": { "forms": ["BCORP", "BLLC", "SPBLP"], "failed": [], "rescinded": [] },
     "MI": { "forms": [], "failed": [], "rescinded": [], "underConsideration": ["BCORP"] },
     "MS": { "forms": [], "failed": ["BCORP"], "rescinded": [] }
-  
+  }
 };
 
 // Corporate form definitions
@@ -249,4 +249,5 @@ function getAvailableYears() {
 
 console.log("Map data loaded successfully");
 console.log("Available years:", getAvailableYears());
+
 
