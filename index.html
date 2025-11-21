@@ -156,103 +156,41 @@
             overflow: hidden;
         }
 
-        /* AK/HI Sidebar */
-        .map-wrapper {
-            position: relative;
-        }
-
-        .ak-hi-sidebar {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
+        /* AK/HI Footnote Section (Desktop Only) */
+        .ak-hi-footnote {
+            background: rgba(248, 248, 248, 0.95);
+            border-top: 1px solid #ddd;
+            padding: 12px 20px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .sidebar-state {
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #666;
-            border-radius: 8px;
-            padding: 12px;
-            min-width: 60px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            transition: all 0.2s;
-        }
-
-        .sidebar-state:hover {
-            background: #d0e8ff;
-            border-color: #00abce;
-            transform: scale(1.05);
-        }
-
-        .sidebar-state-code {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-state-emoji {
-            display: block;
-            font-size: 20px;
-        }
-
-        /* Mobile State List */
-        .mobile-state-list {
-            display: none;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-top: 2px solid #00abce;
-        }
-
-        .mobile-state-list h3 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.2em;
-        }
-
-        .state-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-            gap: 10px;
-        }
-
-        .state-button {
-            background: white;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            padding: 10px 5px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.2s;
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 4px;
-        }
-
-        .state-button:hover {
-            background: #d0e8ff;
-            border-color: #00abce;
-            transform: translateY(-2px);
-        }
-
-        .state-button-code {
+            gap: 15px;
             font-size: 14px;
+            color: #666;
         }
 
-        .state-button-emoji {
-            font-size: 18px;
+        .footnote-state {
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footnote-state:hover {
+            background: rgba(0, 171, 206, 0.1);
+            color: #00abce;
+        }
+
+        .footnote-state strong {
+            font-weight: 600;
+        }
+
+        .footnote-separator {
+            color: #ccc;
+            font-weight: 300;
         }
 
         /* NEW VISUAL STATS BAR */
@@ -628,6 +566,7 @@
 
             .legend {
                 justify-content: center;
+                flex-wrap: wrap;
             }
 
             .map-container {
@@ -638,28 +577,9 @@
                 height: 400px;
             }
 
-            /* Show mobile state list on mobile */
-            .mobile-state-list {
-                display: block;
-            }
-
-            /* Keep AK/HI sidebar on mobile but make it smaller */
-            .ak-hi-sidebar {
-                left: 5px;
-            }
-
-            .sidebar-state {
-                padding: 8px;
-                min-width: 50px;
-                font-size: 12px;
-            }
-
-            .sidebar-state-code {
-                font-size: 14px;
-            }
-
-            .sidebar-state-emoji {
-                font-size: 16px;
+            /* Hide AK/HI footnote on mobile */
+            .ak-hi-footnote {
+                display: none;
             }
 
             .stats-bar {
@@ -678,11 +598,32 @@
             .forms-visual {
                 width: 100%;
                 justify-content: space-around;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
+                overflow-x: auto;
             }
 
             .form-bar {
-                max-width: 100px;
+                max-width: 60px;
+                min-width: 50px;
+                flex-shrink: 0;
+            }
+
+            .form-bar-count {
+                font-size: 0.8em;
+                padding: 3px 8px;
+            }
+
+            .form-bar-fill {
+                width: 45px;
+            }
+
+            .form-bar-label {
+                font-size: 0.7em;
+                padding: 6px 4px;
+            }
+
+            .form-bar-states {
+                font-size: 0.65em;
             }
 
             .content-section {
@@ -806,28 +747,17 @@
         </div>
 
         <div class="map-container">
-            <div class="map-wrapper">
-                <!-- AK/HI Sidebar (left side) -->
-                <div class="ak-hi-sidebar">
-                    <div class="sidebar-state" data-state="AK" onclick="seltMap.showStateInfo('AK')">
-                        <span class="sidebar-state-code">AK</span>
-                        <span class="sidebar-state-emoji" id="ak-emoji">⚪</span>
-                    </div>
-                    <div class="sidebar-state" data-state="HI" onclick="seltMap.showStateInfo('HI')">
-                        <span class="sidebar-state-code">HI</span>
-                        <span class="sidebar-state-emoji" id="hi-emoji">⚪</span>
-                    </div>
-                </div>
-                
-                <div id="map"></div>
-            </div>
+            <div id="map"></div>
             
-            <!-- Mobile State List -->
-            <div class="mobile-state-list">
-                <h3>Select a State:</h3>
-                <div class="state-grid" id="mobileStateGrid">
-                    <!-- Will be populated by JavaScript -->
-                </div>
+            <!-- AK/HI Footnote (Desktop Only) -->
+            <div class="ak-hi-footnote">
+                <span class="footnote-state" onclick="seltMap.showStateInfo('AK')">
+                    <strong>AK</strong> <span id="ak-emoji">⚪</span>
+                </span>
+                <span class="footnote-separator">|</span>
+                <span class="footnote-state" onclick="seltMap.showStateInfo('HI')">
+                    <strong>HI</strong> <span id="hi-emoji">⚪</span>
+                </span>
             </div>
             
             <!-- NEW VISUAL STATS BAR -->
@@ -1337,36 +1267,6 @@
                 const hiEmoji = document.getElementById('hi-emoji');
                 if (akEmoji) akEmoji.textContent = akActivity.emoji;
                 if (hiEmoji) hiEmoji.textContent = hiActivity.emoji;
-
-                // Update mobile state list
-                this.updateMobileStateList();
-            }
-
-            updateMobileStateList() {
-                const grid = document.getElementById('mobileStateGrid');
-                if (!grid) return;
-
-                // Get all 50 states alphabetically
-                const allStates = [
-                    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
-                    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
-                    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
-                    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
-                    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-                ];
-
-                grid.innerHTML = '';
-                allStates.forEach(code => {
-                    const activity = getStateActivity(code, this.currentYear);
-                    const button = document.createElement('div');
-                    button.className = 'state-button';
-                    button.onclick = () => this.showStateInfo(code);
-                    button.innerHTML = `
-                        <span class="state-button-code">${code}</span>
-                        <span class="state-button-emoji">${activity.emoji}</span>
-                    `;
-                    grid.appendChild(button);
-                });
             }
 
             updateFormBars() {
