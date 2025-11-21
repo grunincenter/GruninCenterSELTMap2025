@@ -698,87 +698,100 @@
     <!-- JavaScript -->
     <script src="js/map-data.js"></script>
     <script>
-        // Simplified US map with visible state boundaries using rectangles/polygons
-        // This creates a recognizable US map shape without complex SVG paths
-        
-        const statePositions = {
-            // Format: { x, y, width, height, name }
-            // Western states
-            'WA': { x: 50, y: 50, w: 80, h: 60, name: 'Washington' },
-            'OR': { x: 50, y: 115, w: 70, h: 70, name: 'Oregon' },
-            'CA': { x: 40, y: 190, w: 70, h: 150, name: 'California' },
-            'ID': { x: 135, y: 80, w: 60, h: 100, name: 'Idaho' },
-            'NV': { x: 115, y: 180, w: 70, h: 90, name: 'Nevada' },
-            'MT': { x: 200, y: 50, w: 100, h: 70, name: 'Montana' },
-            'WY': { x: 210, y: 125, w: 80, h: 75, name: 'Wyoming' },
-            'UT': { x: 180, y: 205, w: 70, h: 75, name: 'Utah' },
-            'AZ': { x: 165, y: 285, w: 80, h: 80, name: 'Arizona' },
-            'NM': { x: 250, y: 280, w: 75, h: 85, name: 'New Mexico' },
-            'CO': { x: 260, y: 195, w: 80, h: 80, name: 'Colorado' },
-            
-            // Central states
-            'ND': { x: 305, y: 60, w: 75, h: 60, name: 'North Dakota' },
-            'SD': { x: 305, y: 125, w: 75, h: 60, name: 'South Dakota' },
-            'NE': { x: 310, y: 190, w: 75, h: 55, name: 'Nebraska' },
-            'KS': { x: 315, y: 250, w: 75, h: 55, name: 'Kansas' },
-            'OK': { x: 330, y: 310, w: 75, h: 50, name: 'Oklahoma' },
-            'TX': { x: 320, y: 365, w: 90, h: 120, name: 'Texas' },
-            
-            // Upper Midwest
-            'MN': { x: 385, y: 90, w: 70, h: 80, name: 'Minnesota' },
-            'IA': { x: 390, y: 175, w: 70, h: 55, name: 'Iowa' },
-            'MO': { x: 390, y: 235, w: 70, h: 70, name: 'Missouri' },
-            'WI': { x: 460, y: 100, w: 60, h: 70, name: 'Wisconsin' },
-            'IL': { x: 455, y: 175, w: 50, h: 100, name: 'Illinois' },
-            'MI': { x: 520, y: 110, w: 70, h: 90, name: 'Michigan' },
-            'IN': { x: 510, y: 180, w: 45, h: 75, name: 'Indiana' },
-            'OH': { x: 560, y: 170, w: 60, h: 70, name: 'Ohio' },
-            
-            // South
-            'AR': { x: 410, y: 310, w: 50, h: 55, name: 'Arkansas' },
-            'LA': { x: 415, y: 370, w: 50, h: 60, name: 'Louisiana' },
-            'MS': { x: 465, y: 325, w: 40, h: 80, name: 'Mississippi' },
-            'AL': { x: 510, y: 325, w: 45, h: 85, name: 'Alabama' },
-            'TN': { x: 505, y: 260, w: 80, h: 55, name: 'Tennessee' },
-            'KY': { x: 555, y: 240, w: 75, h: 45, name: 'Kentucky' },
-            'GA': { x: 560, y: 320, w: 55, h: 80, name: 'Georgia' },
-            'FL': { x: 600, y: 380, w: 70, h: 100, name: 'Florida' },
-            'SC': { x: 620, y: 305, w: 50, h: 50, name: 'South Carolina' },
-            'NC': { x: 630, y: 260, w: 70, h: 45, name: 'North Carolina' },
-            
-            // East
-            'WV': { x: 625, y: 230, w: 45, h: 50, name: 'West Virginia' },
-            'VA': { x: 670, y: 245, w: 65, h: 45, name: 'Virginia' },
-            'PA': { x: 670, y: 185, w: 70, h: 50, name: 'Pennsylvania' },
-            'NY': { x: 720, y: 140, w: 65, h: 65, name: 'New York' },
-            'MD': { x: 735, y: 235, w: 35, h: 25, name: 'Maryland' },
-            'DE': { x: 770, y: 220, w: 15, h: 35, name: 'Delaware' },
-            'NJ': { x: 750, y: 200, w: 25, h: 40, name: 'New Jersey' },
-            
-            // New England  
-            'VT': { x: 765, y: 125, w: 25, h: 45, name: 'Vermont' },
-            'NH': { x: 790, y: 120, w: 25, h: 50, name: 'New Hampshire' },
-            'ME': { x: 800, y: 70, w: 45, h: 80, name: 'Maine' },
-            'MA': { x: 790, y: 160, w: 40, h: 25, name: 'Massachusetts' },
-            'RI': { x: 815, y: 170, w: 15, h: 15, name: 'Rhode Island' },
-            'CT': { x: 780, y: 180, w: 30, h: 20, name: 'Connecticut' },
-            
-            // Non-contiguous
-            'AK': { x: 60, y: 450, w: 80, h: 60, name: 'Alaska' },
-            'HI': { x: 200, y: 470, w: 50, h: 35, name: 'Hawaii' }
+        // Embed a simplified US map SVG directly in the page
+        const usMapSVG = `
+<svg viewBox="0 0 959 593" xmlns="http://www.w3.org/2000/svg">
+  <g id="states">
+    <!-- Western States -->
+    <path id="WA" d="M 50,50 L 150,50 L 150,130 L 50,130 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="OR" d="M 50,135 L 140,135 L 140,200 L 50,200 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="CA" d="M 40,205 L 120,205 L 120,360 L 40,360 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="ID" d="M 145,80 L 210,80 L 210,185 L 145,185 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NV" d="M 125,180 L 200,180 L 200,280 L 125,280 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="MT" d="M 215,50 L 330,50 L 330,125 L 215,125 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="WY" d="M 215,130 L 305,130 L 305,215 L 215,215 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="UT" d="M 205,220 L 280,220 L 280,300 L 205,300 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="AZ" d="M 170,305 L 255,305 L 255,390 L 170,390 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NM" d="M 260,305 L 340,305 L 340,395 L 260,395 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="CO" d="M 285,220 L 375,220 L 375,300 L 285,300 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    
+    <!-- Central States -->
+    <path id="ND" d="M 335,55 L 425,55 L 425,120 L 335,120 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="SD" d="M 335,125 L 425,125 L 425,190 L 335,190 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NE" d="M 340,195 L 425,195 L 425,250 L 340,250 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="KS" d="M 345,255 L 430,255 L 430,315 L 345,315 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="OK" d="M 360,320 L 450,320 L 450,375 L 360,375 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="TX" d="M 345,380 L 450,380 L 450,510 L 345,510 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    
+    <!-- Upper Midwest -->
+    <path id="MN" d="M 430,90 L 510,90 L 510,175 L 430,175 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="IA" d="M 430,180 L 510,180 L 510,240 L 430,240 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="MO" d="M 435,245 L 515,245 L 515,320 L 435,320 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="WI" d="M 515,100 L 585,100 L 585,175 L 515,175 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="IL" d="M 520,180 L 575,180 L 575,285 L 520,285 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="MI" d="M 590,110 L 665,110 L 665,205 L 590,205 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="IN" d="M 580,210 L 630,210 L 630,290 L 580,290 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="OH" d="M 635,210 L 700,210 L 700,285 L 635,285 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    
+    <!-- South -->
+    <path id="AR" d="M 455,325 L 515,325 L 515,385 L 455,385 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="LA" d="M 455,390 L 515,390 L 515,455 L 455,455 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="MS" d="M 520,325 L 565,325 L 565,410 L 520,410 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="AL" d="M 570,325 L 620,325 L 620,415 L 570,415 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="TN" d="M 520,290 L 605,290 L 605,320 L 520,320 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="KY" d="M 610,240 L 690,240 L 690,285 L 610,285 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="GA" d="M 625,320 L 685,320 L 685,405 L 625,405 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="FL" d="M 690,385 L 765,385 L 765,490 L 690,490 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="SC" d="M 690,305 L 745,305 L 745,360 L 690,360 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NC" d="M 695,260 L 770,260 L 770,300 L 695,300 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    
+    <!-- East -->
+    <path id="WV" d="M 695,230 L 745,230 L 745,255 L 695,255 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="VA" d="M 705,195 L 775,195 L 775,225 L 705,225 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="PA" d="M 705,155 L 780,155 L 780,190 L 705,190 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NY" d="M 720,105 L 790,105 L 790,150 L 720,150 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="MD" d="M 750,195 L 785,195 L 785,220 L 750,220 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="DE" d="M 788,190 L 805,190 L 805,225 L 788,225 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NJ" d="M 785,155 L 810,155 L 810,188 L 785,188 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    
+    <!-- New England -->
+    <path id="VT" d="M 795,95 L 820,95 L 820,140 L 795,140 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="NH" d="M 823,90 L 848,90 L 848,140 L 823,140 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="ME" d="M 850,60 L 900,60 L 900,145 L 850,145 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="MA" d="M 810,143 L 860,143 L 860,170 L 810,170 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="RI" d="M 863,150 L 880,150 L 880,168 L 863,168 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="CT" d="M 795,143 L 835,143 L 835,163 L 795,163 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    
+    <!-- Non-contiguous -->
+    <path id="AK" d="M 60,480 L 145,480 L 145,545 L 60,545 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+    <path id="HI" d="M 200,500 L 255,500 L 255,540 L 200,540 Z" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+  </g>
+</svg>
+        `;
+    </script>
+    <script>
+        const stateNames = {
+            'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
+            'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware', 'FL': 'Florida', 'GA': 'Georgia',
+            'HI': 'Hawaii', 'ID': 'Idaho', 'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa',
+            'KS': 'Kansas', 'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+            'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi', 'MO': 'Missouri',
+            'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada', 'NH': 'New Hampshire', 'NJ': 'New Jersey',
+            'NM': 'New Mexico', 'NY': 'New York', 'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio',
+            'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+            'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont',
+            'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming'
         };
 
         class SELTMapApp {
             constructor() {
                 this.currentYear = 2024;
-                this.stateElements = {};
                 this.init();
             }
 
             init() {
                 this.setupYearSelect();
-                this.drawMap();
-                this.updateDisplay();
+                this.loadMap();
                 this.setupPopup();
             }
 
@@ -797,58 +810,70 @@
                 });
             }
 
-            drawMap() {
-                const svg = document.getElementById('us-map');
-                svg.setAttribute('viewBox', '0 0 900 550');
+            loadMap() {
+                const mapContainer = document.getElementById('us-map');
+                mapContainer.innerHTML = usMapSVG;
                 
-                // Draw each state as a rectangle with label
-                Object.entries(statePositions).forEach(([code, pos]) => {
-                    // Create state rectangle
-                    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                    rect.setAttribute('x', pos.x);
-                    rect.setAttribute('y', pos.y);
-                    rect.setAttribute('width', pos.w);
-                    rect.setAttribute('height', pos.h);
-                    rect.setAttribute('class', 'state-path');
-                    rect.setAttribute('data-state', code);
-                    rect.setAttribute('rx', '3');
-                    rect.addEventListener('click', () => this.showStatePopup(code));
-                    svg.appendChild(rect);
-
-                    // Create text label (code + emoji)
+                // Add click handlers and labels to each state
+                const states = mapContainer.querySelectorAll('path[id]');
+                states.forEach(state => {
+                    const stateCode = state.id;
+                    
+                    // Make states interactive
+                    state.style.cursor = 'pointer';
+                    state.addEventListener('click', () => this.showStatePopup(stateCode));
+                    state.addEventListener('mouseover', () => {
+                        state.style.fill = '#d0e8ff';
+                        state.style.stroke = '#00abce';
+                        state.style.strokeWidth = '3';
+                    });
+                    state.addEventListener('mouseout', () => {
+                        state.style.fill = '#e8e8e8';
+                        state.style.stroke = '#666';
+                        state.style.strokeWidth = '2';
+                    });
+                    
+                    // Add text label
+                    const bbox = state.getBBox();
                     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                    text.setAttribute('x', pos.x + pos.w/2);
-                    text.setAttribute('y', pos.y + pos.h/2 + 4);
+                    text.setAttribute('x', bbox.x + bbox.width / 2);
+                    text.setAttribute('y', bbox.y + bbox.height / 2 + 4);
                     text.setAttribute('text-anchor', 'middle');
                     text.setAttribute('class', 'state-label');
-                    text.setAttribute('id', `label-${code}`);
-                    text.textContent = code;
-                    svg.appendChild(text);
+                    text.setAttribute('id', `label-${stateCode}`);
+                    text.style.fontSize = '10px';
+                    text.style.fontWeight = 'bold';
+                    text.style.pointerEvents = 'none';
+                    text.style.fill = '#333';
+                    text.textContent = stateCode;
                     
-                    this.stateElements[code] = { rect, text };
+                    mapContainer.querySelector('svg').appendChild(text);
                 });
+                
+                // Initial update
+                this.updateDisplay();
             }
 
             updateDisplay() {
-                // Update map labels with emojis
-                Object.keys(statePositions).forEach(code => {
-                    const activity = getStateActivity(code, this.currentYear);
+                // Update state labels with emojis
+                Object.keys(stateNames).forEach(code => {
                     const label = document.getElementById(`label-${code}`);
-                    if (label) {
-                        // Determine emoji based on activity
-                        let emoji = '⚪';
-                        if (activity.rescinded && activity.rescinded.length > 0) {
-                            emoji = '⛔';
-                        } else if (activity.forms && activity.forms.length > 0) {
-                            emoji = '✅';
-                        } else if (activity.underConsideration && activity.underConsideration.length > 0) {
-                            emoji = '⏳';
-                        } else if (activity.failed && activity.failed.length > 0) {
-                            emoji = '❌';
-                        }
-                        
-                        label.textContent = `${code} ${emoji}`;
+                    if (!label) return;
+                    
+                    const activity = getStateActivity(code, this.currentYear);
+                    let emoji = '⚪';
+                    
+                    if (activity.rescinded && activity.rescinded.length > 0) {
+                        emoji = '⛔';
+                    } else if (activity.forms && activity.forms.length > 0) {
+                        emoji = '✅';
+                    } else if (activity.underConsideration && activity.underConsideration.length > 0) {
+                        emoji = '⏳';
+                    } else if (activity.failed && activity.failed.length > 0) {
+                        emoji = '❌';
                     }
+                    
+                    label.textContent = `${code} ${emoji}`;
                 });
 
                 // Update bar graph
@@ -861,10 +886,10 @@
                 
                 barGraph.innerHTML = '';
 
-                // Calculate cumulative counts up to current year
+                // Calculate cumulative counts
                 const formCounts = { BCORP: 0, L3C: 0, BLLC: 0, SPC: 0, SPBLP: 0 };
                 
-                Object.keys(statePositions).forEach(code => {
+                Object.keys(stateNames).forEach(code => {
                     const activity = getStateActivity(code, this.currentYear);
                     if (activity.availableForms) {
                         activity.availableForms.forEach(form => {
@@ -875,13 +900,13 @@
                     }
                 });
 
-                // Sort by count
+                // Sort and filter
                 const sortedForms = Object.entries(formCounts)
                     .filter(([_, count]) => count > 0)
                     .sort((a, b) => b[1] - a[1]);
 
                 if (sortedForms.length === 0) {
-                    barGraph.innerHTML = '<div style="text-align: center; color: #999; padding: 20px; width: 100%;">No forms enacted by this year</div>';
+                    barGraph.innerHTML = '<div style="text-align:center;color:#999;padding:20px;width:100%;">No forms enacted by this year</div>';
                     return;
                 }
 
@@ -911,7 +936,6 @@
 
             setupPopup() {
                 const overlay = document.getElementById('popupOverlay');
-                const popup = document.getElementById('statePopup');
                 const closeBtn = document.getElementById('popupClose');
 
                 overlay.addEventListener('click', () => this.closePopup());
@@ -919,7 +943,7 @@
             }
 
             showStatePopup(stateCode) {
-                const pos = statePositions[stateCode];
+                const stateName = stateNames[stateCode] || stateCode;
                 const activity = getStateActivity(stateCode, this.currentYear);
                 
                 const popup = document.getElementById('statePopup');
@@ -927,7 +951,7 @@
                 const title = document.getElementById('popupTitle');
                 const content = document.getElementById('popupContent');
 
-                title.textContent = `${pos.name} - ${this.currentYear}`;
+                title.textContent = `${stateName} - ${this.currentYear}`;
 
                 let html = `<p><strong>Year:</strong> ${this.currentYear}</p>`;
 
@@ -984,7 +1008,7 @@
             }
         }
 
-        // Initialize app when DOM is ready
+        // Initialize when ready
         document.addEventListener('DOMContentLoaded', () => {
             new SELTMapApp();
         });
