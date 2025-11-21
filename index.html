@@ -156,6 +156,105 @@
             overflow: hidden;
         }
 
+        /* AK/HI Sidebar */
+        .map-wrapper {
+            position: relative;
+        }
+
+        .ak-hi-sidebar {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar-state {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #666;
+            border-radius: 8px;
+            padding: 12px;
+            min-width: 60px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+
+        .sidebar-state:hover {
+            background: #d0e8ff;
+            border-color: #00abce;
+            transform: scale(1.05);
+        }
+
+        .sidebar-state-code {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-state-emoji {
+            display: block;
+            font-size: 20px;
+        }
+
+        /* Mobile State List */
+        .mobile-state-list {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-top: 2px solid #00abce;
+        }
+
+        .mobile-state-list h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        .state-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+        }
+
+        .state-button {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .state-button:hover {
+            background: #d0e8ff;
+            border-color: #00abce;
+            transform: translateY(-2px);
+        }
+
+        .state-button-code {
+            font-size: 14px;
+        }
+
+        .state-button-emoji {
+            font-size: 18px;
+        }
+
         /* NEW VISUAL STATS BAR */
         .stats-bar {
             background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(248,248,248,1));
@@ -539,6 +638,30 @@
                 height: 400px;
             }
 
+            /* Show mobile state list on mobile */
+            .mobile-state-list {
+                display: block;
+            }
+
+            /* Keep AK/HI sidebar on mobile but make it smaller */
+            .ak-hi-sidebar {
+                left: 5px;
+            }
+
+            .sidebar-state {
+                padding: 8px;
+                min-width: 50px;
+                font-size: 12px;
+            }
+
+            .sidebar-state-code {
+                font-size: 14px;
+            }
+
+            .sidebar-state-emoji {
+                font-size: 16px;
+            }
+
             .stats-bar {
                 flex-direction: column;
                 align-items: center;
@@ -639,32 +762,15 @@
             <h2>Social Enterprise Corporate Forms Defined</h2>
             <p>The SELT tracks the following five corporate forms, each designed to support businesses pursuing both profit and positive social or environmental impact:</p>
             
-            <div class="forms-definitions">
-                <div class="form-definition">
-                    <h3>Benefit Corporation (BCORP)</h3>
-                    <p>The most widely adopted form, requiring companies to pursue general public benefit alongside profit. Directors must consider stakeholder interests beyond shareholders in decision-making.</p>
-                </div>
-                
-                <div class="form-definition">
-                    <h3>Social Purpose Corporation (SPC)</h3>
-                    <p>Allows corporations to define specific social or environmental purposes in addition to profit maximization. Provides flexibility in how companies balance financial and social objectives.</p>
-                </div>
-                
-                <div class="form-definition">
-                    <h3>Low-profit Limited Liability Company (L3C)</h3>
-                    <p>Designed primarily for charitable purposes with limited profit distribution. Originally created to facilitate program-related investments (PRIs) by foundations.</p>
-                </div>
-                
-                <div class="form-definition">
-                    <h3>Benefit Limited Liability Company (BLLC)</h3>
-                    <p>Combines the flexibility of LLC structure with benefit corporation principles. Currently available only in Delaware, offering LLC tax treatment with social benefit requirements.</p>
-                </div>
-                
-                <div class="form-definition">
-                    <h3>Social Purpose Benefit Limited Partnership (SPBLP)</h3>
-                    <p>A limited partnership structure for social enterprises, particularly suited for impact investing. Also currently available only in Delaware for sophisticated investment arrangements.</p>
-                </div>
-            </div>
+            <p><strong>Benefit Corporation (BCORP)</strong> is the most widely adopted form, requiring companies to pursue general public benefit alongside profit. Directors must consider stakeholder interests beyond shareholders in decision-making.</p>
+            
+            <p><strong>Social Purpose Corporation (SPC)</strong> allows corporations to define specific social or environmental purposes in addition to profit maximization. It provides flexibility in how companies balance financial and social objectives.</p>
+            
+            <p><strong>Low-profit Limited Liability Company (L3C)</strong> is designed primarily for charitable purposes with limited profit distribution. It was originally created to facilitate program-related investments (PRIs) by foundations.</p>
+            
+            <p><strong>Benefit Limited Liability Company (BLLC)</strong> combines the flexibility of LLC structure with benefit corporation principles. Currently available only in Delaware, it offers LLC tax treatment with social benefit requirements.</p>
+            
+            <p><strong>Social Purpose Benefit Limited Partnership (SPBLP)</strong> provides a limited partnership structure for social enterprises, particularly suited for impact investing. Also currently available only in Delaware for sophisticated investment arrangements.</p>
         </div>
 
         <div class="controls">
@@ -700,7 +806,29 @@
         </div>
 
         <div class="map-container">
-            <div id="map"></div>
+            <div class="map-wrapper">
+                <!-- AK/HI Sidebar (left side) -->
+                <div class="ak-hi-sidebar">
+                    <div class="sidebar-state" data-state="AK" onclick="seltMap.showStateInfo('AK')">
+                        <span class="sidebar-state-code">AK</span>
+                        <span class="sidebar-state-emoji" id="ak-emoji">⚪</span>
+                    </div>
+                    <div class="sidebar-state" data-state="HI" onclick="seltMap.showStateInfo('HI')">
+                        <span class="sidebar-state-code">HI</span>
+                        <span class="sidebar-state-emoji" id="hi-emoji">⚪</span>
+                    </div>
+                </div>
+                
+                <div id="map"></div>
+            </div>
+            
+            <!-- Mobile State List -->
+            <div class="mobile-state-list">
+                <h3>Select a State:</h3>
+                <div class="state-grid" id="mobileStateGrid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
             
             <!-- NEW VISUAL STATS BAR -->
             <div class="stats-bar">
@@ -719,32 +847,11 @@
             <div class="reports-content">
                 <div class="reports-main">
                     <h2>Annual Reports: The State of Social Enterprise and the Law</h2>
-                    <p>The Grunin Center publishes comprehensive annual reports tracking US social enterprise legislative developments from 2009 to the present. Access our reports below.</p>
+                    <p>The Grunin Center publishes comprehensive annual reports tracking US social enterprise legislative developments from 2009 to the present.</p>
                     
                     <div class="reports-grid">
-                        <a href="https://socentlawtracker.org/wp-content/uploads/2025/08/Grunin-2024-25-Social-Enterprise-and-Law-Report_V2-1.pdf" target="_blank" class="report-link">
-                            📊 2024-2025 Report
-                        </a>
-                        <a href="https://socentlawtracker.org/wp-content/uploads/2024/09/2023_2024_Grunin_Tepper_Social-Enterprise-and-Law-Report.pdf" target="_blank" class="report-link">
-                            📊 2023-2024 Report
-                        </a>
-                        <a href="https://socentlawtracker.org/wp-content/uploads/2023/09/2022_2023_Grunin_Tepper_Report.pdf" target="_blank" class="report-link">
-                            📊 2022-2023 Report
-                        </a>
-                        <a href="https://socentlawtracker.org/wp-content/uploads/2022/08/2021-2022_Grunin_Tepper_Report.pdf" target="_blank" class="report-link">
-                            📊 2021-2022 Report
-                        </a>
-                        <a href="https://www.law.nyu.edu/sites/default/files/Tepper%20Report%20-%20State%20of%20Social%20Enterprise%20and%20the%20Law%20-%202020-2021.pdf" target="_blank" class="report-link">
-                            📊 2020-2021 Report
-                        </a>
-                        <a href="https://www.law.nyu.edu/sites/default/files/ICBRSSEL21.1%20Grunin%20Tepper%20Report_Web_508v2.pdf" target="_blank" class="report-link">
-                            📊 2019-2020 Report
-                        </a>
-                        <a href="https://socentlawtracker.org/wp-content/uploads/2019/05/Grunin-Tepper-Report_5_30_B.pdf" target="_blank" class="report-link">
-                            📊 2018-2019 Report
-                        </a>
-                        <a href="http://www.law.nyu.edu/sites/default/files/upload_documents/Tepper%20Report%20-%20State%20of%20Social%20Enterprise%20and%20the%20Law%20-%202017-2018.pdf" target="_blank" class="report-link">
-                            📊 2017-2018 Report
+                        <a href="https://www.law.nyu.edu/centers/grunin-social-entrepreneurship/resources/publications" target="_blank" class="report-link">
+                            📊 Access All Reports and Publications
                         </a>
                     </div>
                 </div>
@@ -1198,6 +1305,21 @@
                 return content;
             }
 
+            showStateInfo(stateCode) {
+                const activity = getStateActivity(stateCode, this.currentYear);
+                const stateName = stateNames[stateCode] || stateCode;
+                
+                // Create popup content
+                const content = this.createPopupContent(stateCode, activity);
+                
+                // Show as a Leaflet popup in the center of the map
+                const mapCenter = this.map.getCenter();
+                L.popup()
+                    .setLatLng(mapCenter)
+                    .setContent(content)
+                    .openOn(this.map);
+            }
+
             updateDisplay() {
                 this.map.closePopup();
                 document.getElementById('yearBadge').textContent = this.currentYear;
@@ -1206,6 +1328,44 @@
                     const activity = getStateActivity(stateCode, this.currentYear);
                     marker.setIcon(this.createCustomIcon(activity.emoji));
                     marker.bindPopup(this.createPopupContent(stateCode, activity));
+                });
+
+                // Update AK/HI sidebar emojis
+                const akActivity = getStateActivity('AK', this.currentYear);
+                const hiActivity = getStateActivity('HI', this.currentYear);
+                const akEmoji = document.getElementById('ak-emoji');
+                const hiEmoji = document.getElementById('hi-emoji');
+                if (akEmoji) akEmoji.textContent = akActivity.emoji;
+                if (hiEmoji) hiEmoji.textContent = hiActivity.emoji;
+
+                // Update mobile state list
+                this.updateMobileStateList();
+            }
+
+            updateMobileStateList() {
+                const grid = document.getElementById('mobileStateGrid');
+                if (!grid) return;
+
+                // Get all 50 states alphabetically
+                const allStates = [
+                    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+                    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+                    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+                    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+                    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+                ];
+
+                grid.innerHTML = '';
+                allStates.forEach(code => {
+                    const activity = getStateActivity(code, this.currentYear);
+                    const button = document.createElement('div');
+                    button.className = 'state-button';
+                    button.onclick = () => this.showStateInfo(code);
+                    button.innerHTML = `
+                        <span class="state-button-code">${code}</span>
+                        <span class="state-button-emoji">${activity.emoji}</span>
+                    `;
+                    grid.appendChild(button);
                 });
             }
 
@@ -1267,8 +1427,9 @@
         }
 
         // Initialize the application
+        let seltMap;
         document.addEventListener('DOMContentLoaded', () => {
-            new SELTMap();
+            seltMap = new SELTMap();
         });
     </script>
 </body>
