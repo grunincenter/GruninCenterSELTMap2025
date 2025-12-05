@@ -109,6 +109,120 @@
             color: #925333;
             font-size: 1.8em;
             font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #00abce;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-item:nth-child(even) {
+            border-left-color: #73a535;
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-status {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .form-status.failed {
+            background: #dc3545;
+        }
+
+        .form-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #925333;
+        }
+
+        .form-details h4 {
+            color: #925333;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .form-details p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-family: 'Frank Ruhl Libre', serif;
+        }
+
+        .citation {
+            background: rgba(0, 171, 206, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .timeline-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #00abce;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 70px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background: #00abce;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #00abce;
+        }
+
+        .timeline-year {
+            background: linear-gradient(135deg, #00abce, #73a535);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
             display: inline-block;
             margin-bottom: 10px;
         }
@@ -281,118 +395,3 @@
     </div>
 </body>
 </html>
-            margin-bottom: 20px;
-        }
-
-        .form-item {
-            background: rgba(255,255,255,0.8);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-left: 4px solid #00abce;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .form-item:nth-child(even) {
-            border-left-color: #73a535;
-        }
-
-        .form-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .form-status {
-            background: #28a745;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 500;
-            margin-right: 15px;
-        }
-
-        .form-status.failed {
-            background: #dc3545;
-        }
-
-        .form-name {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #925333;
-        }
-
-        .form-details h4 {
-            color: #925333;
-            margin-bottom: 8px;
-            font-size: 1em;
-        }
-
-        .form-details p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            font-family: 'Frank Ruhl Libre', serif;
-        }
-
-        .citation {
-            background: rgba(0, 171, 206, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #555;
-            margin-top: 10px;
-        }
-
-        .timeline-section {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .timeline {
-            position: relative;
-            margin-top: 20px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #00abce;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            padding-left: 70px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 24px;
-            top: 10px;
-            width: 12px;
-            height: 12px;
-            background: #00abce;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px #00abce;
-        }
-
-        .timeline-year {
-            background: linear-gradient(135deg, #00abce, #73a535);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-
-            font-weight: 600;
